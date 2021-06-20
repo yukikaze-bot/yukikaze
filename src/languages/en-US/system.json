@@ -1,0 +1,9 @@
+{
+	"prefix": {
+		"description": "Sets the bot prefix, or shows the current prefix.",
+		"missingPerms": "You need the Manage Server permission to change the prefix!",
+		"current": "The current prefix for __**{{guildName}}**__ is `{{prefix}}`.",
+		"noGuild": "The current prefix of the bot is `{{prefix}}`.",
+		"set": "My prefix was successfully set to `{{prefix}}`!"
+	}
+}

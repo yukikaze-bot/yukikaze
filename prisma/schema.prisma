@@ -11,6 +11,7 @@ generator client {
 }
 
 model Guild {
-  id   String @id
-  lang String
+  id     String @id
+  lang   String
+  prefix String
 }

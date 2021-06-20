@@ -1,5 +1,5 @@
 import { SapphireClient, SapphireClientOptions, LogLevel } from '@sapphire/framework';
-import { Intents, PermissionResolvable, Guild } from 'discord.js';
+import { Intents, PermissionResolvable, Guild, Message } from 'discord.js';
 import type { I18nContext } from '@sapphire/plugin-i18next';
 import { PrismaClient } from '@prisma/client';
 import Turndown from 'turndown';
@@ -8,6 +8,9 @@ import { join } from 'path';
 declare module '@sapphire/framework' {
 	interface SapphireClient {
 		converter: Turndown;
+		db: PrismaClient;
+
+		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
 
 	interface Args {
@@ -90,9 +93,19 @@ export class YukikazeClient extends SapphireClient {
 		return super.login(token);
 	}
 
-	public readonly fetchLanguage = async (context: I18nContext) => {
+	public readonly fetchLanguage = async (context: I18nContext): Promise<string> => {
+		if (!context.guild) return 'en-US';
+
 		const guild = await this.db.guild.findUnique({ where: { id: (context.guild as Guild).id } });
 
 		return guild?.lang ?? 'en-US';
+	};
+
+	public readonly fetchPrefix = async (message: Message): Promise<string> => {
+		if (!message.guild) return '!y ';
+
+		const guild = await this.db.guild.findUnique({ where: { id: message.guild.id } });
+
+		return guild?.prefix ?? '!y ';
 	};
 }
