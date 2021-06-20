@@ -7,7 +7,8 @@ import { PrefixDesc } from '@keys/System';
 	description: PrefixDesc,
 	usage: '[prefix]',
 	examples: ['!y prefix', '!y prefix >'],
-	c: 'System'
+	c: 'System',
+	aliases: ['pref']
 })
 export class PrefixCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {

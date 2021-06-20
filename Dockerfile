@@ -8,4 +8,4 @@ ADD . .
 
 RUN yarn && yarn build && yarn migrate
 
-CMD ["node", "."]
+CMD ["yarn", "start"]

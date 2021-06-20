@@ -19,7 +19,8 @@ export class NarutoCommand extends YukikazeCommand {
 		const commandName = (await args.pickResult('string')).value ?? null;
 
 		if (!commandName) {
-			if (!message.guild?.me?.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) return message.reply(args.t('info:help.missingPerms'));
+			if (!(message.channel as TextChannel).permissionsFor(message.guild?.me!).has(Permissions.FLAGS.MANAGE_MESSAGES))
+				return message.reply(args.t('info:help.missingPerms'));
 
 			return this.menu(message);
 		}

@@ -95,6 +95,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@favware/graphql-pokemon@npm:^5.5.4":
+  version: 5.5.4
+  resolution: "@favware/graphql-pokemon@npm:5.5.4"
+  dependencies:
+    graphql: ^15.5.0
+  checksum: ccff4f4d44d4d15e70c6ff6bc3107124798bdf954099dae861842c2b862011e0a886e78399d082f8fe3b90ce090cef1ca8f9c4e81934477360e503a0404efd05
+  languageName: node
+  linkType: hard
+
 "@jfonx/console-utils@npm:^1.0.3":
   version: 1.0.3
   resolution: "@jfonx/console-utils@npm:1.0.3"
@@ -246,7 +255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/pieces@npm:1, @sapphire/pieces@npm:^1.2.5":
+"@sapphire/pieces@npm:^1.2.5, @sapphire/pieces@npm:~1":
   version: 1.2.5
   resolution: "@sapphire/pieces@npm:1.2.5"
   dependencies:
@@ -361,6 +370,13 @@ __metadata:
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
   checksum: d030f3fb14e0373dbf5005d8f696ff34fda87bf56744bea611fc737449bfc0687ebcb28ee8ba4c6624877f51b18d701c0d417d793f406006a192f4721911d048
+  languageName: node
+  linkType: hard
+
+"@types/capitalize@npm:^2":
+  version: 2.0.0
+  resolution: "@types/capitalize@npm:2.0.0"
+  checksum: 02c440b561a77032978833ed2622d55df48bbaca65111699379d2133a04bf7d102dd753d95e87b73a783629b9099f35cd58227d8b3377f9c46d712f8b77738fa
   languageName: node
   linkType: hard
 
@@ -813,6 +829,13 @@ __metadata:
   version: 3.1.0
   resolution: "callsites@npm:3.1.0"
   checksum: f726bf10d752901174cae348e69c2e58206404d5eebcea485b3fedbcf7fcffdb397e10919fdf6ee2c8adb4be52a64eea2365d52583611939bfecd109260451c9
+  languageName: node
+  linkType: hard
+
+"capitalize@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "capitalize@npm:2.0.3"
+  checksum: 27ee9a26789b7a34b0efc0fb1d962c3fb8a3d0549a39f71bfba7d9d312bf159c83c2195f1d1ae260fe491183e990654d2677aaf2cd42d0bb384244132b5125f4
   languageName: node
   linkType: hard
 
@@ -3208,13 +3231,14 @@ fsevents@~2.3.2:
   version: 0.0.0-use.local
   resolution: "yukikaze@workspace:."
   dependencies:
+    "@favware/graphql-pokemon": ^5.5.4
     "@prisma/client": ^2.25.0
     "@sapphire/decorators": ^2.1.3
     "@sapphire/discord-utilities": ^2.1.3
     "@sapphire/discord.js-utilities": ^1.5.9
     "@sapphire/eslint-config": ^3.1.4
     "@sapphire/framework": ^1.0.2
-    "@sapphire/pieces": 1
+    "@sapphire/pieces": ~1
     "@sapphire/plugin-i18next": ^1.3.7
     "@sapphire/plugin-logger": ^1.0.12
     "@sapphire/plugin-subcommands": ^1.0.5
@@ -3222,12 +3246,14 @@ fsevents@~2.3.2:
     "@sapphire/ts-config": ^2.2.3
     "@sapphire/type": ^2.0.9
     "@skyra/editable-commands": ^1.0.0
+    "@types/capitalize": ^2
     "@types/copyfiles": ^2
     "@types/dotenv-flow": ^3
     "@types/i18next": ^13.0.0
     "@types/node": ^15.12.3
     "@types/rimraf": ^3
     "@types/turndown": ^5.0.0
+    capitalize: ^2.0.3
     copyfiles: ^2.4.1
     discord.js: dev
     dotenv-flow: ^3.2.0

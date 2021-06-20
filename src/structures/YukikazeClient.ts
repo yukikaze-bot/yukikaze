@@ -48,7 +48,7 @@ export class YukikazeClient extends SapphireClient {
 	public constructor(options?: SapphireClientOptions) {
 		super({
 			...options,
-			defaultPrefix: '!y ',
+			defaultPrefix: '!y',
 			regexPrefix: /^(hey +)?yukikaze[,! ]/i,
 			caseInsensitiveCommands: true,
 			logger: {
@@ -102,10 +102,10 @@ export class YukikazeClient extends SapphireClient {
 	};
 
 	public readonly fetchPrefix = async (message: Message): Promise<string> => {
-		if (!message.guild) return '!y ';
+		if (!message.guild) return '!y';
 
 		const guild = await this.db.guild.findUnique({ where: { id: message.guild.id } });
 
-		return guild?.prefix ?? '!y ';
+		return guild?.prefix ?? '!y';
 	};
 }
