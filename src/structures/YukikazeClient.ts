@@ -1,0 +1,98 @@
+import { SapphireClient, SapphireClientOptions, LogLevel } from '@sapphire/framework';
+import { Intents, PermissionResolvable, Guild } from 'discord.js';
+import type { I18nContext } from '@sapphire/plugin-i18next';
+import { PrismaClient } from '@prisma/client';
+import Turndown from 'turndown';
+import { join } from 'path';
+
+declare module '@sapphire/framework' {
+	interface SapphireClient {
+		converter: Turndown;
+	}
+
+	interface Args {
+		c: string;
+		bucket?: number;
+		cooldown?: number;
+		guarded?: boolean;
+		hidden?: boolean;
+		nsfw?: boolean;
+		permissions?: PermissionResolvable;
+		examples: string[];
+		usage: string;
+		subCommands: any;
+	}
+
+	interface Command {
+		c: string;
+		bucket?: number;
+		cooldown?: number;
+		guarded?: boolean;
+		hidden?: boolean;
+		nsfw?: boolean;
+		permissions?: PermissionResolvable;
+		examples: string[];
+		usage: string;
+		subCommands: any;
+	}
+}
+
+export class YukikazeClient extends SapphireClient {
+	public readonly db = new PrismaClient();
+	public readonly converter = new Turndown();
+	public readonly owner: `${bigint}` = '566155739652030465';
+
+	public constructor(options?: SapphireClientOptions) {
+		super({
+			...options,
+			defaultPrefix: '!y ',
+			regexPrefix: /^(hey +)?yukikaze[,! ]/i,
+			caseInsensitiveCommands: true,
+			logger: {
+				level: LogLevel.Trace
+			},
+			partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
+			intents: [Intents.NON_PRIVILEGED, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS],
+			presence: {
+				activities: [
+					{
+						name: 'Yato-no-kami',
+						type: 'COMPETING'
+					}
+				],
+				status: 'online'
+			},
+			allowedMentions: {
+				repliedUser: false,
+				parse: ['roles', 'users']
+			},
+			i18n: {
+				defaultNS: 'global',
+				defaultLanguageDirectory: join(__dirname, '..', 'languages'),
+				i18next: (_: string[], languages: string[]) => ({
+					supportedLngs: languages,
+					preload: languages,
+					returnObjects: true,
+					returnEmptyString: false,
+					returnNull: false,
+					load: 'all',
+					lng: 'en-US',
+					fallbackLng: 'en-US',
+					initImmediate: false
+				})
+			}
+		});
+	}
+
+	public async login(token = process.env.DISCORD_TOKEN) {
+		await this.db.$connect();
+
+		return super.login(token);
+	}
+
+	public readonly fetchLanguage = async (context: I18nContext) => {
+		const guild = await this.db.guild.findUnique({ where: { id: (context.guild as Guild).id } });
+
+		return guild?.lang ?? 'en-US';
+	};
+}

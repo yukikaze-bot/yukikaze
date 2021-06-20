@@ -1,0 +1,15 @@
+{
+	"extends": "@sapphire/ts-config",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"rootDir": "src",
+		"outDir": "dist",
+		"skipLibCheck": true,
+		"paths": {
+			"@structures/*": ["src/structures/*"],
+			"@keys/*": ["src/keys/*"],
+			"#types/*": ["src/types/*"]
+		},
+		"typeRoots": ["./types"]
+	}
+}
