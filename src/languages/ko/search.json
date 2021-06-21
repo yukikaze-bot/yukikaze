@@ -1,0 +1,7 @@
+{
+	"pokemon": {
+		"description": "Searches a Pokemon!",
+		"prompt": "Who is the pokemon that you want to search?",
+		"unknown": "I could not find that pokemon..."
+	}
+}
