@@ -1,7 +1,8 @@
 import { SapphireClient, SapphireClientOptions, LogLevel } from '@sapphire/framework';
-import { Intents, PermissionResolvable, Guild, Message } from 'discord.js';
+import { Intents, PermissionResolvable, Guild, Message, User } from 'discord.js';
 import type { I18nContext } from '@sapphire/plugin-i18next';
 import { PrismaClient } from '@prisma/client';
+import type { Image } from 'canvas';
 import Turndown from 'turndown';
 import { join } from 'path';
 
@@ -37,6 +38,11 @@ declare module '@sapphire/framework' {
 		examples: string[];
 		usage: string;
 		subCommands: any;
+	}
+
+	interface ArgType {
+		image: Image;
+		userName: User;
 	}
 }
 
