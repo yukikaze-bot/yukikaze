@@ -12,6 +12,6 @@
 		"current": "The current language for __**{{guildName}}**__ is `{{language}}`.",
 		"noGuild": "The current language of the bot is `{{language}}`.",
 		"set": "My language was successfully set to `{{language}}`!",
-		"unknown": "The available languages are/or {{langs}}!"
+		"unknown": "The available languages are {{langs}}!"
 	}
 }
