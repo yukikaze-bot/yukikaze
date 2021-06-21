@@ -5,6 +5,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { request, gql } from 'graphql-request';
 import { AnimeDesc } from '@keys/Anime';
 import capitalize from 'capitalize';
+import numbro from 'numbro';
 
 const query = (name: string) => gql`
 	{
@@ -30,7 +31,7 @@ const query = (name: string) => gql`
           				url
         			}
       			}
-			sfw
+				sfw
     		}
 		}
 	}
@@ -78,7 +79,7 @@ export class AnimeCommand extends YukikazeCommand {
 									.addField('Status', capitalize(node.status), true)
 									.addField('Average Rating', `${node.averageRating}%`, true)
 									.addField('Episodes', String(node.episodeCount), true)
-									.addField('Favorites', String(node.favoritesCount), true)
+									.addField('Favorites', numbro(node.favoritesCount).format({ thousandSeparated: true }), true)
 									.addField('Season', capitalize(node.season), true)
 									.setColor('RANDOM')
 									.setFooter(`Page ${index + 1} / ${pages.length}`)

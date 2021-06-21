@@ -124,6 +124,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mapbox/node-pre-gyp@npm:^1.0.0":
+  version: 1.0.5
+  resolution: "@mapbox/node-pre-gyp@npm:1.0.5"
+  dependencies:
+    detect-libc: ^1.0.3
+    https-proxy-agent: ^5.0.0
+    make-dir: ^3.1.0
+    node-fetch: ^2.6.1
+    nopt: ^5.0.0
+    npmlog: ^4.1.2
+    rimraf: ^3.0.2
+    semver: ^7.3.4
+    tar: ^6.1.0
+  bin:
+    node-pre-gyp: bin/node-pre-gyp
+  checksum: 82d337a6df08539e2cc96d0707d24c97c146f2d9da03242258684b0fbf2609dbfbb68aeb5326e9fbb19caa27b67cb1dcb289693bb6f369e0ea3a74aa08654f9d
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -774,6 +793,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bignumber.js@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "bignumber.js@npm:8.1.1"
+  checksum: b5e38f727e97548abb41ba1880918e8875a00d268dcee0f2b40eee3abb7114d93e1408e440b7589f06f99102c51d682dfc2377c7cdbc31c45a2a2d8afe3395c9
+  languageName: node
+  linkType: hard
+
 "binary-extensions@npm:^2.0.0":
   version: 2.2.0
   resolution: "binary-extensions@npm:2.2.0"
@@ -829,6 +855,18 @@ __metadata:
   version: 3.1.0
   resolution: "callsites@npm:3.1.0"
   checksum: f726bf10d752901174cae348e69c2e58206404d5eebcea485b3fedbcf7fcffdb397e10919fdf6ee2c8adb4be52a64eea2365d52583611939bfecd109260451c9
+  languageName: node
+  linkType: hard
+
+"canvas@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "canvas@npm:2.8.0"
+  dependencies:
+    "@mapbox/node-pre-gyp": ^1.0.0
+    nan: ^2.14.0
+    node-gyp: latest
+    simple-get: ^3.0.3
+  checksum: d173d6dea8541d4caa07ef1b6d984fda85aac3a89a7b8009b891176765298bc445f3ef86cc92e8ee6d4aa7f34b549ebaa720fe875ba406656f8ea593e83174fe
   languageName: node
   linkType: hard
 
@@ -1054,6 +1092,15 @@ __metadata:
     supports-color:
       optional: true
   checksum: 5543570879e2274f6725d4285a034d6e0822d35faefc6f55965933fb440e8c21eb3a0bef934e66f4b6b491f898ee2de37cab980e9d4fd61372136c19d3ce4527
+  languageName: node
+  linkType: hard
+
+"decompress-response@npm:^4.2.0":
+  version: 4.2.1
+  resolution: "decompress-response@npm:4.2.1"
+  dependencies:
+    mimic-response: ^2.0.0
+  checksum: d854171a100833d66171ffba0990fc581133cfb62befc18edd2365edc40e8a48f9f96b6156465f1a74802112b9c241c792d865f5ee27e285c2e4417a17ac6c66
   languageName: node
   linkType: hard
 
@@ -2166,6 +2213,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"mimic-response@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "mimic-response@npm:2.1.0"
+  checksum: 9c206f3aebdc8de306550394301de8ce593e7757f3f9be43b5f99728e38ae787d17e6b72b96eb1b7a998d041da0ee465c48d29c927be4ff6ac3319453285d075
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^3.0.3, minimatch@npm:^3.0.4":
   version: 3.0.4
   resolution: "minimatch@npm:3.0.4"
@@ -2268,7 +2322,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.14.2":
+"nan@npm:^2.14.0, nan@npm:^2.14.2":
   version: 2.14.2
   resolution: "nan@npm:2.14.2"
   dependencies:
@@ -2358,6 +2412,15 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"numbro@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "numbro@npm:2.3.2"
+  dependencies:
+    bignumber.js: ^8.1.1
+  checksum: 76bae79bc2cf3c6c76d9666405194dbc48da58002c5e9b92bb219f6724009fe734b71df82e7fa0228993267614318a3389c6631717cd2959dcbaef0a5e72aba3
+  languageName: node
+  linkType: hard
+
 "object-assign@npm:^4.1.0":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
@@ -2365,7 +2428,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"once@npm:^1.3.0":
+"once@npm:^1.3.0, once@npm:^1.3.1":
   version: 1.4.0
   resolution: "once@npm:1.4.0"
   dependencies:
@@ -2752,6 +2815,24 @@ fsevents@~2.3.2:
   version: 3.0.3
   resolution: "signal-exit@npm:3.0.3"
   checksum: f8f3fec95c8d1f9ad7e3cce07e1195f84e7a85cdcb4e825e8a2b76aa5406a039083d2bc9662b3cf40e6948262f41277047d20e6fbd58c77edced0b18fab647d8
+  languageName: node
+  linkType: hard
+
+"simple-concat@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "simple-concat@npm:1.0.1"
+  checksum: 4623960448a49731b5abeedc5430f8158c5caa05f10a685b405b13ed8532c80b5d99e6ef5d53f76a695e66f551cdbcca22c1363ceef8f8b246cda1e21b9ef871
+  languageName: node
+  linkType: hard
+
+"simple-get@npm:^3.0.3":
+  version: 3.1.0
+  resolution: "simple-get@npm:3.1.0"
+  dependencies:
+    decompress-response: ^4.2.0
+    once: ^1.3.1
+    simple-concat: ^1.0.0
+  checksum: f56f08765eafde034b379d38d3dd1eb9b9ffb41d090d8216e71dce6ea3936499ee34b20942773a2605b08e8abce940691bd06e110ac12d08f83917493078831e
   languageName: node
   linkType: hard
 
@@ -3253,6 +3334,7 @@ fsevents@~2.3.2:
     "@types/node": ^15.12.3
     "@types/rimraf": ^3
     "@types/turndown": ^5.0.0
+    canvas: ^2.8.0
     capitalize: ^2.0.3
     copyfiles: ^2.4.1
     discord.js: dev
@@ -3262,6 +3344,7 @@ fsevents@~2.3.2:
     graphql-request: ^3.4.0
     i18next: ^20.3.2
     lexure: ^0.17.0
+    numbro: ^2.3.2
     prettier: ^2.3.1
     prisma: ^2.25.0
     reflect-metadata: ^0.1.13

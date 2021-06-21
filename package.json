@@ -37,6 +37,7 @@
 		"@sapphire/plugin-subcommands": "^1.0.5",
 		"@sapphire/type": "^2.0.9",
 		"@skyra/editable-commands": "^1.0.0",
+		"canvas": "^2.8.0",
 		"capitalize": "^2.0.3",
 		"discord.js": "dev",
 		"dotenv-flow": "^3.2.0",
@@ -44,6 +45,7 @@
 		"graphql-request": "^3.4.0",
 		"i18next": "^20.3.2",
 		"lexure": "^0.17.0",
+		"numbro": "^2.3.2",
 		"reflect-metadata": "^0.1.13",
 		"turndown": "^7.0.0"
 	},
