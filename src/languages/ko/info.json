@@ -1,0 +1,7 @@
+{
+	"help": {
+		"description": "Shows a list of all commands, or shows info about a command.",
+		"missingPerms": "I need the Manage Messages permission to run the paginated help command!",
+		"unknown": "I can't seem to find that command... Maybe try giving a valid command next time?"
+	}
+}
