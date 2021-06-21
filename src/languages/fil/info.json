@@ -1,7 +1,7 @@
 {
 	"help": {
-		"description": "Shows a list of all commands, or shows info about a command.",
-		"missingPerms": "I need the Manage Messages permission to run the paginated help command!",
-		"unknown": "I can't seem to find that command... Maybe try giving a valid command next time?"
+		"description": "Nagpapakita ng isang listahan ng lahat ng mga command, o nagpapakita ng impormasyon tungkol sa isang command.",
+		"missingPerms": "Kailangan ko ng pahintulot na Manage Message upang patakbuhin ang naka-paginate na command!",
+		"unknown": "Tila hindi ko mahanap ang command na iyon... Siguro subukang magbigay ng isang wastong command sa susunod?"
 	}
 }
