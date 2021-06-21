@@ -8,6 +8,7 @@
 		"paths": {
 			"@structures/*": ["src/structures/*"],
 			"@keys/*": ["src/keys/*"],
+			"@utils/*": ["src/utils/*"],
 			"#types/*": ["src/types/*"]
 		},
 		"typeRoots": ["./types"]

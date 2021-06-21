@@ -9,7 +9,8 @@
 		"migrate:dev": "prisma migrate dev",
 		"migrate": "prisma migrate deploy",
 		"start": "node .",
-		"prettier": "prettier . --write"
+		"prettier": "prettier . --write",
+		"deploy": "railway up"
 	},
 	"repository": {
 		"type": "git",

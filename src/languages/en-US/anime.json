@@ -3,5 +3,10 @@
 		"description": "Searches a Naruto character!",
 		"prompt": "Who is the character that you want to search?",
 		"unknown": "I could not find that character..."
+	},
+	"anime": {
+		"description": "Searches an Anime!",
+		"prompt": "What is the title of the anime?",
+		"unknown": "I could not find that anime..."
 	}
 }

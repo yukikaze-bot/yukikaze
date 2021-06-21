@@ -6,6 +6,9 @@ ARG DATABASE_URL
 
 ADD . .
 
-RUN yarn && yarn build && yarn migrate
+RUN apk add --no-cache build-base alpine-sdk python3-dev gcc wget curl && \
+	yarn && \
+	yarn build && \
+	yarn migrate
 
 CMD ["yarn", "start"]
