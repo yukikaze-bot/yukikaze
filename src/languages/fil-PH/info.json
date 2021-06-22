@@ -7,13 +7,13 @@
 			"usages": [
 				"CommandName"
 			],
-			"extendedHelp": "The help command shows a paginated list of all commands by their categories, or the extended information of a command if provided.",
+			"extendedHelp": "Ang help command ay nagpapakita ng isang naka-listang listahan ng lahat ng mga command ayon sa kanilang mga kategorya, o ang pinahabang impormasyon ng isang command kung ibinigay.",
 			"examples": [
 				"naruto"
 			]
 		},
 		"data": {
-			"footer": "Command help for {{footerName}}",
+			"footer": "Command help para sa {{footerName}}",
 			"title": "{{titleDescription}}"
 		}
 	}
