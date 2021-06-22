@@ -143,6 +143,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@naval-base/ms@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@naval-base/ms@npm:3.1.0"
+  checksum: 247cc6758ab5a1b86ee8091251520378df64db0a27b3435f41af77d4ca21aa8a9d2299ba916518ddd880ac4f8487340a3ad25b2c1479111d2d52ab8b59f5c1dc
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -3323,6 +3330,7 @@ fsevents@~2.3.2:
   resolution: "yukikaze@workspace:."
   dependencies:
     "@favware/graphql-pokemon": ^5.5.4
+    "@naval-base/ms": ^3.1.0
     "@prisma/client": ^2.25.0
     "@sapphire/decorators": ^2.1.3
     "@sapphire/discord-utilities": ^2.1.3

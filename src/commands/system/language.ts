@@ -1,14 +1,13 @@
 import { YukikazeCommand } from '@structures/YukikazeCommand';
+import { LanguageDesc, LanguageExtended } from '@keys/System';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Message, Permissions } from 'discord.js';
-import { LanguageDesc } from '@keys/System';
 
 const availableLangs = ['en-US', 'fil-PH', 'de-DE', 'fr-FR', 'id-ID', 'ja-JP', 'ko-KR', 'zh-CN'];
 
 @ApplyOptions<YukikazeCommand.Options>({
 	description: LanguageDesc,
-	usage: '[language]',
-	examples: ['!y language', '!y language en-US'],
+	extendedHelp: LanguageExtended,
 	c: 'System',
 	aliases: ['lang']
 })

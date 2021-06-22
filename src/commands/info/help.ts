@@ -1,14 +1,15 @@
 import { Message, MessageEmbed, APIMessage, TextChannel, Permissions } from 'discord.js';
 import { PaginatedMessage } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
+import { LanguageHelp } from '@structures/LanguageHelp';
 import type { CommandStore } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
-import { HelpDesc } from '@keys/Info';
+import { HelpDesc, HelpExtended } from '@keys/Info';
+import { HelpTitles } from '@keys/Bot';
 
 @ApplyOptions<YukikazeCommand.Options>({
 	description: HelpDesc,
-	usage: '[command]',
-	examples: ['!y help', '!y help naruto'],
+	extendedHelp: HelpExtended,
 	c: 'Information',
 	preconditions: ['GuildOnly']
 })
@@ -32,14 +33,31 @@ export class NarutoCommand extends YukikazeCommand {
 
 		if (!command) return message.reply(args.t('info:help.unknown'));
 
-		const embed = new MessageEmbed()
-			.setColor('RANDOM')
-			.setDescription(args.t(command.description))
-			.addField('Examples', command.examples.join('\n'));
+		let prefix = await this.context.client.fetchPrefix(message);
 
-		if (command.aliases.length) embed.addField('Aliases', command.aliases.map((alias) => `\`${alias}\``).join(' '));
-		if (command.usage) embed.addField('Usage', `\`${command.usage}\``);
-		if (command.subCommands) embed.addField('Sub Commands', (command.subCommands as any).entries.map((sc: any) => `\`${sc.input}\``).join(' '));
+		if (prefix === '!y') prefix = '!y ';
+
+		const builderData = args.t(HelpTitles) as any;
+		const builder = new LanguageHelp()
+			.setUsages(builderData.usages)
+			.setAliases(builderData.aliases)
+			.setExtendedHelp(builderData.extendedHelp)
+			.setExplainedUsage(builderData.explainedUsage)
+			.setExamples(builderData.examples)
+			.setPossibleFormats(builderData.possibleFormats)
+			.setReminder(builderData.reminders);
+		const extendedHelpData = args.t(command.extendedHelp, { replace: { prefix }, postProcess: 'helpUsagePostProcessor' });
+		const extendedHelp = builder.display(
+			command.name,
+			command.aliases.length ? command.aliases.join(', ') : 'None',
+			extendedHelpData as any,
+			prefix as string
+		);
+		const data = args.t('info:help.data', {
+			footerName: command.name,
+			titleDescription: args.t(command.description)
+		}) as any;
+		const embed = new MessageEmbed().setColor('RANDOM').setDescription(extendedHelp).setFooter(data.footer).setTitle(data.title);
 
 		return message.reply({ embeds: [embed] });
 	}

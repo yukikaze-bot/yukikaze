@@ -4,7 +4,12 @@
 		"missingPerms": "You need the Manage Server permission to change the prefix!",
 		"current": "The current prefix for __**{{guildName}}**__ is `{{prefix}}`.",
 		"noGuild": "The current prefix of the bot is `{{prefix}}`.",
-		"set": "My prefix was successfully set to `{{prefix}}`!"
+		"set": "My prefix was successfully set to `{{prefix}}`!",
+		"extended": {
+			"usages": ["Prefix"],
+			"extendedHelp": "Sets a guild prefix if provided. Or shows the current guild prefix.",
+			"examples": ["h!", ">"]
+		}
 	},
 	"language": {
 		"description": "Sets the bot's language, or shows the current language.",
@@ -12,6 +17,11 @@
 		"current": "The current language for __**{{guildName}}**__ is `{{language}}`.",
 		"noGuild": "The current language of the bot is `{{language}}`.",
 		"set": "My language was successfully set to `{{language}}`!",
-		"unknown": "The available languages are {{langs}}!"
+		"unknown": "The available languages are {{langs}}!",
+		"extended": {
+			"usages": ["Language"],
+			"extendedHelp": "Sets a guild language if provided. Or shows the current guild language.",
+			"examples": ["en-US", "ja-JP"]
+		}
 	}
 }

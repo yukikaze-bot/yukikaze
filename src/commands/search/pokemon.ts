@@ -1,10 +1,10 @@
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
+import { PokemonDesc, PokemonExtended } from '@keys/Search';
 import type { Query } from '@favware/graphql-pokemon';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Message, MessageEmbed } from 'discord.js';
 import { request, gql } from 'graphql-request';
-import { PokemonDesc } from '@keys/Search';
 import capitalize from 'capitalize';
 
 type GraphQLPokemonResponse<K extends keyof Omit<Query, '__typename'>> = Record<K, Omit<Query[K], '__typename'>>;
@@ -32,11 +32,10 @@ const query = (name: string) => gql`
 
 @ApplyOptions<YukikazeCommand.Options>({
 	limit: 2,
-	delay: 10,
+	delay: 10000,
 	description: PokemonDesc,
 	c: 'Search',
-	examples: ['!y pokemon Greninja'],
-	usage: '<pokemon>',
+	extendedHelp: PokemonExtended,
 	aliases: ['pkmn']
 })
 export class PokemonCommand extends YukikazeCommand {

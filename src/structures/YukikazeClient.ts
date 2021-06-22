@@ -1,7 +1,9 @@
 import { SapphireClient, SapphireClientOptions, LogLevel } from '@sapphire/framework';
 import { Intents, PermissionResolvable, Guild, Message, User } from 'discord.js';
+import type { LanguageHelpDisplayOptions } from './LanguageHelp';
 import type { I18nContext } from '@sapphire/plugin-i18next';
 import { PrismaClient } from '@prisma/client';
+import type { CustomGet } from '#types/i18n';
 import type { Image } from 'canvas';
 import Turndown from 'turndown';
 import { join } from 'path';
@@ -22,8 +24,7 @@ declare module '@sapphire/framework' {
 		hidden?: boolean;
 		nsfw?: boolean;
 		permissions?: PermissionResolvable;
-		examples: string[];
-		usage: string;
+		extendedHelp: CustomGet<string, LanguageHelpDisplayOptions>;
 		subCommands: any;
 	}
 
@@ -35,8 +36,7 @@ declare module '@sapphire/framework' {
 		hidden?: boolean;
 		nsfw?: boolean;
 		permissions?: PermissionResolvable;
-		examples: string[];
-		usage: string;
+		extendedHelp: CustomGet<string, LanguageHelpDisplayOptions>;
 		subCommands: any;
 	}
 

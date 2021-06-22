@@ -1,5 +1,6 @@
 import { Awaited, CommandContext, PermissionsPrecondition, PieceContext, PreconditionEntryResolvable } from '@sapphire/framework';
 import { SubCommandPluginCommand } from '@sapphire/plugin-subcommands';
+import type { LanguageHelpDisplayOptions } from './LanguageHelp';
 import type { Message, PermissionResolvable } from 'discord.js';
 import { YukikazeArgs } from './YukikazeArgs';
 import type { CustomGet } from '#types/i18n';
@@ -9,19 +10,17 @@ import { sep } from 'path';
 export abstract class YukikazeCommand extends SubCommandPluginCommand<YukikazeCommand.Args, YukikazeCommand> {
 	public readonly guarded: boolean;
 	public readonly hidden: boolean;
-	public readonly usage: string;
 	public readonly c: string;
-	public readonly examples: string[];
 	public readonly fullCategory: readonly string[];
 	public readonly description: CustomGet<string, string>;
+	public readonly extendedHelp: CustomGet<string, LanguageHelpDisplayOptions>;
 
 	public constructor(context: PieceContext, options: YukikazeCommand.Options) {
 		super(context, YukikazeCommand.resolvePreConditions(context, options));
 
 		this.guarded = options.guarded ?? false;
 		this.hidden = options.hidden ?? false;
-		this.usage = options.usage;
-		this.examples = options.examples;
+		this.extendedHelp = options.extendedHelp;
 		this.c = options.c;
 		this.description = options.description;
 
@@ -58,7 +57,7 @@ export abstract class YukikazeCommand extends SubCommandPluginCommand<YukikazeCo
 
 		if (options.nsfw) preconditions.push('NSFW');
 		if (options.permissions) preconditions.push(new PermissionsPrecondition(options.permissions));
-		if (options.limit && options.delay) preconditions.push({ name: 'Cooldown', context: { limit: options.limit, delay: options.delay * 1000 } });
+		if (options.limit && options.delay) preconditions.push({ name: 'Cooldown', context: { limit: options.limit, delay: options.delay } });
 
 		return options;
 	}
@@ -76,8 +75,7 @@ export namespace YukikazeCommand {
 		hidden?: boolean;
 		nsfw?: boolean;
 		permissions?: PermissionResolvable;
-		examples: string[];
-		usage: string;
 		description: CustomGet<string, string>;
+		extendedHelp: CustomGet<string, LanguageHelpDisplayOptions>;
 	}
 }

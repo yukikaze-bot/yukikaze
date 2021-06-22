@@ -1,12 +1,11 @@
 import { YukikazeCommand } from '@structures/YukikazeCommand';
+import { PrefixDesc, PrefixExtended } from '@keys/System';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Message, Permissions } from 'discord.js';
-import { PrefixDesc } from '@keys/System';
 
 @ApplyOptions<YukikazeCommand.Options>({
 	description: PrefixDesc,
-	usage: '[prefix]',
-	examples: ['!y prefix', '!y prefix >'],
+	extendedHelp: PrefixExtended,
 	c: 'System',
 	aliases: ['pref']
 })

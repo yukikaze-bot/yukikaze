@@ -1,9 +1,9 @@
 import { MessagePrompter, MessagePrompterStrategies, PaginatedMessage, MessagePage } from '@sapphire/discord.js-utilities';
 import { Message, MessageEmbed, APIMessage, TextChannel, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
+import { AnimeDesc, AnimeExtended } from '@keys/Anime';
 import { ApplyOptions } from '@sapphire/decorators';
 import { request, gql } from 'graphql-request';
-import { AnimeDesc } from '@keys/Anime';
 import capitalize from 'capitalize';
 import numbro from 'numbro';
 
@@ -40,10 +40,9 @@ const query = (name: string) => gql`
 @ApplyOptions<YukikazeCommand.Options>({
 	c: 'Anime',
 	description: AnimeDesc,
-	usage: '<anime>',
-	examples: ['!y anime Naruto'],
+	extendedHelp: AnimeExtended,
 	limit: 2,
-	delay: 10,
+	delay: 10000,
 	preconditions: ['GuildOnly'],
 	permissions: Permissions.FLAGS.MANAGE_MESSAGES
 })
