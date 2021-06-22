@@ -5,13 +5,13 @@
 		"unknown": "Hindi ko mahanap ang pokemon na iyon...",
 		"extended": {
 			"usages": [
-				"Name"
+				"Pangalan"
 			],
-			"extendedHelp": "Fetches data from https://graphqlpokemon.favware.tech to get your pokemon!",
+			"extendedHelp": "Kinukuha ang data mula sa https://graphqlpokemon.favware.tech upang makuha ang iyong pokemon!",
 			"explainedUsage": [
 				[
-					"name",
-					"The pokemon name."
+					"pangalan",
+					"Ang pangalan ng pokemon."
 				]
 			],
 			"examples": [
