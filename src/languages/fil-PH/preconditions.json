@@ -1,5 +1,5 @@
 {
-	"cooldown": "Ginamit mo lang ang command na ito. Maaari mong gamitin muli ang command na ito sa {{remaining, duration}}.",
+	"cooldown": "You have just used this command. You can use this command again in `{{remaining, duration}}ms`.",
 	"dmOnly": "Magagamit lamang ang command na ito sa mga DM channel.",
 	"guildOnly": "Magagamit lamang ang command na ito sa mga channel ng server.",
 	"nsfw": "Maaaring hindi mo magamit ang mga command na NSFW sa channel na ito!",
