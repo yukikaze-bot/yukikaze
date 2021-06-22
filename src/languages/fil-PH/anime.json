@@ -26,13 +26,13 @@
 		"unknown": "Hindi ko mahanap ang anime na iyon...",
 		"extended": {
 			"usages": [
-				"Title"
+				"Titulo"
 			],
-			"extendedHelp": "Fetches data from https://kitsu.io to get your anime!",
+			"extendedHelp": "Kinukuha ang data mula sa https://kitsu.io upang makuha ang iyong anime!",
 			"explainedUsage": [
 				[
-					"title",
-					"The anime title."
+					"titulo",
+					"Ang pamagat ng anime."
 				]
 			],
 			"examples": [
