@@ -1,5 +1,10 @@
 {
 	"simp": {
-		"description": "Draws a \"simp\" label over an image."
+		"description": "Draws a \"simp\" label over an image.",
+		"extended": {
+			"usages": ["User"],
+			"extendedHelp": "Overlays a \"simp\" label for people who are simps.",
+			"examples": ["PopBot"]
+		}
 	}
 }
