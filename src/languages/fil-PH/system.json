@@ -4,7 +4,17 @@
 		"missingPerms": "Kailangan mo ng pahintulot na Manage Server upang baguhin ang prefix!",
 		"current": "Ang kasalukuyang prefix para sa __** {{guildName}} **__ ay `{{prefix}}`.",
 		"noGuild": "Ang kasalukuyang prefix ng bot ay `{{prefix}}`.",
-		"set": "Ang aking prefix ay matagumpay na naitakda sa `{{prefix}}`!"
+		"set": "Ang aking prefix ay matagumpay na naitakda sa `{{prefix}}`!",
+		"extended": {
+			"usages": [
+				"Prefix"
+			],
+			"extendedHelp": "Sets a guild prefix if provided. Or shows the current guild prefix.",
+			"examples": [
+				"h!",
+				">"
+			]
+		}
 	},
 	"language": {
 		"description": "Itinatakda ang wika ng bot, o ipinapakita ang kasalukuyang wika.",
@@ -12,6 +22,16 @@
 		"current": "Ang kasalukuyang wika para sa __** {{guildName}} **__ ay `{{language}}`.",
 		"noGuild": "Ang kasalukuyang wika ng bot ay `{{language}}`.",
 		"set": "Ang aking wika ay matagumpay na naitakda sa `{{language}}`!",
-		"unknown": "Ang mga magagamit na wika ay {{langs}}!"
+		"unknown": "Ang mga magagamit na wika ay {{langs}}!",
+		"extended": {
+			"usages": [
+				"Language"
+			],
+			"extendedHelp": "Sets a guild language if provided. Or shows the current guild language.",
+			"examples": [
+				"en-US",
+				"ja-JP"
+			]
+		}
 	}
 }
