@@ -4,20 +4,10 @@
 		"prompt": "Sino ang character na nais mong hanapin?",
 		"unknown": "Hindi ko mahanap ang tauhang iyon...",
 		"extended": {
-			"usages": [
-				"Character"
-			],
+			"usages": ["Character"],
 			"extendedHelp": "Fetches data from https://narutoql.com for your query.",
-			"explainedUsage": [
-				[
-					"character",
-					"The character."
-				]
-			],
-			"examples": [
-				"Uzumaki Naruto",
-				"Sarutobi Konohamaru"
-			]
+			"explainedUsage": [["character", "The character."]],
+			"examples": ["Uzumaki Naruto", "Sarutobi Konohamaru"]
 		}
 	},
 	"anime": {
@@ -25,20 +15,10 @@
 		"prompt": "Ano ang pamagat ng anime?",
 		"unknown": "Hindi ko mahanap ang anime na iyon...",
 		"extended": {
-			"usages": [
-				"Title"
-			],
+			"usages": ["Title"],
 			"extendedHelp": "Fetches data from https://kitsu.io to get your anime!",
-			"explainedUsage": [
-				[
-					"title",
-					"The anime title."
-				]
-			],
-			"examples": [
-				"Death Note",
-				"Attack On Titan"
-			]
+			"explainedUsage": [["title", "The anime title."]],
+			"examples": ["Death Note", "Attack On Titan"]
 		}
 	}
 }

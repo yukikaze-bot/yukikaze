@@ -2,13 +2,9 @@
 	"simp": {
 		"description": "Gumaguhit ng isang \"simp\" na label sa isang imahe.",
 		"extended": {
-			"usages": [
-				"User"
-			],
+			"usages": ["User"],
 			"extendedHelp": "Overlays a \"simp\" label for people who are simps.",
-			"examples": [
-				"PopBot"
-			]
+			"examples": ["PopBot"]
 		}
 	}
 }
