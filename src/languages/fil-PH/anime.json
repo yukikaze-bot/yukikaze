@@ -5,13 +5,13 @@
 		"unknown": "Hindi ko mahanap ang tauhang iyon...",
 		"extended": {
 			"usages": [
-				"Character"
+				"Tauhan"
 			],
-			"extendedHelp": "Fetches data from https://narutoql.com for your query.",
+			"extendedHelp": "Kinukuha ang data mula sa https://narutoql.com para sa iyong query.",
 			"explainedUsage": [
 				[
-					"character",
-					"The character."
+					"tauhan",
+					"Ang tauhan."
 				]
 			],
 			"examples": [
