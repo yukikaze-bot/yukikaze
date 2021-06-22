@@ -31,7 +31,8 @@ const query = (name: string) => gql`
 `;
 
 @ApplyOptions<YukikazeCommand.Options>({
-	cooldown: 3,
+	limit: 2,
+	delay: 10,
 	description: PokemonDesc,
 	c: 'Search',
 	examples: ['!y pokemon Greninja'],

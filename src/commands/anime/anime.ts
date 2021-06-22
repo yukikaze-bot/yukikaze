@@ -42,7 +42,8 @@ const query = (name: string) => gql`
 	description: AnimeDesc,
 	usage: '<anime>',
 	examples: ['!y anime Naruto'],
-	cooldown: 3,
+	limit: 2,
+	delay: 10,
 	preconditions: ['GuildOnly'],
 	permissions: Permissions.FLAGS.MANAGE_MESSAGES
 })

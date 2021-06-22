@@ -22,7 +22,8 @@ const query = (name: string) => gql`
 `;
 
 @ApplyOptions<YukikazeCommand.Options>({
-	cooldown: 3,
+	limit: 2,
+	delay: 10,
 	description: NarutoDesc,
 	usage: '<character>',
 	examples: ['!y naruto Uchiha Sasuke'],

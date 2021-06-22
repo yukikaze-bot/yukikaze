@@ -12,8 +12,9 @@ import { join } from 'path';
 	description: SimpDesc,
 	examples: ['!y simp @PopBot'],
 	usage: '<user>',
-	cooldown: 10,
-	permissions: Permissions.FLAGS.ATTACH_FILES
+	permissions: Permissions.FLAGS.ATTACH_FILES,
+	limit: 1,
+	delay: 10
 })
 export class SimpCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {

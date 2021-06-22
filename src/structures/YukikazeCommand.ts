@@ -58,8 +58,7 @@ export abstract class YukikazeCommand extends SubCommandPluginCommand<YukikazeCo
 
 		if (options.nsfw) preconditions.push('NSFW');
 		if (options.permissions) preconditions.push(new PermissionsPrecondition(options.permissions));
-		if (options.bucket && options.cooldown)
-			preconditions.push({ name: 'Cooldown', context: { bucket: options.bucket, cooldown: options.cooldown } });
+		if (options.limit && options.delay) preconditions.push({ name: 'Cooldown', context: { limit: options.limit, delay: options.delay * 1000 } });
 
 		return options;
 	}
@@ -71,8 +70,8 @@ export namespace YukikazeCommand {
 
 	export interface Options extends SubCommandPluginCommand.Options {
 		c: string;
-		bucket?: number;
-		cooldown?: number;
+		limit?: number;
+		delay?: number;
 		guarded?: boolean;
 		hidden?: boolean;
 		nsfw?: boolean;

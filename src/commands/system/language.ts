@@ -3,7 +3,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Message, Permissions } from 'discord.js';
 import { LanguageDesc } from '@keys/System';
 
-const availableLangs = ['en-US', 'tl-TL', 'de-DE', 'fr-FR', 'id-ID', 'ja-JA', 'ko-KO', 'zh-ZH'];
+const availableLangs = ['en-US', 'fil-PH', 'de-DE', 'fr-FR', 'id-ID', 'ja-JP', 'ko-KR', 'zh-CN'];
 
 @ApplyOptions<YukikazeCommand.Options>({
 	description: LanguageDesc,
