@@ -9,7 +9,7 @@
 			"usages": [
 				"Prefix"
 			],
-			"extendedHelp": "Sets a guild prefix if provided. Or shows the current guild prefix.",
+			"extendedHelp": "Nagtatakda ng isang prefix ng guild kung ibinigay. O ipinapakita ang kasalukuyang prefix ng guild.",
 			"examples": [
 				"h!",
 				">"
@@ -25,9 +25,9 @@
 		"unknown": "Ang mga magagamit na wika ay {{langs}}!",
 		"extended": {
 			"usages": [
-				"Language"
+				"Wika"
 			],
-			"extendedHelp": "Sets a guild language if provided. Or shows the current guild language.",
+			"extendedHelp": "Nagtatakda ng isang wika ng guild kung ibinigay. O ipinapakita ang kasalukuyang wika ng guild.",
 			"examples": [
 				"en-US",
 				"ja-JP"
