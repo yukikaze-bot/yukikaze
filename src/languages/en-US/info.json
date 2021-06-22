@@ -2,6 +2,15 @@
 	"help": {
 		"description": "Shows a list of all commands, or shows info about a command.",
 		"missingPerms": "I need the Manage Messages permission to run the paginated help command!",
-		"unknown": "I can't seem to find that command... Maybe try giving a valid command next time?"
+		"unknown": "I can't seem to find that command... Maybe try giving a valid command next time?",
+		"extended": {
+			"usages": ["CommandName"],
+			"extendedHelp": "The help command shows a paginated list of all commands by their categories, or the extended information of a command if provided.",
+			"examples": ["naruto"]
+		},
+		"data": {
+			"footer": "Command help for {{footerName}}",
+			"title": "{{titleDescription}}"
+		}
 	}
 }
