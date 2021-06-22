@@ -4,10 +4,20 @@
 		"prompt": "Sino ang pokemon na nais mong hanapin?",
 		"unknown": "Hindi ko mahanap ang pokemon na iyon...",
 		"extended": {
-			"usages": ["Name"],
-			"extendedHelp": "Fetches data from https://graphqlpokemon.favware.tech to get your pokemon!",
-			"explainedUsage": [["name", "The pokemon name."]],
-			"examples": ["Greninja", "Togedemaru"]
+			"usages": [
+				"Pangalan"
+			],
+			"extendedHelp": "Kinukuha ang data mula sa https://graphqlpokemon.favware.tech upang makuha ang iyong pokemon!",
+			"explainedUsage": [
+				[
+					"pangalan",
+					"Ang pangalan ng pokemon."
+				]
+			],
+			"examples": [
+				"Greninja",
+				"Togedemaru"
+			]
 		}
 	}
 }

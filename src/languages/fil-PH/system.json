@@ -6,9 +6,14 @@
 		"noGuild": "Ang kasalukuyang prefix ng bot ay `{{prefix}}`.",
 		"set": "Ang aking prefix ay matagumpay na naitakda sa `{{prefix}}`!",
 		"extended": {
-			"usages": ["Prefix"],
-			"extendedHelp": "Sets a guild prefix if provided. Or shows the current guild prefix.",
-			"examples": ["h!", ">"]
+			"usages": [
+				"Prefix"
+			],
+			"extendedHelp": "Nagtatakda ng isang prefix ng guild kung ibinigay. O ipinapakita ang kasalukuyang prefix ng guild.",
+			"examples": [
+				"h!",
+				">"
+			]
 		}
 	},
 	"language": {
@@ -19,9 +24,14 @@
 		"set": "Ang aking wika ay matagumpay na naitakda sa `{{language}}`!",
 		"unknown": "Ang mga magagamit na wika ay {{langs}}!",
 		"extended": {
-			"usages": ["Language"],
-			"extendedHelp": "Sets a guild language if provided. Or shows the current guild language.",
-			"examples": ["en-US", "ja-JP"]
+			"usages": [
+				"Wika"
+			],
+			"extendedHelp": "Nagtatakda ng isang wika ng guild kung ibinigay. O ipinapakita ang kasalukuyang wika ng guild.",
+			"examples": [
+				"en-US",
+				"ja-JP"
+			]
 		}
 	}
 }

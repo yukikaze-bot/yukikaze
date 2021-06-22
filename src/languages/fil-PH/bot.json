@@ -1,11 +1,11 @@
 {
 	"helpTitles": {
-		"aliases": "**Aliases**",
-		"usages": "**Command Usage**",
-		"extendedHelp": "**Extended Help**",
-		"explainedUsage": "**Explained usage**",
-		"possibleFormats": "**Possible formats**",
-		"examples": "**Examples**",
-		"reminders": "**Reminder**"
+		"aliases": "**Mga Alias**",
+		"usages": "**Paggamit ng Command**",
+		"extendedHelp": "**Pinalawak na Tulong**",
+		"explainedUsage": "**Ipinaliwanag na paggamit**",
+		"possibleFormats": "**Mga posibleng format**",
+		"examples": "**Mga halimbawa**",
+		"reminders": "**Paalala**"
 	}
 }
