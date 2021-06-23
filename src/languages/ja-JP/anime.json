@@ -1,6 +1,6 @@
 {
 	"naruto": {
-		"description": "Searches a Naruto character!",
+		"description": "Naruto-ナルト-キャラクターを検索します！",
 		"prompt": "Who is the character that you want to search?",
 		"unknown": "I could not find that character...",
 		"extended": {
