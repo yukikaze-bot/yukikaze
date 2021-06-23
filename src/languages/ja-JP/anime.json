@@ -4,10 +4,20 @@
 		"prompt": "検索したいキャラクターは誰ですか？",
 		"unknown": "I could not find that character...",
 		"extended": {
-			"usages": ["Character"],
+			"usages": [
+				"Character"
+			],
 			"extendedHelp": "Fetches data from https://narutoql.com for your query.",
-			"explainedUsage": [["character", "The character."]],
-			"examples": ["Uzumaki Naruto", "Sarutobi Konohamaru"]
+			"explainedUsage": [
+				[
+					"character",
+					"The character."
+				]
+			],
+			"examples": [
+				"Uzumaki Naruto",
+				"Sarutobi Konohamaru"
+			]
 		}
 	},
 	"anime": {
@@ -15,10 +25,20 @@
 		"prompt": "What is the title of the anime?",
 		"unknown": "I could not find that anime...",
 		"extended": {
-			"usages": ["Title"],
+			"usages": [
+				"Title"
+			],
 			"extendedHelp": "Fetches data from https://kitsu.io to get your anime!",
-			"explainedUsage": [["title", "The anime title."]],
-			"examples": ["Death Note", "Attack On Titan"]
+			"explainedUsage": [
+				[
+					"title",
+					"The anime title."
+				]
+			],
+			"examples": [
+				"Death Note",
+				"Attack On Titan"
+			]
 		}
 	}
 }
