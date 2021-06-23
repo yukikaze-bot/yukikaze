@@ -4,25 +4,35 @@
 		"prompt": "Sino ang pokemon na nais mong hanapin?",
 		"unknown": "Hindi ko mahanap ang pokemon na iyon...",
 		"extended": {
-			"usages": ["Pangalan"],
+			"usages": [
+				"Pangalan"
+			],
 			"extendedHelp": "Kinukuha ang data mula sa https://graphqlpokemon.favware.tech upang makuha ang iyong pokemon!",
-			"explainedUsage": [["pangalan", "Ang pangalan ng pokemon."]],
-			"examples": ["Greninja", "Togedemaru"]
+			"explainedUsage": [
+				[
+					"pangalan",
+					"Ang pangalan ng pokemon."
+				]
+			],
+			"examples": [
+				"Greninja",
+				"Togedemaru"
+			]
 		}
 	},
 	"horoscope": {
-		"description": "Gets your daily horoscope!",
-		"prompt": "What is the horoscope?",
-		"unknown": "You provided an invalid horoscope, it could be one of {{list}}.",
+		"description": "Nakukuha ang iyong pang-araw-araw na horoscope!",
+		"prompt": "Ano ang horoscope?",
+		"unknown": "Nagbigay ka ng hindi wastong horoscope, maaaring ito ay isa sa {{list}}.",
 		"extended": {
 			"usages": [
 				"Horoscope"
 			],
-			"extendedHelp": "Gets data about your daily horoscope.",
+			"extendedHelp": "Nakakakuha ng data tungkol sa iyong pang-araw-araw na horoscope.",
 			"explainedUsage": [
 				[
 					"horoscope",
-					"The horoscope."
+					"Ang horoscope."
 				]
 			],
 			"examples": [
