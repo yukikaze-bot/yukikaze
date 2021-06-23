@@ -4,20 +4,10 @@
 		"prompt": "Who is the pokemon that you want to search?",
 		"unknown": "I could not find that pokemon...",
 		"extended": {
-			"usages": [
-				"Name"
-			],
+			"usages": ["Name"],
 			"extendedHelp": "Fetches data from https://graphqlpokemon.favware.tech to get your pokemon!",
-			"explainedUsage": [
-				[
-					"name",
-					"The pokemon name."
-				]
-			],
-			"examples": [
-				"Greninja",
-				"Togedemaru"
-			]
+			"explainedUsage": [["name", "The pokemon name."]],
+			"examples": ["Greninja", "Togedemaru"]
 		}
 	},
 	"horoscope": {
@@ -25,20 +15,10 @@
 		"prompt": "What is the horoscope?",
 		"unknown": "You provided an invalid horoscope, it could be one of {{list}}.",
 		"extended": {
-			"usages": [
-				"Horoscope"
-			],
+			"usages": ["Horoscope"],
 			"extendedHelp": "Gets data about your daily horoscope.",
-			"explainedUsage": [
-				[
-					"horoscope",
-					"The horoscope."
-				]
-			],
-			"examples": [
-				"Leo",
-				"Aquarius"
-			]
+			"explainedUsage": [["horoscope", "The horoscope."]],
+			"examples": ["Leo", "Aquarius"]
 		}
 	}
 }
