@@ -539,6 +539,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@skyra/saelem@npm:^3.0.9":
+  version: 3.0.9
+  resolution: "@skyra/saelem@npm:3.0.9"
+  dependencies:
+    graphql: ^15.5.0
+  checksum: 754ee2e52116e760c4abaf279f3699d4ecc4a1e0c17d7e474e887f5c3d541e281088293dffc04ee605ee5175002bb6109b6fd8dd2950d159b2beb8e2a91bc53c
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:1":
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
@@ -4887,6 +4896,7 @@ fsevents@~2.3.2:
     "@sapphire/ts-config": ^2.2.3
     "@sapphire/type": ^2.0.9
     "@skyra/editable-commands": ^1.0.0
+    "@skyra/saelem": ^3.0.9
     "@types/capitalize": ^2
     "@types/copyfiles": ^2
     "@types/dotenv-flow": ^3

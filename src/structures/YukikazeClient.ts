@@ -78,6 +78,7 @@ export class YukikazeClient extends SapphireClient {
 			},
 			i18n: {
 				defaultNS: 'global',
+				defaultMissingKey: 'missing',
 				defaultLanguageDirectory: join(__dirname, '..', 'languages'),
 				i18next: (_: string[], languages: string[]) => ({
 					supportedLngs: languages,
