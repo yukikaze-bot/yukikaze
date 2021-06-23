@@ -4,10 +4,20 @@
 		"prompt": "Who is the pokemon that you want to search?",
 		"unknown": "I could not find that pokemon...",
 		"extended": {
-			"usages": ["Name"],
+			"usages": [
+				"Name"
+			],
 			"extendedHelp": "Fetches data from https://graphqlpokemon.favware.tech to get your pokemon!",
-			"explainedUsage": [["name", "The pokemon name."]],
-			"examples": ["Greninja", "Togedemaru"]
+			"explainedUsage": [
+				[
+					"name",
+					"The pokemon name."
+				]
+			],
+			"examples": [
+				"Greninja",
+				"Togedemaru"
+			]
 		}
 	},
 	"horoscope": {
