@@ -9,5 +9,26 @@
 			"explainedUsage": [["name", "The pokemon name."]],
 			"examples": ["Greninja", "Togedemaru"]
 		}
+	},
+	"horoscope": {
+		"description": "Gets your daily horoscope!",
+		"prompt": "What is the horoscope?",
+		"unknown": "You provided an invalid horoscope, it could be one of {{list}}.",
+		"extended": {
+			"usages": [
+				"Horoscope"
+			],
+			"extendedHelp": "Gets data about your daily horoscope.",
+			"explainedUsage": [
+				[
+					"horoscope",
+					"The horoscope."
+				]
+			],
+			"examples": [
+				"Leo",
+				"Aquarius"
+			]
+		}
 	}
 }
