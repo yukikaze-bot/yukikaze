@@ -1,0 +1,42 @@
+{
+	"doesntExist": "That tag doesn't exist...",
+	"alreadyExists": "That tag already exists...",
+	"show": "What is the tag name?",
+	"create": {
+		"prompt": {
+			"name": "What is the tag name?",
+			"content": "What is the content of the tag?"
+		},
+		"success": "Tag **{{name}}** was created successfully!"
+	},
+	"del": {
+		"perms": "You don't have permission to delete that tag.",
+		"prompt": "What is the tag name?",
+		"success": "Tag **{{name}}** was deleted successfully!"
+	},
+	"edit": {
+		"prompt": {
+			"name": "What is the tag name?",
+			"content": "What is the new content of the tag?"
+		},
+		"perms": "You don't have permission to edit that tag.",
+		"success": "Tag **{{name}}** was edited successfully with new content `{{content}}`!"
+	},
+	"info": "What is the tag name?",
+	"noTags": "No Tags.",
+	"description": "A tag command where you can make notes.",
+	"extended": {
+		"usages": ["show Name", "create Name Content", "del Name", "edit Name NewContent", "info Name"],
+		"explainedHelp": "It can give you a chunk of text stored under a specific name.",
+		"explainedUsage": [
+			[
+				"show/create/del/edit/info/list",
+				"Whether to\n  - Shows a tag.\n  - Creates a tag.\n  - Deletes a tag.\n  - Edits an existing tag.\n  - Shows information about a tag,\n  - Lists all the tags."
+			],
+			["name", "The name of the tag."],
+			["content", "The content of the tag."],
+			["new-content", "The new content of the tag."]
+		],
+		"examples": ["show myTag", "create welcome Welcome to our server!", "del offensiveTag", "edit left Goodbye...", "info myTag", "list"]
+	}
+}

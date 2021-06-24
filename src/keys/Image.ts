@@ -3,3 +3,5 @@ import { T } from '#types/i18n';
 
 export const SimpDesc = T<string>('image:simp.description');
 export const SimpExtended = T<LanguageHelpDisplayOptions>('image:simp.extended');
+export const CircleDesc = T<string>('image:circle.description');
+export const CircleExtended = T<LanguageHelpDisplayOptions>('image:circle.extended');
