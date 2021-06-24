@@ -2,9 +2,25 @@
 	"simp": {
 		"description": "Draws a \"simp\" label over an image.",
 		"extended": {
-			"usages": ["User"],
+			"usages": [
+				"User"
+			],
 			"extendedHelp": "Overlays a \"simp\" label for people who are simps.",
-			"examples": ["PopBot"]
+			"examples": [
+				"PopBot"
+			]
+		}
+	},
+	"circle": {
+		"description": "Circles an image.",
+		"extended": {
+			"usages": [
+				"User"
+			],
+			"extendedHelp": "Circles a user's avatar.",
+			"examples": [
+				"Connor"
+			]
 		}
 	}
 }
