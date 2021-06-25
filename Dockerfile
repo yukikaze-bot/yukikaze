@@ -2,11 +2,13 @@ FROM node:alpine
 
 WORKDIR /yukikaze
 
-ARG DATABASE_URL
+COPY ["package.json", "yarn.lock", ".yarnrc.yml", "./"]
 
-ADD . .
+ADD .yarn /yukikaze/.yarn
 
 RUN apk add --no-cache build-base alpine-sdk python3-dev gcc wget curl cairo-dev jpeg-dev pango-dev giflib-dev font-noto-emoji && \
 	yarn
+
+COPY . .
 
 CMD ["yarn", "start"]

@@ -33,7 +33,7 @@ export class NarutoCommand extends YukikazeCommand {
 		let char = (await args.restResult('string')).value;
 
 		if (!char) {
-			const handler = new MessagePrompter(args.t('anime:naruto.prompt'), MessagePrompterStrategies.Message);
+			const handler = new MessagePrompter(args.t('anime:naruto.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel, message.author)) as Message;
 
 			char = res.content;

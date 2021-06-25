@@ -43,7 +43,7 @@ export class PokemonCommand extends YukikazeCommand {
 		let pkmn = (await args.restResult('string')).value;
 
 		if (!pkmn) {
-			const handler = new MessagePrompter(args.t('search:pokemon.prompt'), MessagePrompterStrategies.Message);
+			const handler = new MessagePrompter(args.t('search:pokemon.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel, message.author)) as Message;
 
 			pkmn = res.content;

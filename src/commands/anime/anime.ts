@@ -51,7 +51,7 @@ export class AnimeCommand extends YukikazeCommand {
 		let title = (await args.restResult('string')).value;
 
 		if (!title) {
-			const handler = new MessagePrompter(args.t('anime:anime.prompt'), MessagePrompterStrategies.Message);
+			const handler = new MessagePrompter(args.t('anime:anime.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel, message.author)) as Message;
 
 			title = res.content;

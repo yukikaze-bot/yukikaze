@@ -37,7 +37,7 @@ export class HoroscopeCommand extends YukikazeCommand {
 		let horo = (await args.restResult('string')).value;
 
 		if (!horo) {
-			const handler = new MessagePrompter(args.t('search:horoscope.prompt'), MessagePrompterStrategies.Message);
+			const handler = new MessagePrompter(args.t('search:horoscope.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel, message.author)) as Message;
 
 			horo = res.content;
