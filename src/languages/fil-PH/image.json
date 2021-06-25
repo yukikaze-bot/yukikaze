@@ -5,7 +5,7 @@
 			"usages": [
 				"User"
 			],
-			"extendedHelp": "Nag-o-overlay ng isang \"simp\" na label para sa mga taong simps.",
+			"extendedHelp": "Overlays a \"simp\" label for people who are simps. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": [
 				"PopBot"
 			]
@@ -17,7 +17,7 @@
 			"usages": [
 				"User"
 			],
-			"extendedHelp": "Circles a user's avatar.",
+			"extendedHelp": "Circles a user's avatar. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": [
 				"Connor"
 			]
@@ -29,7 +29,7 @@
 			"usages": [
 				"User"
 			],
-			"extendedHelp": "Draws an image but with oil paints.",
+			"extendedHelp": "Draws an image but with oil paints. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": [
 				"Hajime"
 			]
