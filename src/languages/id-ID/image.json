@@ -22,5 +22,17 @@
 				"Connor"
 			]
 		}
+	},
+	"oilPainting": {
+		"description": "Oil paints an image.",
+		"extended": {
+			"usages": [
+				"User"
+			],
+			"extendedHelp": "Draws an image but with oil paints.",
+			"examples": [
+				"Hajime"
+			]
+		}
 	}
 }
