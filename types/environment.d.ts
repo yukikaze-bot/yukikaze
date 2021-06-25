@@ -3,5 +3,6 @@ namespace NodeJS {
 		DISCORD_TOKEN: string;
 		DATABASE_URL: string;
 		SAELEM_URL: string;
+		POKEMON_URL: string;
 	}
 }

@@ -3,7 +3,7 @@
 		"description": "Draws a \"simp\" label over an image.",
 		"extended": {
 			"usages": ["User"],
-			"extendedHelp": "Overlays a \"simp\" label for people who are simps.",
+			"extendedHelp": "Overlays a \"simp\" label for people who are simps. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["PopBot"]
 		}
 	},
@@ -11,7 +11,7 @@
 		"description": "Circles an image.",
 		"extended": {
 			"usages": ["User"],
-			"extendedHelp": "Circles a user's avatar.",
+			"extendedHelp": "Circles a user's avatar. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Connor"]
 		}
 	},
@@ -19,7 +19,7 @@
 		"description": "Oil paints an image.",
 		"extended": {
 			"usages": ["User"],
-			"extendedHelp": "Draws an image but with oil paints.",
+			"extendedHelp": "Draws an image but with oil paints. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Hajime"]
 		}
 	}

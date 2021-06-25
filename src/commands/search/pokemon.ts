@@ -51,7 +51,7 @@ export class PokemonCommand extends YukikazeCommand {
 
 		try {
 			const { getPokemonDetailsByName: data } = await request<GraphQLPokemonResponse<'getPokemonDetailsByName'>>(
-				'https://graphqlpokemon.favware.tech',
+				process.env.POKEMON_URL,
 				query(pkmn)
 			);
 			const embed = new MessageEmbed()
@@ -65,7 +65,7 @@ export class PokemonCommand extends YukikazeCommand {
 				.addField('Height', `${data.height}m`, true)
 				.addField('Weight', `${data.weight}kg`, true)
 				.addField('Tier', data.smogonTier, true)
-				.setFooter('Powered by graphqlpokemon.favware.tech')
+				.setFooter('Powered by the GraphQL Pokemon API made by Favware')
 				.setColor('RANDOM');
 
 			return message.reply({ embeds: [embed] });

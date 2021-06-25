@@ -53,7 +53,7 @@ export class HoroscopeCommand extends YukikazeCommand {
 				.addField('Rating', String(data.rating), true)
 				.addField('Keywords', data.keywords.join(', '))
 				.setTimestamp(data.date)
-				.setFooter('Powered by Saelem')
+				.setFooter('Powered by Saelem Horoscope API')
 				.setColor('RANDOM');
 
 			return message.reply({ embeds: [embed] });
