@@ -9,17 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Remote SSH Commands
+      - name: Execute the Commands
         uses: fifsky/ssh-action@v0.0.5
         with:
           command: |
-            cd yukikaze
-            git pull
-            yarn cache clean
-            yarn
-            yarn build
-            pm2 delete yukikaze
-            pm2 start dist/index.js --name yukikaze
+            ls
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
