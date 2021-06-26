@@ -24,4 +24,4 @@ jobs:
         service_account_key: ${{ secrets.GCE_SA_KEY }}
         project_id: ${{ secrets.GCE_PROJECT }}
 
-    - run: gcloud compute ssh $GCE_INSTANCE --command ls
+    - run: gcloud compute ssh $GCE_INSTANCE --zone=$GCE_INSTANCE_ZONE --command=ls
