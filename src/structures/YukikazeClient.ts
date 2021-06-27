@@ -135,9 +135,7 @@ export class YukikazeClient extends SapphireClient {
 					commands: () => this.stores.get('commands').size,
 					channels: () => this.channels.cache.size
 				}
-			},
-			playground: true,
-			introspection: true
+			}
 		});
 
 		await server.listen({ port: 4000 });
