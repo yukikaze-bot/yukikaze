@@ -138,6 +138,6 @@ export class YukikazeClient extends SapphireClient {
 			}
 		});
 
-		await server.listen();
+		await server.listen({ port: 4000 });
 	}
 }
