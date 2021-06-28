@@ -23,5 +23,15 @@
 			"extendedHelp": "Sets a guild language if provided. Or shows the current guild language.",
 			"examples": ["en-US", "ja-JP"]
 		}
+	},
+	"download": {
+		"description": "Gives the download link for our desktop app!",
+		"embed": {
+			"description": "Download our desktop app [`here`]({{link}})!\n\n`.dmg` - MacOS\n`.msi` - Windows\n`.deb` - Linux",
+			"footer": "Powered by {{link}}"
+		},
+		"extended": {
+			"extendedHelp": "Gives instructions on how to download our desktop app!"
+		}
 	}
 }
