@@ -8,7 +8,7 @@
 		"build": "rimraf dist && tsc && tsc-alias && copyfiles -u 1 src/languages/**/*.json dist",
 		"migrate:dev": "prisma migrate dev",
 		"migrate": "prisma migrate deploy && prisma generate",
-		"start": "yarn migrate && yarn build && pm2-runtime start dist/index.js",
+		"start": "yarn migrate && yarn build && pm2-runtime start dist/index.js --name yukikaze",
 		"prettier": "prettier . --write",
 		"deploy": "railway up"
 	},
