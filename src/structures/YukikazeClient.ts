@@ -137,7 +137,8 @@ export class YukikazeClient extends SapphireClient {
 				}
 			}
 		});
+		const app = await server.listen({ port: Number(process.env.PORT) });
 
-		await server.listen({ port: Number(process.env.PORT) });
+		this.logger.info(`GraphQL Server started at ${app.url}`);
 	}
 }

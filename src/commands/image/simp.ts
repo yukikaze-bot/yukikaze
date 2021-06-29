@@ -17,20 +17,25 @@ import { join } from 'path';
 })
 export class SimpCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		message.channel.startTyping();
+		try {
+			message.channel.startTyping();
 
-		const data = (await args.pickResult('image')).value ?? (await fetchAvatar(message.author));
-		const base = await loadImage(join(__dirname, '..', '..', '..', 'images', 'simp.png'));
-		const canvas = createCanvas(data.width, data.height);
-		const ctx = canvas.getContext('2d');
+			const data = (await args.pickResult('image')).value ?? (await fetchAvatar(message.author));
+			const base = await loadImage(join(__dirname, '..', '..', '..', 'images', 'simp.png'));
+			const canvas = createCanvas(data.width, data.height);
+			const ctx = canvas.getContext('2d');
 
-		ctx.drawImage(data, 0, 0);
+			ctx.drawImage(data, 0, 0);
 
-		const { x, y, width, height } = centerImage(base, data);
+			const { x, y, width, height } = centerImage(base, data);
 
-		ctx.drawImage(base, x, y, width, height);
+			ctx.drawImage(base, x, y, width, height);
 
-		message.channel.stopTyping();
-		return message.reply({ files: [{ attachment: canvas.toBuffer(), name: 'simp.png' }] });
+			message.channel.stopTyping();
+			return message.reply({ files: [{ attachment: canvas.toBuffer(), name: 'simp.png' }] });
+		} catch {
+			message.channel.stopTyping();
+			return message.reply(args.t('image:invalid'));
+		}
 	}
 }

@@ -51,9 +51,12 @@
 		"graphql-request": "^3.4.0",
 		"i18next": "^20.3.2",
 		"lexure": "^0.17.0",
+		"metascraper": "^5.22.4",
+		"metascraper-image": "^5.22.4",
 		"numbro": "^2.3.2",
 		"reflect-metadata": "^0.1.13",
-		"turndown": "^7.0.0"
+		"turndown": "^7.0.0",
+		"valid-image-url": "^0.1.4"
 	},
 	"devDependencies": {
 		"@sapphire/eslint-config": "^3.1.4",
@@ -64,6 +67,8 @@
 		"@types/dotenv-flow": "^3",
 		"@types/gm": "^1",
 		"@types/i18next": "^13.0.0",
+		"@types/metascraper": "^5",
+		"@types/metascraper-image": "^5",
 		"@types/node": "^15.12.3",
 		"@types/rimraf": "^3",
 		"@types/turndown": "^5.0.0",

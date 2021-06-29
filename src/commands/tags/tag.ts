@@ -34,7 +34,12 @@ export class TagCommand extends YukikazeCommand {
 
 		if (!data) return message.reply(args.t('tags:doesntExist'));
 
-		return message.reply(data.content);
+		return message.reply({
+			content: data.content,
+			allowedMentions: {
+				parse: []
+			}
+		});
 	}
 
 	public async create(message: Message, args: YukikazeCommand.Args) {
