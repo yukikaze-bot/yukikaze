@@ -9,3 +9,5 @@ export const OilPaintDesc = T<string>('image:oilPainting.description');
 export const OilPaintExtended = T<LanguageHelpDisplayOptions>('image:oilPainting.extended');
 export const CharcoalDesc = T<string>('image:charcoal.description');
 export const CharcoalExtended = T<LanguageHelpDisplayOptions>('image:charcoal.extended');
+export const EmbossDesc = T<string>('image:emboss.description');
+export const EmbossExtended = T<LanguageHelpDisplayOptions>('image:emboss.extended');

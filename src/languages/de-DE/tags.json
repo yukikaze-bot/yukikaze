@@ -26,39 +26,17 @@
 	"noTags": "No Tags.",
 	"description": "A tag command where you can make notes.",
 	"extended": {
-		"usages": [
-			"show Name",
-			"create Name Content",
-			"del Name",
-			"edit Name NewContent",
-			"info Name"
-		],
+		"usages": ["show Name", "create Name Content", "del Name", "edit Name NewContent", "info Name"],
 		"explainedHelp": "It can give you a chunk of text stored under a specific name.",
 		"explainedUsage": [
 			[
 				"show/create/del/edit/info/list",
 				"Whether to\n  - Shows a tag.\n  - Creates a tag.\n  - Deletes a tag.\n  - Edits an existing tag.\n  - Shows information about a tag,\n  - Lists all the tags."
 			],
-			[
-				"name",
-				"The name of the tag."
-			],
-			[
-				"content",
-				"The content of the tag."
-			],
-			[
-				"new-content",
-				"The new content of the tag."
-			]
+			["name", "The name of the tag."],
+			["content", "The content of the tag."],
+			["new-content", "The new content of the tag."]
 		],
-		"examples": [
-			"show myTag",
-			"create welcome Welcome to our server!",
-			"del offensiveTag",
-			"edit left Goodbye...",
-			"info myTag",
-			"list"
-		]
+		"examples": ["show myTag", "create welcome Welcome to our server!", "del offensiveTag", "edit left Goodbye...", "info myTag", "list"]
 	}
 }

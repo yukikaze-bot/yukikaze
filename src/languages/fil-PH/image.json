@@ -2,37 +2,25 @@
 	"simp": {
 		"description": "Gumaguhit ng isang \"simp\" na label sa isang imahe.",
 		"extended": {
-			"usages": [
-				"User"
-			],
+			"usages": ["User"],
 			"extendedHelp": "Overlays a \"simp\" label for people who are simps. Fallbacks to the author's avatar when the author provides an invalid user.",
-			"examples": [
-				"PopBot"
-			]
+			"examples": ["PopBot"]
 		}
 	},
 	"circle": {
 		"description": "Circles an image.",
 		"extended": {
-			"usages": [
-				"User"
-			],
+			"usages": ["User"],
 			"extendedHelp": "Circles a user's avatar. Fallbacks to the author's avatar when the author provides an invalid user.",
-			"examples": [
-				"Connor"
-			]
+			"examples": ["Connor"]
 		}
 	},
 	"oilPainting": {
 		"description": "Oil paints an image.",
 		"extended": {
-			"usages": [
-				"User"
-			],
+			"usages": ["User"],
 			"extendedHelp": "Draws an image but with oil paints. Fallbacks to the author's avatar when the author provides an invalid user.",
-			"examples": [
-				"Hajime"
-			]
+			"examples": ["Hajime"]
 		}
 	}
 }

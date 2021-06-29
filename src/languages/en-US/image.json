@@ -3,7 +3,7 @@
 	"simp": {
 		"description": "Draws a \"simp\" label over an image.",
 		"extended": {
-			"usages": ["User"],
+			"usages": ["User", "Url"],
 			"extendedHelp": "Overlays a \"simp\" label for people who are simps. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["PopBot"]
 		}
@@ -11,7 +11,7 @@
 	"circle": {
 		"description": "Circles an image.",
 		"extended": {
-			"usages": ["User"],
+			"usages": ["User", "Url"],
 			"extendedHelp": "Circles a user's avatar. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Connor"]
 		}
@@ -19,7 +19,7 @@
 	"oilPainting": {
 		"description": "Oil paints an image.",
 		"extended": {
-			"usages": ["User"],
+			"usages": ["User", "Url"],
 			"extendedHelp": "Draws an image but with oil paints. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Hajime"]
 		}
@@ -27,9 +27,17 @@
 	"charcoal": {
 		"description": "Charcoal draws an image.",
 		"extended": {
-			"usages": ["User"],
+			"usages": ["User", "Url"],
 			"extendedHelp": "Draws an image but with charcoal. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Henry"]
+		}
+	},
+	"emboss": {
+		"description": "Embossess an image.",
+		"extended": {
+			"usages": ["User", "Url"],
+			"extendedHelp": "Draws an image but embosses it. Fallbacks to the author's avatar when the author provides an invalid user.",
+			"examples": ["Tomio"]
 		}
 	}
 }
