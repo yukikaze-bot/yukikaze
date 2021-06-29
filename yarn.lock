@@ -5617,13 +5617,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"renovate-config-teal@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "renovate-config-teal@npm:1.0.1"
-  checksum: 479f37439a4e8896b22d58bf55a205f428e40f41a7fcd28bfd38ac887d3d2264d6a2ba55e5b2cd6d2e04180d90462c87cabab746e46de9a7d7e845c7030598fa
-  languageName: node
-  linkType: hard
-
 "repeat-string@npm:^1.6.1":
   version: 1.6.1
   resolution: "repeat-string@npm:1.6.1"
@@ -7056,7 +7049,6 @@ resolve@^1.12.0:
     prettier: ^2.3.1
     prisma: ^2.25.0
     reflect-metadata: ^0.1.13
-    renovate-config-teal: ^1.0.1
     rimraf: ^3.0.2
     tsc-alias: ^1.3.3
     turndown: ^7.0.0
