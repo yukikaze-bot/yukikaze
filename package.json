@@ -7,10 +7,10 @@
 	"scripts": {
 		"build": "rimraf dist && tsc && tsc-alias && copyfiles -u 1 src/languages/**/*.json dist",
 		"migrate:dev": "prisma migrate dev",
-		"migrate": "prisma migrate deploy && prisma generate",
+		"migrate": "prisma migrate deploy && yarn generate",
 		"start": "yarn migrate && yarn build && pm2-runtime start dist/index.js --name yukikaze",
 		"prettier": "prettier . --write",
-		"deploy": "railway up"
+		"generate": "prisma generate"
 	},
 	"repository": {
 		"type": "git",
@@ -28,7 +28,7 @@
 	"dependencies": {
 		"@favware/graphql-pokemon": "^5.5.4",
 		"@naval-base/ms": "^3.1.0",
-		"@prisma/client": "^2.25.0",
+		"@prisma/client": "^2.26.0",
 		"@sapphire/decorators": "^2.1.3",
 		"@sapphire/discord-utilities": "^2.1.3",
 		"@sapphire/discord.js-utilities": "^1.5.9",
@@ -76,7 +76,7 @@
 		"eslint": "^7.28.0",
 		"pm2": "^5.1.0",
 		"prettier": "^2.3.1",
-		"prisma": "^2.25.0",
+		"prisma": "^2.26.0",
 		"rimraf": "^3.0.2",
 		"tsc-alias": "^1.3.3",
 		"typescript": "^4.3.4"
