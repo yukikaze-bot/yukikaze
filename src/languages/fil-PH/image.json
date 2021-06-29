@@ -1,4 +1,5 @@
 {
+	"invalid": "You provided an invalid image url.",
 	"simp": {
 		"description": "Gumaguhit ng isang \"simp\" na label sa isang imahe.",
 		"extended": {
@@ -21,6 +22,18 @@
 			"usages": ["User"],
 			"extendedHelp": "Draws an image but with oil paints. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Hajime"]
+		}
+	},
+	"charcoal": {
+		"description": "Charcoal draws an image.",
+		"extended": {
+			"usages": [
+				"User"
+			],
+			"extendedHelp": "Draws an image but with charcoal. Fallbacks to the author's avatar when the author provides an invalid user.",
+			"examples": [
+				"Henry"
+			]
 		}
 	}
 }
