@@ -5,5 +5,6 @@ namespace NodeJS {
 		SAELEM_URL: string;
 		POKEMON_URL: string;
 		PORT: string;
+		STACKOVERFLOW_KEY: string;
 	}
 }

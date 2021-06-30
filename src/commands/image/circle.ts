@@ -2,6 +2,7 @@ import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { CircleDesc, CircleExtended } from '@keys/Image';
 import { fetchAvatar } from '@utils/user/fetchAvatar';
 import { ApplyOptions } from '@sapphire/decorators';
+import { getImage } from '@utils/canvas/getImage';
 import { Message, Permissions } from 'discord.js';
 import { createCanvas } from 'canvas';
 
@@ -19,7 +20,7 @@ export class CircleCommand extends YukikazeCommand {
 		try {
 			message.channel.startTyping();
 
-			const data = (await args.pickResult('image')).value ?? (await fetchAvatar(message.author));
+			const data = (await args.pickResult('image')).value ?? (await getImage(message)) ?? (await fetchAvatar(message.author));
 			const dimensions = data.width <= data.height ? data.width : data.height;
 			const canvas = createCanvas(dimensions, dimensions);
 			const ctx = canvas.getContext('2d');

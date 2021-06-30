@@ -27,6 +27,7 @@
 	"homepage": "https://github.com/yukikaze-bot/yukikaze#readme",
 	"dependencies": {
 		"@favware/graphql-pokemon": "^5.5.4",
+		"@favware/querystring": "^7.0.3",
 		"@naval-base/ms": "^3.1.0",
 		"@prisma/client": "^2.26.0",
 		"@sapphire/decorators": "^2.1.3",

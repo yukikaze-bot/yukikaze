@@ -161,6 +161,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@favware/querystring@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@favware/querystring@npm:7.0.3"
+  checksum: 627d6f33dab52616f291fd6305f70200a0ff63491ef3be850c2090ddbacc77b571640bd24a89308f7674acd316c3343ddf31f12ef3d0e8756d18037db9b82c15
+  languageName: node
+  linkType: hard
+
 "@jfonx/console-utils@npm:^1.0.3":
   version: 1.0.3
   resolution: "@jfonx/console-utils@npm:1.0.3"
@@ -7003,6 +7010,7 @@ resolve@^1.12.0:
   resolution: "yukikaze@workspace:."
   dependencies:
     "@favware/graphql-pokemon": ^5.5.4
+    "@favware/querystring": ^7.0.3
     "@naval-base/ms": ^3.1.0
     "@prisma/client": ^2.26.0
     "@sapphire/decorators": ^2.1.3

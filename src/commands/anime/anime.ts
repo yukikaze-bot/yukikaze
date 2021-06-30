@@ -44,7 +44,7 @@ const query = (name: string) => gql`
 	limit: 2,
 	delay: 10000,
 	preconditions: ['GuildOnly'],
-	permissions: Permissions.FLAGS.MANAGE_MESSAGES
+	permissions: [Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.EMBED_LINKS]
 })
 export class AnimeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {

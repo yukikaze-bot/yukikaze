@@ -1,8 +1,8 @@
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
+import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { NarutoDesc, NarutoExtended } from '@keys/Anime';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Message, MessageEmbed } from 'discord.js';
 import { request, gql } from 'graphql-request';
 
 const query = (name: string) => gql`
@@ -26,7 +26,8 @@ const query = (name: string) => gql`
 	delay: 10000,
 	description: NarutoDesc,
 	extendedHelp: NarutoExtended,
-	c: 'Anime'
+	c: 'Anime',
+	permissions: Permissions.FLAGS.EMBED_LINKS
 })
 export class NarutoCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {

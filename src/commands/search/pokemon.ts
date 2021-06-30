@@ -1,9 +1,9 @@
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
+import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { PokemonDesc, PokemonExtended } from '@keys/Search';
 import type { Query } from '@favware/graphql-pokemon';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Message, MessageEmbed } from 'discord.js';
 import { request, gql } from 'graphql-request';
 import capitalize from 'capitalize';
 
@@ -36,7 +36,8 @@ const query = (name: string) => gql`
 	description: PokemonDesc,
 	c: 'Search',
 	extendedHelp: PokemonExtended,
-	aliases: ['pkmn']
+	aliases: ['pkmn'],
+	permissions: Permissions.FLAGS.EMBED_LINKS
 })
 export class PokemonCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {

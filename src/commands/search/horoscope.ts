@@ -1,8 +1,8 @@
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
 import { HoroscopeDesc, HoroscopeExtended } from '@keys/Search';
+import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Message, MessageEmbed } from 'discord.js';
 import { request, gql } from 'graphql-request';
 import type { Query } from '@skyra/saelem';
 import capitalize from 'capitalize';
@@ -30,7 +30,8 @@ const query = (name: string) => gql`
 	description: HoroscopeDesc,
 	c: 'Search',
 	extendedHelp: HoroscopeExtended,
-	aliases: ['horo']
+	aliases: ['horo'],
+	permissions: Permissions.FLAGS.EMBED_LINKS
 })
 export class HoroscopeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
