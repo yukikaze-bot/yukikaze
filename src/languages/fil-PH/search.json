@@ -4,10 +4,20 @@
 		"prompt": "Sino ang pokemon na nais mong hanapin?",
 		"unknown": "Hindi ko mahanap ang pokemon na iyon...",
 		"extended": {
-			"usages": ["Pangalan"],
+			"usages": [
+				"Pangalan"
+			],
 			"extendedHelp": "Kinukuha ang data mula sa https://graphqlpokemon.favware.tech upang makuha ang iyong pokemon!",
-			"explainedUsage": [["pangalan", "Ang pangalan ng pokemon."]],
-			"examples": ["Greninja", "Togedemaru"]
+			"explainedUsage": [
+				[
+					"pangalan",
+					"Ang pangalan ng pokemon."
+				]
+			],
+			"examples": [
+				"Greninja",
+				"Togedemaru"
+			]
 		}
 	},
 	"horoscope": {
@@ -15,10 +25,40 @@
 		"prompt": "Ano ang horoscope?",
 		"unknown": "Nagbigay ka ng hindi wastong horoscope, maaaring ito ay isa sa {{list}}.",
 		"extended": {
-			"usages": ["Horoscope"],
+			"usages": [
+				"Horoscope"
+			],
 			"extendedHelp": "Nakakakuha ng data tungkol sa iyong pang-araw-araw na horoscope.",
-			"explainedUsage": [["horoscope", "Ang horoscope."]],
-			"examples": ["Leo", "Aquarius"]
+			"explainedUsage": [
+				[
+					"horoscope",
+					"Ang horoscope."
+				]
+			],
+			"examples": [
+				"Leo",
+				"Aquarius"
+			]
+		}
+	},
+	"stackoverflow": {
+		"description": "Searches Stack Overflow for your query.",
+		"prompt": "What is your query?",
+		"noResults": "I could not find any results...",
+		"extended": {
+			"usages": [
+				"Query"
+			],
+			"extendedHelp": "Uses the Stack Apps API to search for your query.",
+			"explainedUsage": [
+				[
+					"query",
+					"Your query."
+				]
+			],
+			"examples": [
+				"How to loop through an array in Python."
+			]
 		}
 	}
 }
