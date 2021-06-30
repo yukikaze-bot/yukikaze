@@ -20,5 +20,16 @@
 			"explainedUsage": [["horoscope", "The horoscope."]],
 			"examples": ["Leo", "Aquarius"]
 		}
+	},
+	"stackoverflow": {
+		"description": "Searches Stack Overflow for your query.",
+		"prompt": "What is your query?",
+		"noResults": "I could not find any results...",
+		"extended": {
+			"usages": ["Query"],
+			"extendedHelp": "Uses the Stack Apps API to search for your query.",
+			"explainedUsage": [["query", "Your query."]],
+			"examples": ["How to loop through an array in Python."]
+		}
 	}
 }
