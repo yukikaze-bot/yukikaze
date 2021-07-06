@@ -2,7 +2,6 @@ import { SapphireClient, SapphireClientOptions, LogLevel } from '@sapphire/frame
 import { Intents, PermissionResolvable, Guild, Message, User } from 'discord.js';
 import type { LanguageHelpDisplayOptions } from './LanguageHelp';
 import type { I18nContext } from '@sapphire/plugin-i18next';
-import { ApolloServer, gql } from 'apollo-server';
 import { PrismaClient } from '@prisma/client';
 import type { CustomGet } from '#types/i18n';
 import type { Image } from 'canvas';
@@ -98,15 +97,45 @@ export class YukikazeClient extends SapphireClient {
 					fallbackLng: 'en-US',
 					initImmediate: false
 				})
+			},
+			api: {
+				listenOptions: {
+					port: Number(process.env.PORT)
+				},
+				auth: {
+					id: '855428383574589460',
+					secret: process.env.CLIENT_SECRET,
+					scopes: ['identify', 'guilds'],
+					redirect: 'https://yukikaze.tech/oauth/callback',
+					domainOverwrite: 'yukikaze.tech'
+				},
+				prefix: '/',
+				origin: 'https://yukikaze.tech'
 			}
 		});
 	}
 
 	public async login(token = process.env.DISCORD_TOKEN) {
 		await this.db.$connect();
-		await this._startGql();
 
 		return super.login(token);
+	}
+
+	public getEnv(key: string, type?: EnvMethods.Int): number;
+	public getEnv(key: string, type?: EnvMethods.String): string;
+	public getEnv(key: string, type?: EnvMethods): number | string {
+		if (typeof type === 'undefined') type = EnvMethods.String;
+
+		const res = process.env[key];
+
+		switch (type) {
+			case EnvMethods.String:
+				return String(res);
+			case EnvMethods.Int:
+				return Number(res);
+			default:
+				throw new Error('Unknown type.');
+		}
 	}
 
 	public readonly fetchLanguage = async (context: I18nContext): Promise<string> => {
@@ -124,28 +153,9 @@ export class YukikazeClient extends SapphireClient {
 
 		return guild?.prefix ?? '!y';
 	};
+}
 
-	private async _startGql() {
-		const server = new ApolloServer({
-			typeDefs: gql`
-				type Query {
-					guilds: String!
-					users: String!
-					commands: String!
-					channels: String!
-				}
-			`,
-			resolvers: {
-				Query: {
-					guilds: () => this.guilds.cache.size,
-					users: () => this.guilds.cache.reduce((acc, g) => acc + g.memberCount, 0),
-					commands: () => this.stores.get('commands').size,
-					channels: () => this.channels.cache.size
-				}
-			}
-		});
-		const app = await server.listen({ port: Number(process.env.PORT) });
-
-		this.logger.info(`GraphQL Server started at ${app.url}`);
-	}
+export const enum EnvMethods {
+	String = 'string',
+	Int = 'integer'
 }

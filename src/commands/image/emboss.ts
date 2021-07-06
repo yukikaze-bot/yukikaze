@@ -25,7 +25,7 @@ export class CharcoalCommand extends YukikazeCommand {
 				user?.displayAvatarURL({ format: 'png', size: 4096 }) ??
 				(await getAttachment(message)) ??
 				message.author.displayAvatarURL({ format: 'png', size: 4096 });
-			const buffer = await fetch<Buffer>(avatar, FetchResultTypes.Buffer);
+			const buffer = await fetch(avatar, FetchResultTypes.Buffer);
 			const state = gm(buffer).emboss().setFormat('png');
 
 			message.channel.stopTyping();

@@ -13,7 +13,7 @@ export const getAttachment = async (message: Message): Promise<string | null> =>
 	const matched = message.content.match(urlRe);
 
 	if (matched) {
-		const html = await fetch<string>(matched[0], FetchResultTypes.Text);
+		const html = await fetch(matched[0], FetchResultTypes.Text);
 		const { image } = await scraper({ html, url: matched[0] });
 		const valid = await isImage(image);
 

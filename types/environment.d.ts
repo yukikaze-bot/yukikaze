@@ -6,5 +6,6 @@ namespace NodeJS {
 		POKEMON_URL: string;
 		PORT: string;
 		STACKOVERFLOW_KEY: string;
+		CLIENT_SECRET: string;
 	}
 }
