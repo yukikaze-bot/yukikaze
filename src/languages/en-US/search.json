@@ -5,7 +5,7 @@
 		"unknown": "I could not find that pokemon...",
 		"extended": {
 			"usages": ["Name"],
-			"extendedHelp": "Fetches data from https://graphqlpokemon.favware.tech to get your pokemon!",
+			"extendedHelp": "Fetches data from our Pokemon API to get your pokemon!",
 			"explainedUsage": [["name", "The pokemon name."]],
 			"examples": ["Greninja", "Togedemaru"]
 		}
@@ -30,6 +30,18 @@
 			"extendedHelp": "Uses the Stack Apps API to search for your query.",
 			"explainedUsage": [["query", "Your query."]],
 			"examples": ["How to loop through an array in Python."]
+		}
+	},
+	"define": {
+		"description": "Defines a word.",
+		"prompt": "What is the word?",
+		"noResults": "I could not find any results...",
+		"choose": "Choose between one of the definitions!",
+		"extended": {
+			"usages": ["Word"],
+			"extendedHelp": "Defines a word and gives the meanings.",
+			"explainedUsage": ["word", "The word."],
+			"examples": ["hello", "developer"]
 		}
 	}
 }

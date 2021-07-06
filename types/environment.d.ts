@@ -7,5 +7,6 @@ namespace NodeJS {
 		PORT: string;
 		STACKOVERFLOW_KEY: string;
 		CLIENT_SECRET: string;
+		DICTIONARY_URL: string;
 	}
 }

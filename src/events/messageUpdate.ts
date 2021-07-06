@@ -1,5 +1,6 @@
 import type { Message, PartialMessage } from 'discord.js';
-import { Event, Events } from '@sapphire/framework';
+import { Event } from '@sapphire/framework';
+import { Events } from '@utils/Events';
 
 export class MessageUpdateEvent extends Event<Events.MessageUpdate> {
 	public async run(old: Message | PartialMessage, message: Message | PartialMessage) {
