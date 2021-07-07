@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, APIMessage, TextChannel, Permissions } from 'discord.js';
+import { Message, MessageEmbed, MessagePayload, TextChannel, Permissions } from 'discord.js';
 import { PaginatedMessage } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { LanguageHelp } from '@structures/LanguageHelp';
@@ -72,7 +72,7 @@ export class NarutoCommand extends YukikazeCommand {
 		return new PaginatedMessage({
 			pages: [...categories.values()].map(
 				(category) => (index, pages) =>
-					new APIMessage(message.channel, {
+					new MessagePayload(message.channel, {
 						embeds: [
 							new MessageEmbed()
 								.setColor('RANDOM')

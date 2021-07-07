@@ -9,8 +9,9 @@
 			"@structures/*": ["src/structures/*"],
 			"@keys/*": ["src/keys/*"],
 			"@utils/*": ["src/utils/*"],
-			"#types/*": ["src/types/*"]
+			"#types/*": ["src/types/*"],
+			"@root": ["src/*"]
 		},
-		"typeRoots": ["./types"]
+		"typeRoots": ["./types", "./node_modules/discord.js/typings"]
 	}
 }

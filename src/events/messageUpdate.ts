@@ -7,7 +7,7 @@ export class MessageUpdateEvent extends Event<Events.MessageUpdate> {
 		if (old.partial) old = await old.fetch();
 		if (message.partial) message = await message.fetch();
 		if (old.content === message.content) return;
-		if (message.webhookID) return;
+		if (message.webhookId) return;
 		if (message.system) return;
 		if (message.author.bot) return;
 

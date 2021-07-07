@@ -20,7 +20,7 @@ export class GuildRoute extends Route {
 			id: guild.id,
 			name: guild.name,
 			memberCount: guild.memberCount,
-			owner: guild.ownerID,
+			owner: guild.ownerId,
 			icon: guild.iconURL({ dynamic: true, size: 512 }) ?? 'https://cdn.discordapp.com/embed/avatars/4.png'
 		});
 	}

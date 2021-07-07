@@ -1,0 +1,179 @@
+diff --git a/dist/index.js b/dist/index.js
+index 23646521bd017e3a1bb71e899e10366e7f3f857b..90c77f30e04489362a2aa7f9f2fe00f54a6f60d9 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -306,7 +306,7 @@ class PaginatedMessage {
+         });
+         this.pages = pages !== null && pages !== void 0 ? pages : [];
+         for (const page of this.pages)
+-            this.messages.push(page instanceof discord_js.APIMessage ? page : null);
++            this.messages.push(page instanceof discord_js.MessagePayload ? page : null);
+         for (const action of actions !== null && actions !== void 0 ? actions : this.constructor.defaultActions)
+             this.actions.set(action.id, action);
+     }
+@@ -374,7 +374,7 @@ class PaginatedMessage {
+      */
+     addPage(page) {
+         this.pages.push(page);
+-        this.messages.push(page instanceof discord_js.APIMessage ? page : null);
++        this.messages.push(page instanceof discord_js.MessagePayload ? page : null);
+         return this;
+     }
+     /**
+@@ -446,7 +446,7 @@ class PaginatedMessage {
+      * @param author The author the handler is for.
+      */
+     async setUpReactions(channel, author) {
+-        this.collector = this.response.createReactionCollector((reaction, user) => user.id === author.id && (this.actions.has(reaction.emoji.identifier) || this.actions.has(reaction.emoji.name)), { idle: this.idle })
++        this.collector = this.response.createReactionCollector({ filter: (reaction, user) => user.id === author.id && (this.actions.has(reaction.emoji.identifier) || this.actions.has(reaction.emoji.name)), idle: this.idle })
+             .on('collect', this.handleCollect.bind(this, author, channel))
+             .on('end', this.handleEnd.bind(this));
+         for (const id of this.actions.keys()) {
+@@ -463,7 +463,7 @@ class PaginatedMessage {
+      */
+     async handlePageLoad(page, channel, index) {
+         const options = typeof page === 'function' ? await page(index, this.pages, this) : page;
+-        return (options instanceof discord_js.APIMessage ? options : new discord_js.APIMessage(channel, options)).resolveData();
++        return (options instanceof discord_js.MessagePayload ? options : new discord_js.MessagePayload(channel, options)).resolveData();
+     }
+     /**
+      * Handles the `collect` event from the collector.
+@@ -670,7 +670,7 @@ class MessagePrompterBaseStrategy {
+     }
+     async collectReactions(channel, authorOrFilter, reactions) {
+         this.appliedMessage = await channel.send(this.message);
+-        const collector = this.appliedMessage.createReactionCollector(this.createReactionPromptFilter(reactions, authorOrFilter), {
++        const collector = this.appliedMessage.createReactionCollector({ filter: this.createReactionPromptFilter(reactions, authorOrFilter),
+             max: 1,
+             time: this.timeout
+         });
+@@ -811,7 +811,7 @@ class MessagePrompterMessageStrategy extends MessagePrompterBaseStrategy {
+      */
+     async run(channel, authorOrFilter) {
+         this.appliedMessage = await channel.send(this.message);
+-        const collector = await channel.awaitMessages(this.createMessagePromptFilter(authorOrFilter), {
++        const collector = await channel.awaitMessages({ filter: this.createMessagePromptFilter(authorOrFilter),
+             max: 1,
+             time: this.timeout,
+             errors: ['time']
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 840e7c8b487a7b9ae9a267aeb8578876bd1c434f..5716e95ef97b3ca691d3ade02138385afa77b494 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1,5 +1,5 @@
+ export * from '@sapphire/discord-utilities';
+-import { APIMessage } from 'discord.js';
++import { MessagePayload } from 'discord.js';
+
+ /**
+  * A message builder class, it implements the {@link https://discord.js.org/#/docs/main/stable/typedef/MessageOptions MessageOptions}
+@@ -302,7 +302,7 @@ class PaginatedMessage {
+         });
+         this.pages = pages !== null && pages !== void 0 ? pages : [];
+         for (const page of this.pages)
+-            this.messages.push(page instanceof APIMessage ? page : null);
++            this.messages.push(page instanceof MessagePayload ? page : null);
+         for (const action of actions !== null && actions !== void 0 ? actions : this.constructor.defaultActions)
+             this.actions.set(action.id, action);
+     }
+@@ -370,7 +370,7 @@ class PaginatedMessage {
+      */
+     addPage(page) {
+         this.pages.push(page);
+-        this.messages.push(page instanceof APIMessage ? page : null);
++        this.messages.push(page instanceof MessagePayload ? page : null);
+         return this;
+     }
+     /**
+@@ -459,7 +459,7 @@ class PaginatedMessage {
+      */
+     async handlePageLoad(page, channel, index) {
+         const options = typeof page === 'function' ? await page(index, this.pages, this) : page;
+-        return (options instanceof APIMessage ? options : new APIMessage(channel, options)).resolveData();
++        return (options instanceof MessagePayload ? options : new MessagePayload(channel, options)).resolveData();
+     }
+     /**
+      * Handles the `collect` event from the collector.
+diff --git a/dist/lib/LazyPaginatedMessage.d.ts b/dist/lib/LazyPaginatedMessage.d.ts
+index 1b6efa74cee780573f6ee6fb02103419b47945fb..457ddcfbb23e3b9ca0ce956f43365e4f38776d4b 100644
+--- a/dist/lib/LazyPaginatedMessage.d.ts
++++ b/dist/lib/LazyPaginatedMessage.d.ts
+@@ -1,4 +1,4 @@
+-import type { APIMessage, NewsChannel, TextChannel } from 'discord.js';
++import type { MessagePayload, NewsChannel, TextChannel } from 'discord.js';
+ import { PaginatedMessage } from './PaginatedMessage';
+ /**
+  * This is a LazyPaginatedMessage. Instead of resolving all pages that are functions on [[PaginatedMessage.run]] will resolve when requested.
+@@ -12,6 +12,6 @@ export declare class LazyPaginatedMessage extends PaginatedMessage {
+      * Resolves the page corresponding with the given index. This also resolves the index's before and after the given index.
+      * @param index The index to resolve. Defaults to handler's current index.
+      */
+-    resolvePage(channel: TextChannel | NewsChannel, index: number): Promise<APIMessage>;
++    resolvePage(channel: TextChannel | NewsChannel, index: number): Promise<MessagePayload>;
+ }
+ //# sourceMappingURL=LazyPaginatedMessage.d.ts.map
+\ No newline at end of file
+diff --git a/dist/lib/MessagePrompter/constants.d.ts b/dist/lib/MessagePrompter/constants.d.ts
+index eae25ecaa10bdce5053bd349a5514acebe1a1281..e305f489937d2789660b6d3e3caf54e5469ba9b4 100644
+--- a/dist/lib/MessagePrompter/constants.d.ts
++++ b/dist/lib/MessagePrompter/constants.d.ts
+@@ -1,10 +1,10 @@
+-import type { APIMessageContentResolvable, MessageAdditions, MessageOptions } from 'discord.js';
++import type { MessageAdditions, MessageOptions } from 'discord.js';
+ export declare type Constructor<A extends readonly any[] = readonly any[], R = any> = new (...args: A) => R;
+ export declare type Awaited<T> = PromiseLike<T> | T;
+ /**
+  * A type to extend multiple discord types and simplify usage in [[MessagePrompter]]
+  */
+-export declare type MessagePrompterMessage = APIMessageContentResolvable | (MessageOptions & {
++export declare type MessagePrompterMessage = string | (MessageOptions & {
+     split?: false;
+ }) | MessageAdditions;
+ export declare const enum MessagePrompterStrategies {
+diff --git a/dist/lib/PaginatedMessage.d.ts b/dist/lib/PaginatedMessage.d.ts
+index 2ff1bbeadbde92b597222bcae864f3dace27637e..7cf296a29bcf76ed9d7082f17932b04a18cbea4f 100644
+--- a/dist/lib/PaginatedMessage.d.ts
++++ b/dist/lib/PaginatedMessage.d.ts
+@@ -1,4 +1,4 @@
+-import { APIMessage, Message, MessageOptions, MessageReaction, NewsChannel, ReactionCollector, TextChannel, User } from 'discord.js';
++import { MessagePayload, Message, MessageOptions, MessageReaction, NewsChannel, ReactionCollector, TextChannel, User } from 'discord.js';
+ /**
+  * This is a [[PaginatedMessage]], a utility to paginate messages (usually embeds).
+  * You must either use this class directly or extend it.
+@@ -55,7 +55,7 @@ export declare class PaginatedMessage {
+     /**
+      * The pages which were converted from [[PaginatedMessage.pages]]
+      */
+-    messages: (APIMessage | null)[];
++    messages: (MessagePayload | null)[];
+     /**
+      * The actions which are to be used.
+      */
+@@ -133,7 +133,7 @@ export declare class PaginatedMessage {
+      * Executed whenever an action is triggered and resolved.
+      * @param index The index to resolve.
+      */
+-    resolvePage(channel: TextChannel | NewsChannel, index: number): Promise<APIMessage>;
++    resolvePage(channel: TextChannel | NewsChannel, index: number): Promise<MessagePayload>;
+     /**
+      * Clones the current handler into a new instance.
+      */
+@@ -156,7 +156,7 @@ export declare class PaginatedMessage {
+      * @param channel The channel the paginated message runs at.
+      * @param index The index of the current page.
+      */
+-    protected handlePageLoad(page: MessagePage, channel: TextChannel | NewsChannel, index: number): Promise<APIMessage>;
++    protected handlePageLoad(page: MessagePage, channel: TextChannel | NewsChannel, index: number): Promise<MessagePayload>;
+     /**
+      * Handles the `collect` event from the collector.
+      * @param author The the handler is for.
+@@ -268,7 +268,7 @@ export interface PaginatedMessageOptions {
+  *   });
+  * ```
+  */
+-export declare type MessagePage = ((index: number, pages: MessagePage[], handler: PaginatedMessage) => Awaited<APIMessage | MessageOptions>) | APIMessage | MessageOptions;
++export declare type MessagePage = ((index: number, pages: MessagePage[], handler: PaginatedMessage) => Awaited<MessagePayload | MessageOptions>) | MessagePayload | MessageOptions;
+ declare type Awaited<T> = PromiseLike<T> | T;
+ export {};
+ //# sourceMappingURL=PaginatedMessage.d.ts.map
+\ No newline at end of file

@@ -1,5 +1,5 @@
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions } from 'discord.js';
+import { Message, MessageEmbed, Permissions, TextChannel } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { PokemonDesc, PokemonExtended } from '@keys/Search';
 import type { Query } from '@favware/graphql-pokemon';
@@ -45,7 +45,7 @@ export class PokemonCommand extends YukikazeCommand {
 
 		if (!pkmn) {
 			const handler = new MessagePrompter(args.t('search:pokemon.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			pkmn = res.content;
 		}

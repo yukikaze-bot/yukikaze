@@ -1,7 +1,6 @@
 import { SapphireClient, SapphireClientOptions, LogLevel } from '@sapphire/framework';
 import { Intents, PermissionResolvable, Guild, Message, User } from 'discord.js';
 import type { LanguageHelpDisplayOptions } from './LanguageHelp';
-import InteractiveClient from '@duxcore/interactive-discord';
 import type { I18nContext } from '@sapphire/plugin-i18next';
 import { PrismaClient } from '@prisma/client';
 import type { CustomGet } from '#types/i18n';
@@ -13,7 +12,6 @@ declare module '@sapphire/framework' {
 	interface SapphireClient {
 		converter: Turndown;
 		db: PrismaClient;
-		interactions: InteractiveClient;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -51,7 +49,6 @@ declare module '@sapphire/framework' {
 export class YukikazeClient extends SapphireClient {
 	public readonly db = new PrismaClient();
 	public readonly converter = new Turndown();
-	public readonly interactions = new InteractiveClient(this);
 	public readonly owner: `${bigint}` = '566155739652030465';
 
 	public constructor(options?: SapphireClientOptions) {
@@ -141,8 +138,8 @@ export class YukikazeClient extends SapphireClient {
 		}
 	}
 
-	public readonly fetchLanguage = async (context: I18nContext): Promise<string> => {
-		if (!context.guild) return 'en-US';
+	public readonly fetchLanguage = async (context?: I18nContext): Promise<string> => {
+		if (!context?.guild) return 'en-US';
 
 		const guild = await this.db.guild.findUnique({ where: { id: (context.guild as Guild).id } });
 

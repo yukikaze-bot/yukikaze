@@ -18,7 +18,7 @@ export class TagCommand extends YukikazeCommand {
 
 		if (!name) {
 			const handler = new MessagePrompter(args.t('tags:prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			name = res.content;
 		}
@@ -48,14 +48,14 @@ export class TagCommand extends YukikazeCommand {
 
 		if (!name) {
 			const handler = new MessagePrompter(args.t('tags:create.prompt.name')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			name = res.content;
 		}
 
 		if (!content) {
 			const handler = new MessagePrompter(args.t('tags:create.prompt.content')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			content = res.content;
 		}
@@ -89,7 +89,7 @@ export class TagCommand extends YukikazeCommand {
 
 		if (!name) {
 			const handler = new MessagePrompter(args.t('tags:del.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			name = res.content;
 		}
@@ -114,14 +114,14 @@ export class TagCommand extends YukikazeCommand {
 
 		if (!name) {
 			const handler = new MessagePrompter(args.t('tags:edit.prompt.name')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			name = res.content;
 		}
 
 		if (!content) {
 			const handler = new MessagePrompter(args.t('tags:edit.prompt.content')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			content = res.content;
 		}
@@ -162,7 +162,7 @@ export class TagCommand extends YukikazeCommand {
 
 		if (!name) {
 			const handler = new MessagePrompter(args.t('tags:info')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			name = res.content;
 		}

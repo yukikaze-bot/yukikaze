@@ -1,5 +1,5 @@
 import { MessagePrompter, MessagePrompterStrategies, PaginatedMessage, MessagePage } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, APIMessage, TextChannel, Permissions } from 'discord.js';
+import { Message, MessageEmbed, MessagePayload, TextChannel, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { AnimeDesc, AnimeExtended } from '@keys/Anime';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -52,7 +52,7 @@ export class AnimeCommand extends YukikazeCommand {
 
 		if (!title) {
 			const handler = new MessagePrompter(args.t('anime:anime.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			title = res.content;
 		}
@@ -66,7 +66,7 @@ export class AnimeCommand extends YukikazeCommand {
 				.filter((node: any) => node.sfw)
 				.map(
 					(node: any) => (index: number, pages: MessagePage[]) =>
-						new APIMessage(message.channel, {
+						new MessagePayload(message.channel, {
 							embeds: [
 								new MessageEmbed()
 									.setTitle(node.titles.canonical)

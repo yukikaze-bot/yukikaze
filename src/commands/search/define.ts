@@ -1,6 +1,5 @@
+import { Message, MessageEmbed, Permissions, MessageSelectMenu, SelectMenuInteraction, TextChannel } from 'discord.js';
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { SelectionComponent, ComponentCluster } from '@duxcore/interactive-discord';
-import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { DefineDesc, DefineExtended } from '@keys/Search';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
@@ -26,8 +25,7 @@ interface Item<T = string> {
 	aliases: ['dictionary', 'meaning'],
 	delay: 10000,
 	limit: 2,
-	permissions: Permissions.FLAGS.EMBED_LINKS,
-	preconditions: ['GuildOnly']
+	permissions: Permissions.FLAGS.EMBED_LINKS
 })
 export class DefineCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
@@ -35,7 +33,7 @@ export class DefineCommand extends YukikazeCommand {
 
 		if (!word) {
 			const handler = new MessagePrompter(args.t('search:define.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			word = res.content;
 		}
@@ -48,29 +46,23 @@ export class DefineCommand extends YukikazeCommand {
 				)
 			)[0];
 			const originalMeans = Object.keys(data.meaning);
-			const selection = new SelectionComponent({
-				placeholder: 'Meanings',
-				options: originalMeans.map((mean) => ({
-					label: `${capitalize(word!)} (${capitalize(mean)})`,
-					description: shorten(data.meaning[mean][0].definition, 50),
-					value: mean
-				}))
-			});
-			const cluster = new ComponentCluster(selection);
+			const select = new MessageSelectMenu()
+				.setCustomId('select-define')
+				.setPlaceholder('Definitions')
+				.addOptions(
+					originalMeans.map((mean) => ({
+						label: shorten(`${capitalize(word!)} (${capitalize(mean)})`, 25),
+						description: shorten(data.meaning[mean][0].definition, 50),
+						value: mean
+					}))
+				);
 
-			this.context.client.interactions.sendComponents({
-				channel: message.channel,
-				content: args.t('search:define.choose'),
-				components: cluster
-			});
-			this.context.client.interactions.addSelectionListener(selection, (interaction) => {
-				if (interaction.raw.member.user.id !== message.author.id)
-					return interaction.respond({
-						content: "You aren't part of this interaction...",
-						isPrivate: true
-					});
+			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [[select]] });
+			const filter = (i: SelectMenuInteraction) => i.customId === 'select-define' && i.user.id === message.author.id;
+			const collector = message.channel.createMessageComponentCollector({ filter, time: 30000 });
 
-				const meaning = data.meaning[interaction.selections!.join()][0];
+			collector.on('collect', (i) => {
+				const meaning = data.meaning[i.values.join()][0];
 				const embed = new MessageEmbed()
 					.setTitle(capitalize(word!))
 					.setDescription(meaning.definition)
@@ -79,7 +71,10 @@ export class DefineCommand extends YukikazeCommand {
 
 				if (meaning.synonyms) embed.addField('Synonyms', meaning.synonyms.map((m) => capitalize(m)).join(', '));
 
-				return interaction.respond({ shouldEdit: true, embeds: [embed], content: '\u200b' });
+				msg.edit({ content: '\u200b', embeds: [embed], components: [[select]] });
+			});
+			collector.on('end', () => {
+				msg.edit({ content: 'This interaction has ended.', components: [] });
 			});
 
 			return;

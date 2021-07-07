@@ -1,6 +1,6 @@
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
+import { Message, MessageEmbed, Permissions, TextChannel } from 'discord.js';
 import { HoroscopeDesc, HoroscopeExtended } from '@keys/Search';
-import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { ApplyOptions } from '@sapphire/decorators';
 import { request, gql } from 'graphql-request';
@@ -39,7 +39,7 @@ export class HoroscopeCommand extends YukikazeCommand {
 
 		if (!horo) {
 			const handler = new MessagePrompter(args.t('search:horoscope.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			horo = res.content;
 		}

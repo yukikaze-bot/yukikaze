@@ -1,5 +1,5 @@
 import { MessagePrompter, MessagePrompterStrategies, PaginatedMessage } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions, APIMessage, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, Permissions, MessagePayload, TextChannel } from 'discord.js';
 import { StackoverflowDesc, StackoverflowExtended } from '@keys/Search';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
@@ -28,7 +28,7 @@ export class StackoverflowCommand extends YukikazeCommand {
 
 		if (!q) {
 			const handler = new MessagePrompter(args.t('search:stackoverflow.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel, message.author)) as Message;
+			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
 
 			q = res.content;
 		}
@@ -53,7 +53,7 @@ export class StackoverflowCommand extends YukikazeCommand {
 		return new PaginatedMessage({
 			pages: items.map(
 				(item) => (index, pages) =>
-					new APIMessage(message.channel, {
+					new MessagePayload(message.channel, {
 						embeds: [
 							new MessageEmbed()
 								.setAuthor(item.owner.display_name, item.owner.profile_image, item.owner.link)
