@@ -37,6 +37,8 @@ export class HoroscopeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		let horo = (await args.restResult('string')).value;
 
+		message.channel.startTyping();
+
 		if (!horo) {
 			const handler = new MessagePrompter(args.t('search:horoscope.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
@@ -57,8 +59,12 @@ export class HoroscopeCommand extends YukikazeCommand {
 				.setFooter('Powered by Saelem Horoscope API')
 				.setColor('RANDOM');
 
+			message.channel.stopTyping();
+
 			return message.reply({ embeds: [embed] });
 		} catch {
+			message.channel.stopTyping();
+
 			return message.reply(args.t('search:horoscope.unknown', { list: list(horoscopes, 'or') }));
 		}
 	}

@@ -1,6 +1,7 @@
 export const enum Constants {
 	DOWNLOAD_URL = 'https://yukikaze.tech/download',
-	TAURI_URL = 'https://tauri.studio'
+	TAURI_URL = 'https://tauri.studio',
+	NODE_URL = 'https://nodejs.org'
 }
 
 export const enum Time {

@@ -31,6 +31,8 @@ export class DefineCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		let word = (await args.restResult('string')).value;
 
+		message.channel.startTyping();
+
 		if (!word) {
 			const handler = new MessagePrompter(args.t('search:define.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
@@ -57,11 +59,15 @@ export class DefineCommand extends YukikazeCommand {
 					}))
 				);
 
+			message.channel.stopTyping();
+
 			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [[select]] });
 			const filter = (i: SelectMenuInteraction) => i.customId === 'select-define' && i.user.id === message.author.id;
 			const collector = message.channel.createMessageComponentCollector({ filter, time: 30000 });
 
 			collector.on('collect', (i) => {
+				if (!i.isSelectMenu()) return;
+
 				const meaning = data.meaning[i.values.join()][0];
 				const embed = new MessageEmbed()
 					.setTitle(capitalize(word!))
@@ -71,6 +77,8 @@ export class DefineCommand extends YukikazeCommand {
 
 				if (meaning.synonyms) embed.addField('Synonyms', meaning.synonyms.map((m) => capitalize(m)).join(', '));
 
+				i.deferUpdate();
+
 				msg.edit({ content: '\u200b', embeds: [embed], components: [[select]] });
 			});
 			collector.on('end', () => {
@@ -79,6 +87,8 @@ export class DefineCommand extends YukikazeCommand {
 
 			return;
 		} catch {
+			message.channel.stopTyping();
+
 			return message.reply(args.t('search:define.noResults'));
 		}
 	}

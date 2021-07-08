@@ -5672,6 +5672,7 @@ resolve@^1.12.0:
   version: 0.0.0-use.local
   resolution: "yukikaze@workspace:."
   dependencies:
+    "@discordjs/builders": ^0.2.0
     "@favware/graphql-pokemon": ^5.5.4
     "@favware/querystring": ^7.0.3
     "@naval-base/ms": ^3.1.0
@@ -5719,6 +5720,7 @@ resolve@^1.12.0:
     lexure: ^0.17.0
     metascraper: ^5.22.4
     metascraper-image: ^5.22.4
+    node-fetch: ^2.6.1
     numbro: ^2.3.2
     pm2: ^5.1.0
     prettier: ^2.3.1

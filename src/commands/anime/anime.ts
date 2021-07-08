@@ -50,6 +50,8 @@ export class AnimeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		let title = (await args.restResult('string')).value;
 
+		message.channel.startTyping();
+
 		if (!title) {
 			const handler = new MessagePrompter(args.t('anime:anime.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
@@ -59,7 +61,13 @@ export class AnimeCommand extends YukikazeCommand {
 
 		const { searchAnimeByTitle: data } = await request('https://kitsu.io/api/graphql', query(title));
 
-		if (!data.nodes.length) return message.reply(args.t('anime:anime.unknown'));
+		if (!data.nodes.length) {
+			message.channel.stopTyping();
+
+			return message.reply(args.t('anime:anime.unknown'));
+		}
+
+		message.channel.stopTyping();
 
 		return new PaginatedMessage({
 			pages: data.nodes

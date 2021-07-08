@@ -10,7 +10,18 @@ import { TagDesc, TagExtended } from '@keys/Tags';
 	extendedHelp: TagExtended,
 	aliases: ['t'],
 	preconditions: ['GuildOnly'],
-	subCommands: ['show', 'create', 'del', 'edit', 'info', 'list']
+	subCommands: [
+		'show',
+		'create',
+		'del',
+		'edit',
+		'info',
+		'list',
+		{ input: 'show', default: true },
+		{ input: 'add', output: 'create' },
+		{ input: 'delete', output: 'del' },
+		{ input: 'modify', output: 'edit' }
+	]
 })
 export class TagCommand extends YukikazeCommand {
 	public async show(message: Message, args: YukikazeCommand.Args) {

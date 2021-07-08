@@ -26,6 +26,8 @@ export class StackoverflowCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		let q = (await args.restResult('string')).value;
 
+		message.channel.startTyping();
+
 		if (!q) {
 			const handler = new MessagePrompter(args.t('search:stackoverflow.prompt')!, MessagePrompterStrategies.Message);
 			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
@@ -48,7 +50,13 @@ export class StackoverflowCommand extends YukikazeCommand {
 		);
 		const { items } = await fetch<Result>(`https://api.stackexchange.com/2.2/search/advanced${query}`, FetchResultTypes.JSON);
 
-		if (!items.length) return message.reply(args.t('search:stackoverflow.noResults'));
+		if (!items.length) {
+			message.channel.stopTyping();
+
+			return message.reply(args.t('search:stackoverflow.noResults'));
+		}
+
+		message.channel.stopTyping();
 
 		return new PaginatedMessage({
 			pages: items.map(

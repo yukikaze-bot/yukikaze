@@ -43,6 +43,9 @@ declare module '@sapphire/framework' {
 	interface ArgType {
 		image: Image;
 		userName: User;
+
+		// @ts-ignore override
+		url: string;
 	}
 }
 
