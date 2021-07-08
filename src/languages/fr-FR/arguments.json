@@ -1,4 +1,5 @@
 {
-	"imageNotFound": "❌ I was unable to get an avatar for {{value}}.",
-	"user": "I couldn't resolve `{{parameter}}` to a user. Please check if it's valid."
+	"imageNotFound": "I was unable to get an avatar for {{value}}.",
+	"user": "I couldn't resolve `{{parameter}}` to a user. Please check if it's valid.",
+	"url": "You provided an invalid url."
 }
