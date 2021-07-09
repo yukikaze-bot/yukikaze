@@ -9,5 +9,6 @@ namespace NodeJS {
 		CLIENT_SECRET: string;
 		DICTIONARY_URL: string;
 		SCREENSHOT_URL: string;
+		GITHUB_TOKEN: string;
 	}
 }

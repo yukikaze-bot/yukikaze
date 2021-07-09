@@ -53,8 +53,8 @@ export class DefineCommand extends YukikazeCommand {
 				.setPlaceholder('Definitions')
 				.addOptions(
 					originalMeans.map((mean) => ({
-						label: shorten(`${capitalize(word!)} (${capitalize(mean)})`, 25),
-						description: shorten(data.meaning[mean][0].definition, 50),
+						label: capitalize(mean),
+						description: shorten(data.meaning[mean][0].definition ?? data.meaning[mean][1].definition, 50),
 						value: mean
 					}))
 				);
@@ -86,8 +86,10 @@ export class DefineCommand extends YukikazeCommand {
 			});
 
 			return;
-		} catch {
+		} catch (e) {
 			message.channel.stopTyping();
+
+			console.error(e);
 
 			return message.reply(args.t('search:define.noResults'));
 		}

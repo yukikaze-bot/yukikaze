@@ -1,17 +1,19 @@
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { stringify } from '@favware/querystring';
 
-export const screenshot = async (url: string, width = 1980, height = 1080): Promise<Buffer> => {
+export const screenshot = async (url: string, width = 1980, height = 1080, full = false): Promise<Buffer> => {
+	const fullPage = full ? 'true' : 'false';
 	const query = stringify(
 		{
 			url,
 			width,
-			height
+			height,
+			full: fullPage
 		},
 		{ includeQuestion: true }
 	);
 
-	const data = await fetch(`${process.env.SCREENSHOT_URL}/api${query}`, FetchResultTypes.Buffer);
+	const data = await fetch(`${process.env.SCREENSHOT_URL}${query}`, FetchResultTypes.Buffer);
 
 	return data;
 };

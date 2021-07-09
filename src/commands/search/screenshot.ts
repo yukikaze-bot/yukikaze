@@ -18,7 +18,8 @@ import { parse } from 'url';
 	limit: 1,
 	permissions: Permissions.FLAGS.ATTACH_FILES,
 	strategyOptions: {
-		options: ['width', 'height']
+		options: ['width', 'height'],
+		flags: ['full']
 	}
 })
 export class ScreenshotCommand extends YukikazeCommand {
@@ -28,6 +29,7 @@ export class ScreenshotCommand extends YukikazeCommand {
 		let url = (await args.pickResult('url')).value as string | undefined;
 		const width = args.getOption('width') ?? 1920;
 		const height = args.getOption('height') ?? 1080;
+		const full = args.getFlags('full');
 
 		message.channel.startTyping();
 
@@ -68,8 +70,8 @@ export class ScreenshotCommand extends YukikazeCommand {
 					return message.reply(args.t('search:screenshot.nsfw'));
 				}
 
-				shot = await screenshot(redirect, Number(width), Number(height));
-			} else shot = await screenshot(url, Number(width), Number(height));
+				shot = await screenshot(redirect, Number(width), Number(height), full);
+			} else shot = await screenshot(url, Number(width), Number(height), full);
 
 			message.channel.stopTyping();
 

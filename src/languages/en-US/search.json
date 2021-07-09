@@ -67,5 +67,11 @@
 			"explainedUsage": [["url", "The url."]],
 			"examples": ["https://google.com --width=1980 --height=1080", "https://yukikaze.tech"]
 		}
+	},
+	"github": {
+		"description": "Commands that search Github!",
+		"extended": {
+			"usages": ["user Name"]
+		}
 	}
 }

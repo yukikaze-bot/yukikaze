@@ -4,6 +4,7 @@ import type { LanguageHelpDisplayOptions } from './LanguageHelp';
 import type { I18nContext } from '@sapphire/plugin-i18next';
 import { PrismaClient } from '@prisma/client';
 import type { CustomGet } from '#types/i18n';
+import { graphql } from '@octokit/graphql';
 import type { Image } from 'canvas';
 import Turndown from 'turndown';
 import { join } from 'path';
@@ -12,6 +13,7 @@ declare module '@sapphire/framework' {
 	interface SapphireClient {
 		converter: Turndown;
 		db: PrismaClient;
+		gh: typeof graphql;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -52,6 +54,7 @@ declare module '@sapphire/framework' {
 export class YukikazeClient extends SapphireClient {
 	public readonly db = new PrismaClient();
 	public readonly converter = new Turndown();
+	public readonly gh = graphql.defaults({ headers: { authorization: `token ${process.env.GITHUB_TOKEN}` } });
 	public readonly owner: `${bigint}` = '566155739652030465';
 
 	public constructor(options?: SapphireClientOptions) {
