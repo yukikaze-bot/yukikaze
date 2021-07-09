@@ -25,9 +25,6 @@
 		"url": "https://github.com/yukikaze-bot/yukikaze/issues"
 	},
 	"homepage": "https://github.com/yukikaze-bot/yukikaze#readme",
-	"resolutions": {
-		"@prisma/client/.prisma": "link:node_modules/.prisma"
-	},
 	"dependencies": {
 		"@discordjs/builders": "^0.2.0",
 		"@favware/graphql-pokemon": "^5.5.4",

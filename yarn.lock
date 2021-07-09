@@ -5,12 +5,6 @@ __metadata:
   version: 4
   cacheKey: 7
 
-".prisma@link:node_modules/.prisma::locator=yukikaze%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: ".prisma@link:node_modules/.prisma::locator=yukikaze%40workspace%3A."
-  languageName: node
-  linkType: soft
-
 "@babel/code-frame@npm:7.12.11":
   version: 7.12.11
   resolution: "@babel/code-frame@npm:7.12.11"

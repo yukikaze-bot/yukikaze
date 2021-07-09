@@ -102,16 +102,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT",
         }]
       ]],
-      [".prisma", [
-        ["link:node_modules/.prisma::locator=yukikaze%40workspace%3A.", {
-          "packageLocation": "./node_modules/.prisma/",
-          "packageDependencies": [
-            [".prisma", "link:node_modules/.prisma::locator=yukikaze%40workspace%3A."]
-          ],
-          "linkType": "SOFT",
-          "discardFromLookup": true
-        }]
-      ]],
       ["@babel/code-frame", [
         ["npm:7.12.11", {
           "packageLocation": "./.yarn/cache/@babel-code-frame-npm-7.12.11-1a9a1b277f-033d3fb3bf.zip/node_modules/@babel/code-frame/",
@@ -545,7 +535,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/@prisma-client-virtual-bd6e0b303d/node_modules/@prisma/client/",
           "packageDependencies": [
             ["@prisma/client", "virtual:cb6d3546b33b75a9edd306bddfbe40bb7c9207d1053f986caa6917bd2944205a6466c8ab9f1d952cd3abeb1b509e4c4bed1ec80e4929b4c349c677396e57282e#npm:2.26.0"],
-            [".prisma", "link:node_modules/.prisma::locator=yukikaze%40workspace%3A."],
             ["@prisma/engines-version", "npm:2.26.0-23.9b816b3aa13cc270074f172f30d6eda8a8ce867d"],
             ["@types/prisma", null],
             ["prisma", "npm:2.26.0"]
