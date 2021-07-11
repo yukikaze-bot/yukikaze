@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import type { CustomGet } from '#types/i18n';
 import { graphql } from '@octokit/graphql';
 import type { Image } from 'canvas';
+import { Timers } from './Timers';
 import Turndown from 'turndown';
 import { join } from 'path';
 
@@ -14,6 +15,7 @@ declare module '@sapphire/framework' {
 		converter: Turndown;
 		db: PrismaClient;
 		gh: typeof graphql;
+		timers: Timers;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -55,6 +57,7 @@ export class YukikazeClient extends SapphireClient {
 	public readonly db = new PrismaClient();
 	public readonly converter = new Turndown();
 	public readonly gh = graphql.defaults({ headers: { authorization: `token ${process.env.GITHUB_TOKEN}` } });
+	public readonly timers = new Timers(process.env.REDIS_URL);
 	public readonly owner: `${bigint}` = '566155739652030465';
 
 	public constructor(options?: SapphireClientOptions) {

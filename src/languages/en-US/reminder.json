@@ -1,0 +1,22 @@
+{
+	"remind": {
+		"description": "Sets a reminder.",
+		"prompt": "What do you want me to remind you about, and in how long?",
+		"exists": "Only one reminder can be set per channel per user.",
+		"done": "Hey {{user}}, i'm reminding you of {{title}}.",
+		"invalid": "You provided an invalid time.",
+		"extended": {
+			"usages": ["Time"],
+			"extendedHelp": "Sets a reminder in the current channel. You can only have one reminder per channel.",
+			"examples": ["1m to eat"]
+		}
+	},
+	"deleteRemind": {
+		"description": "Deletes a reminder.",
+		"doesntExist": "You do not have a reminder in this channel.",
+		"deleted": "Your reminder has been deleted!",
+		"extended": {
+			"extendedHelp": "Deletes a reminder in your curremt channel."
+		}
+	}
+}

@@ -9,7 +9,6 @@ datasource db {
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["nApi"]
-  output          = "../prisma-dist"
 }
 
 model Guild {
@@ -27,4 +26,11 @@ model Tag {
   guildID   String
 
   @@id([name, guildID])
+}
+
+model Timer {
+  id      String   @id
+  date    DateTime
+  message String
+  title   String
 }

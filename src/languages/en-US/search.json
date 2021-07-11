@@ -65,13 +65,23 @@
 			"usages": ["Url"],
 			"extendedHelp": "Uses Puppeteer to screenshot your website.",
 			"explainedUsage": [["url", "The url."]],
-			"examples": ["https://google.com --width=1980 --height=1080", "https://yukikaze.tech"]
+			"examples": ["https://google.com --width=1980 --height=1080", "https://yukikaze.tech --full", "https://discord.com"]
 		}
 	},
 	"github": {
 		"description": "Commands that search Github!",
+		"user": {
+			"prompt": "Who is the user?",
+			"noResults": "I could not find that user..."
+		},
 		"extended": {
-			"usages": ["user Name"]
+			"usages": ["user Name"],
+			"extendedHelp": "Searches GitHub for your query.",
+			"explainedUsage": [
+				["user", "Whether to\n  - Search a user."],
+				["user", "The user"]
+			],
+			"examples": ["user 1chiSensei"]
 		}
 	}
 }

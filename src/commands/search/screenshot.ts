@@ -14,7 +14,7 @@ import { parse } from 'url';
 	description: ScreenshotDesc,
 	extendedHelp: ScreenshotExtended,
 	aliases: ['ss', 'capture'],
-	delay: 10000,
+	delay: 30000,
 	limit: 1,
 	permissions: Permissions.FLAGS.ATTACH_FILES,
 	strategyOptions: {

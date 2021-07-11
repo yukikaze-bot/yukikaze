@@ -88,7 +88,7 @@ export class AnimeCommand extends YukikazeCommand {
 									.addField('Average Rating', `${node.averageRating}%`, true)
 									.addField('Episodes', String(node.episodeCount), true)
 									.addField('Favorites', numbro(node.favoritesCount).format({ thousandSeparated: true }), true)
-									.addField('Season', capitalize(node.season), true)
+									.addField('Season', capitalize(node.season ?? 'Unknown'), true)
 									.setColor('RANDOM')
 									.setFooter(`Page ${index + 1} / ${pages.length}`)
 							]

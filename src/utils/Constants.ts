@@ -13,3 +13,10 @@ export const enum Time {
 	Month = 1000 * 60 * 60 * 24 * (365 / 12),
 	Year = 1000 * 60 * 60 * 24 * 365
 }
+
+export const enum RequestTypes {
+	START_TIMER = 1,
+	STOP_TIMER = 2,
+	RESET_TIMER = 3,
+	REMAINING_TIMER = 4
+}

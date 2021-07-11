@@ -1,3 +1,12 @@
+import type { EventOptions as BaseEventOptions } from '@sapphire/framework';
+import type { YukikazeClient } from '@structures/YukikazeClient';
+import type { EventEmitter } from 'events';
+
+// @ts-ignore For intellisense
+export interface EventOptions extends BaseEventOptions {
+	emitter?: keyof YukikazeClient | EventEmitter;
+}
+
 export const enum Events {
 	ChannelCreate = 'channelCreate',
 	ChannelDelete = 'channelDelete',
@@ -65,5 +74,5 @@ export const enum Events {
 	CommandFinish = 'commandFinish',
 	CommandError = 'commandError',
 	PluginLoaded = 'pluginLoaded',
-	SelectionInteraction = 'selectionInteraction'
+	Timeout = 'timeout'
 }

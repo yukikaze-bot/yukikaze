@@ -71,7 +71,7 @@ export class DefineCommand extends YukikazeCommand {
 				const meaning = data.meaning[i.values.join()][0];
 				const embed = new MessageEmbed()
 					.setTitle(capitalize(word!))
-					.setDescription(meaning.definition)
+					.setDescription(meaning.definition ?? data.meaning[i.values.join()][1].definition)
 					.addField('Example', capitalize(meaning.example))
 					.setColor('RANDOM');
 

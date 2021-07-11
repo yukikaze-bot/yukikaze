@@ -13,3 +13,5 @@ export const NodeDesc = T<string>('search:node.description');
 export const NodeExtended = T<LanguageHelpDisplayOptions>('search:node.extended');
 export const ScreenshotDesc = T<string>('search:screenshot.description');
 export const ScreenshotExtended = T<LanguageHelpDisplayOptions>('search:screenshot.extended');
+export const GithubDesc = T<string>('search:github.description');
+export const GithubExtended = T<LanguageHelpDisplayOptions>('search:github.extended');
