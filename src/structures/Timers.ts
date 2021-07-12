@@ -88,6 +88,7 @@ export class Timers extends TypedEmitter<Events> {
 				break;
 			case this.stopChannel:
 				this._handleStop(msg);
+				break;
 		}
 	}
 }

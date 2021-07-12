@@ -1,3 +1,5 @@
+import { TwemojiRegex } from '@sapphire/discord-utilities';
+
 export const enum Constants {
 	DOWNLOAD_URL = 'https://yukikaze.tech/download',
 	TAURI_URL = 'https://tauri.studio',
@@ -20,3 +22,8 @@ export const enum RequestTypes {
 	RESET_TIMER = 3,
 	REMAINING_TIMER = 4
 }
+
+export const kRegExpUnicodeBoxNumber = /^\d\u20E3$/;
+export const kRegExpFormattedCustomEmoji = /<a?:\w{2,32}:\d{17,18}>/;
+export const kRegExpParsedCustomEmoji = /a?:\w{2,32}:\d{17,18}/;
+export const kRegExpTwemoji = new RegExp(TwemojiRegex, '');

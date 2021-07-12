@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, Permissions, MessageSelectMenu, SelectMenuInteraction, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, Permissions, MessageSelectMenu, SelectMenuInteraction, TextChannel, MessageActionRow } from 'discord.js';
 import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { DefineDesc, DefineExtended } from '@keys/Search';
@@ -48,22 +48,24 @@ export class DefineCommand extends YukikazeCommand {
 				)
 			)[0];
 			const originalMeans = Object.keys(data.meaning);
-			const select = new MessageSelectMenu()
-				.setCustomId('select-define')
-				.setPlaceholder('Definitions')
-				.addOptions(
-					originalMeans.map((mean) => ({
-						label: capitalize(mean),
-						description: shorten(data.meaning[mean][0].definition ?? data.meaning[mean][1].definition, 50),
-						value: mean
-					}))
-				);
+			const select = new MessageActionRow().addComponents(
+				new MessageSelectMenu()
+					.setCustomId('select-define')
+					.setPlaceholder('Definitions')
+					.addOptions(
+						originalMeans.map((mean) => ({
+							label: capitalize(mean),
+							description: shorten(data.meaning[mean][0].definition ?? data.meaning[mean][1].definition, 50),
+							value: mean
+						}))
+					)
+			);
 
 			message.channel.stopTyping();
 
-			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [[select]] });
+			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [select] });
 			const filter = (i: SelectMenuInteraction) => i.customId === 'select-define' && i.user.id === message.author.id;
-			const collector = message.channel.createMessageComponentCollector({ filter, time: 30000 });
+			const collector = message.channel.createMessageComponentCollector({ filter, idle: 120000 });
 
 			collector.on('collect', (i) => {
 				if (!i.isSelectMenu()) return;
@@ -79,7 +81,7 @@ export class DefineCommand extends YukikazeCommand {
 
 				i.deferUpdate();
 
-				msg.edit({ content: '\u200b', embeds: [embed], components: [[select]] });
+				msg.edit({ content: '\u200b', embeds: [embed], components: [select] });
 			});
 			collector.on('end', () => {
 				msg.edit({ content: 'This interaction has ended.', components: [] });

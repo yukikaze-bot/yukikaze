@@ -74,5 +74,6 @@ export const enum Events {
 	CommandFinish = 'commandFinish',
 	CommandError = 'commandError',
 	PluginLoaded = 'pluginLoaded',
-	Timeout = 'timeout'
+	Timeout = 'timeout',
+	RawReactionAdd = 'rawReactionAdd'
 }

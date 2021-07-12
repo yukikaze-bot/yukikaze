@@ -30,37 +30,39 @@ export class RemindCommand extends YukikazeCommand {
 			time = res.content;
 		}
 
-		const exists = await this.context.client.db.timer.findUnique({ where: { id: `${message.channel.id}-${message.author.id}` } });
+		try {
+			const exists = await this.context.client.db.timer.findUnique({ where: { id: `${message.channel.id}-${message.author.id}` } });
 
-		if (exists) return message.reply(args.t('reminder:remind.exists'));
+			if (exists) return message.reply(args.t('reminder:remind.exists'));
 
-		const parsed = parse(time);
+			const parsed = parse(time);
 
-		if (!parsed.startDate) return message.reply(args.t('reminder:remind.invalid'));
+			if (!parsed.startDate) return message.reply(args.t('reminder:remind.invalid'));
 
-		const timeMs = parsed.startDate.getTime() - Date.now();
-		const display = dayjs().add(timeMs, 'ms').fromNow();
-		const title = parsed.eventTitle ? shorten(parsed.eventTitle, 500) : args.t('something');
-		const id = `${message.channel.id}-${message.author.id}`;
-		const sec = ~~(timeMs / 1000) + 1;
+			const timeMs = parsed.startDate.getTime() - Date.now();
+			const display = dayjs().add(timeMs, 'ms').fromNow();
+			const title = parsed.eventTitle ? shorten(parsed.eventTitle, 500) : args.t('something');
+			const id = `${message.channel.id}-${message.author.id}`;
+			const sec = ~~(timeMs / 1000) + 1;
 
-		console.log(sec);
+			await this.context.client.db.timer.create({
+				data: {
+					id,
+					title,
+					date: parsed.startDate,
+					message: message.id
+				}
+			});
+			await this.context.client.timers.start(id, sec);
 
-		await this.context.client.db.timer.create({
-			data: {
-				id,
-				title,
-				date: parsed.startDate,
-				message: message.id
-			}
-		});
-		await this.context.client.timers.start(id, sec);
-
-		return message.reply({
-			content: `Okay, I will be reminding you of **"${title}"** ${display}.`,
-			allowedMentions: {
-				parse: ['users']
-			}
-		});
+			return message.reply({
+				content: `Okay, I will be reminding you of **"${title}"** ${display}.`,
+				allowedMentions: {
+					parse: ['users']
+				}
+			});
+		} catch {
+			return message.reply(args.t('reminder:remind.invalid'));
+		}
 	}
 }

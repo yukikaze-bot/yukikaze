@@ -141,7 +141,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mapbox/node-pre-gyp@npm:^1.0.0":
+"@mapbox/node-pre-gyp@npm:^1.0.0, @mapbox/node-pre-gyp@npm:^1.0.5":
   version: 1.0.5
   resolution: "@mapbox/node-pre-gyp@npm:1.0.5"
   dependencies:
@@ -916,6 +916,16 @@ __metadata:
     "@typescript-eslint/types": 4.27.0
     eslint-visitor-keys: ^2.0.0
   checksum: d600de56ce12ee1195fbc76fd82ec56116f5301093b4f313dbf9fa1ee82a3609bbfdf48bdb722cb253256da80f46b71070fddbda47d77e8808d0a04c4f5e6a2c
+  languageName: node
+  linkType: hard
+
+"@yukikaze-bot/erlpack@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@yukikaze-bot/erlpack@npm:1.0.1"
+  dependencies:
+    "@mapbox/node-pre-gyp": ^1.0.5
+    node-addon-api: ^4.0.0
+  checksum: d1294afece563375da6bb79cf164f46a9d219118dbef992869c03e14e69dd7f9ac5d43395d78ec7615adc7fec8dc136993cd904569baafd5aeab6b9ae2f388fa
   languageName: node
   linkType: hard
 
@@ -1965,9 +1975,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-discord.js@13.0.0-dev.755c180.1625616230:
-  version: 13.0.0-dev.755c180.1625616230
-  resolution: "discord.js@npm:13.0.0-dev.755c180.1625616230"
+discord.js@dev:
+  version: 13.0.0-dev.1dcad05.1626091387
+  resolution: "discord.js@npm:13.0.0-dev.1dcad05.1626091387"
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -1978,13 +1988,13 @@ discord.js@13.0.0-dev.755c180.1625616230:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: c2afaefcb84a33bc18886f40cf4603bd15509e10427081262fdd5081a1a9c3566cd690335d7c6ec95a17d07fe537981db80540e3faf428d538802f9899c0c6da
+  checksum: 0f3e4243ee056036074cf62901c5f47aba6ceac7dffe016170a4e7cd08103874d2abf3223850df35ffe32652c43bb4817a13bc6bb29fc486df854801c51077c5
   languageName: node
   linkType: hard
 
-"discord.js@patch:discord.js@13.0.0-dev.755c180.1625616230#./.yarn/patches/discord.js.patch::locator=yukikaze%40workspace%3A.":
-  version: 13.0.0-dev.755c180.1625616230
-  resolution: "discord.js@patch:discord.js@npm%3A13.0.0-dev.755c180.1625616230#./.yarn/patches/discord.js.patch::version=13.0.0-dev.755c180.1625616230&hash=fcfdf8&locator=yukikaze%40workspace%3A."
+"discord.js@patch:discord.js@dev#./.yarn/patches/discord.js.patch::locator=yukikaze%40workspace%3A.":
+  version: 13.0.0-dev.1dcad05.1626091387
+  resolution: "discord.js@patch:discord.js@npm%3A13.0.0-dev.1dcad05.1626091387#./.yarn/patches/discord.js.patch::version=13.0.0-dev.1dcad05.1626091387&hash=0a3b33&locator=yukikaze%40workspace%3A."
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -1995,7 +2005,7 @@ discord.js@13.0.0-dev.755c180.1625616230:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: caaa05e69351c09e5be530c394196624517fd8164541186f029fb6aa93d6b391284a6191036435b2c60c40b49b72eb16a6e0d0b2e9d8fa64603e6ab1bb3255e7
+  checksum: 585cf3a5ba0a40d34b1828a9cc972abd8c8e8872149bc1aa167e1b8d7fb92b5ff7c5d4cadd9122d7fdf6c038e974bdb3610990266d85f66031c9b026abffa3d8
   languageName: node
   linkType: hard
 
@@ -3926,6 +3936,15 @@ fsevents@~2.3.2:
   version: 2.0.2
   resolution: "netmask@npm:2.0.2"
   checksum: 17bfa2d1a2ee49c4385da07f3aa3403654efa4bcf2382b75a5abd3942ebc57846f82416612adc58b5e92723392bad1a5ae3310c2a922d529102a01b1671885a2
+  languageName: node
+  linkType: hard
+
+"node-addon-api@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "node-addon-api@npm:4.0.0"
+  dependencies:
+    node-gyp: latest
+  checksum: 0359a744bc6a6f742eeb47abdbaeb2f0bc6e83f8bc116640e0a35613d4a0eaf8f6b29fefacca2f7409764775accfb3bfba6cca0ec1f697cd9581be8108729cf3
   languageName: node
   linkType: hard
 
@@ -5905,12 +5924,13 @@ resolve@^1.12.0:
     "@types/node-fetch": ^2.5.10
     "@types/rimraf": ^3
     "@types/turndown": ^5.0.0
+    "@yukikaze-bot/erlpack": ^1.0.1
     canvas: ^2.8.0
     capitalize: ^2.0.3
     copyfiles: ^2.4.1
     dayjs: ^1.10.6
     discord-api-types: ^0.18.1
-    discord.js: "patch:discord.js@13.0.0-dev.755c180.1625616230#./.yarn/patches/discord.js.patch"
+    discord.js: "patch:discord.js@dev#./.yarn/patches/discord.js.patch"
     dotenv-flow: ^3.2.0
     eslint: ^7.28.0
     gm: ^1.23.1
@@ -5935,5 +5955,8 @@ resolve@^1.12.0:
     turndown: ^7.0.0
     typescript: ^4.3.4
     valid-image-url: ^0.1.4
+  dependenciesMeta:
+    "@yukikaze-bot/erlpack":
+      optional: true
   languageName: unknown
   linkType: soft

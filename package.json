@@ -50,7 +50,7 @@
 		"canvas": "^2.8.0",
 		"capitalize": "^2.0.3",
 		"dayjs": "^1.10.6",
-		"discord.js": "patch:discord.js@13.0.0-dev.755c180.1625616230#./.yarn/patches/discord.js.patch",
+		"discord.js": "patch:discord.js@dev#./.yarn/patches/discord.js.patch",
 		"dotenv-flow": "^3.2.0",
 		"gm": "^1.23.1",
 		"graphql": "^15.5.0",
@@ -103,5 +103,8 @@
 			"@typescript-eslint/no-non-null-asserted-optional-chain": "off"
 		}
 	},
-	"prettier": "@sapphire/prettier-config"
+	"prettier": "@sapphire/prettier-config",
+	"optionalDependencies": {
+		"@yukikaze-bot/erlpack": "^1.0.1"
+	}
 }
