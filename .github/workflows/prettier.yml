@@ -17,7 +17,7 @@ jobs:
         uses: creyD/prettier_action@v3.3
         with:
           commit_message: 'style(global): prettier'
-          prettier_options: --write **/*
+          prettier_options: --write **/* --config ./.github/prettier.ci.js
           only_changed: True
         env:
           GITHUB_TOKEN: ${{ github.token }}
