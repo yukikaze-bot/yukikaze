@@ -3,5 +3,6 @@
 	"dmOnly": "This command can only be used in DM channels.",
 	"guildOnly": "This command can only be used in server channels.",
 	"nsfw": "You may not use NSFW commands in this channel!",
-	"permissions": "I don't have sufficient permissions! I'm missing: {{missing, permissionsAndList}}"
+	"permissions": "I don't have sufficient permissions! I'm missing: {{missing, permissionsAndList}}",
+	"subCommandGuildOnly": "This subcommand can only be used in server channels."
 }
