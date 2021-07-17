@@ -1,3 +1,5 @@
 {
-	"missing": "{{key}} ay hindi pa naisalokal para sa en-US. Nais mong makatulong sa pagsasalin? Bisitahin ang https://translate.yukikaze.tech upang makapagsimula!"
+	"missing": "{{key}} ay hindi pa naisalokal para sa en-US. Nais mong makatulong sa pagsasalin? Bisitahin ang https://translate.yukikaze.tech upang makapagsimula!",
+	"something": "something",
+	"missingArgs": "The `{{name}}` argument is missing."
 }
