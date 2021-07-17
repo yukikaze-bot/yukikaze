@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Install Git
-        run: apk add git --update-cache
+        run: apk add git docker --update-cache
 
       - name: Checkout the Repository
         uses: actions/checkout@v2
