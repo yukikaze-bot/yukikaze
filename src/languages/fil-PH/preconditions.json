@@ -3,5 +3,6 @@
 	"dmOnly": "Magagamit lamang ang command na ito sa mga DM channel.",
 	"guildOnly": "Magagamit lamang ang command na ito sa mga channel ng server.",
 	"nsfw": "Maaaring hindi mo magamit ang mga command na NSFW sa channel na ito!",
-	"permissions": "Wala akong sapat na mga pahintulot! Wala akong: {{missing, permissionsAndList}}"
+	"permissions": "Wala akong sapat na mga pahintulot! Wala akong: {{missing, permissionsAndList}}",
+	"subCommandGuildOnly": "This subcommand can only be used in server channels."
 }
