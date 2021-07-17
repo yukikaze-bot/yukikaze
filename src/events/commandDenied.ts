@@ -8,6 +8,6 @@ export class CommandDeniedEvent extends Event<Events.CommandDenied> {
 
 		const identifier = translate(error.identifier);
 
-		return message.reply(await message.resolveKey(identifier, { message, command, ...(error.context as any) }));
+		return message.error(await message.resolveKey(identifier, { message, command, ...(error.context as any) }));
 	}
 }

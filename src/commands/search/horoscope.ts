@@ -1,5 +1,4 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { HoroscopeDesc, HoroscopeExtended } from '@keys/Search';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -35,15 +34,14 @@ const query = (name: string) => gql`
 })
 export class HoroscopeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let horo = (await args.restResult('string')).value;
+		const horo = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
 		if (!horo) {
-			const handler = new MessagePrompter(args.t('search:horoscope.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
+			message.channel.stopTyping();
 
-			horo = res.content;
+			return message.error(args.t('missingArgs', { name: 'horoscope' }));
 		}
 
 		try {
@@ -65,7 +63,7 @@ export class HoroscopeCommand extends YukikazeCommand {
 		} catch {
 			message.channel.stopTyping();
 
-			return message.reply(args.t('search:horoscope.unknown', { list: list(horoscopes, 'or') }));
+			return message.error(args.t('search:horoscope.unknown', { list: list(horoscopes, 'or') }));
 		}
 	}
 }

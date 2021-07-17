@@ -10,6 +10,7 @@ import type { Image } from 'canvas';
 import { Timers } from './Timers';
 import Turndown from 'turndown';
 import { join } from 'path';
+import sagiri from 'sagiri';
 
 declare module '@sapphire/framework' {
 	interface SapphireClient {
@@ -18,6 +19,7 @@ declare module '@sapphire/framework' {
 		gh: typeof graphql;
 		timers: Timers;
 		llrCollectors: Set<LongLivingReactionCollector>;
+		saucenao: ReturnType<typeof sagiri>;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -62,6 +64,7 @@ declare module 'discord.js' {
 		gh: typeof graphql;
 		timers: Timers;
 		llrCollectors: Set<LongLivingReactionCollector>;
+		saucenao: ReturnType<typeof sagiri>;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -73,6 +76,7 @@ export class YukikazeClient extends SapphireClient {
 	public readonly gh = graphql.defaults({ headers: { authorization: `token ${process.env.GITHUB_TOKEN}` } });
 	public readonly timers = new Timers(process.env.REDIS_URL);
 	public readonly llrCollectors = new Set<LongLivingReactionCollector>();
+	public readonly saucenao = sagiri(process.env.SAUCENAO_KEY, { results: 30 });
 	public readonly owner: `${bigint}` = '566155739652030465';
 
 	public constructor(options?: SapphireClientOptions) {

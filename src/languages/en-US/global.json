@@ -1,4 +1,5 @@
 {
 	"missing": "{{key}} has not been localized for en-US yet. Want to help translating? Visit https://translate.yukikaze.tech to get started!",
-	"something": "something"
+	"something": "something",
+	"missingArgs": "The `{{name}}` argument is missing."
 }

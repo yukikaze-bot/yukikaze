@@ -8,9 +8,11 @@
 		"build": "rimraf dist && tsc && tsc-alias && copyfiles -u 1 src/languages/**/*.json dist",
 		"migrate:dev": "prisma migrate dev",
 		"migrate": "prisma migrate deploy && yarn generate",
-		"start": "yarn migrate && yarn build && pm2-runtime start dist/index.js --name yukikaze",
+		"start": "yarn migrate && yarn build && yarn banner && pm2-runtime start dist/index.js --name yukikaze",
 		"prettier": "prettier . --write",
-		"generate": "prisma generate"
+		"generate": "prisma generate",
+		"setup": "node scripts/setup.mjs",
+		"banner": "node scripts/banner.mjs"
 	},
 	"repository": {
 		"type": "git",
@@ -27,6 +29,7 @@
 	"homepage": "https://github.com/yukikaze-bot/yukikaze#readme",
 	"dependencies": {
 		"@discordjs/builders": "^0.2.0",
+		"@discordjs/collection": "^0.2.0",
 		"@favware/graphql-pokemon": "^5.5.4",
 		"@favware/querystring": "^7.0.3",
 		"@naval-base/ms": "^3.1.0",
@@ -36,7 +39,7 @@
 		"@sapphire/discord-utilities": "^2.1.3",
 		"@sapphire/discord.js-utilities": "patch:@sapphire/discord.js-utilities@^1.5.9#./.yarn/patches/sapphire__discord.js-utilities.patch",
 		"@sapphire/fetch": "^1.0.3",
-		"@sapphire/framework": "^1.0.2",
+		"@sapphire/framework": "patch:@sapphire/framework@^1.0.2#./.yarn/patches/sapphire__framework.patch",
 		"@sapphire/pieces": "~1",
 		"@sapphire/plugin-api": "^2.2.0",
 		"@sapphire/plugin-i18next": "^1.3.7",
@@ -47,8 +50,11 @@
 		"@sapphire/utilities": "^1.6.1",
 		"@skyra/editable-commands": "^1.0.0",
 		"@skyra/saelem": "^3.0.9",
+		"@yukikaze-bot/prompt": "^2.0.7",
 		"canvas": "^2.8.0",
 		"capitalize": "^2.0.3",
+		"colorette": "^1.2.2",
+		"common-tags": "^1.8.0",
 		"dayjs": "^1.10.6",
 		"discord.js": "patch:discord.js@dev#./.yarn/patches/discord.js.patch",
 		"dotenv-flow": "^3.2.0",
@@ -60,9 +66,11 @@
 		"lexure": "^0.17.0",
 		"metascraper": "^5.22.4",
 		"metascraper-image": "^5.22.4",
+		"nanoid": "^3.1.23",
 		"node-fetch": "^2.6.1",
 		"numbro": "^2.3.2",
 		"reflect-metadata": "^0.1.13",
+		"sagiri": "^3.1.1",
 		"sherlockjs": "^1.4.0",
 		"tiny-typed-emitter": "^2.0.3",
 		"tslib": "^2.3.0",
@@ -74,6 +82,7 @@
 		"@sapphire/prettier-config": "^1.1.3",
 		"@sapphire/ts-config": "^2.2.3",
 		"@types/capitalize": "^2",
+		"@types/common-tags": "^1",
 		"@types/copyfiles": "^2",
 		"@types/dotenv-flow": "^3",
 		"@types/gm": "^1",
@@ -105,6 +114,9 @@
 	},
 	"prettier": "@sapphire/prettier-config",
 	"optionalDependencies": {
-		"@yukikaze-bot/erlpack": "^1.0.1"
+		"@yukikaze-bot/erlpack": "^1.0.1",
+		"bufferutil": "^4.0.3",
+		"utf-8-validate": "^5.0.5",
+		"zlib-sync": "^0.1.7"
 	}
 }

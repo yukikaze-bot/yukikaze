@@ -1,6 +1,5 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions, TextChannel, Collection } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, underscore } from '@discordjs/builders';
+import { Message, MessageEmbed, Permissions, Collection } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { NodeDesc, NodeExtended } from '@keys/Search';
@@ -25,15 +24,14 @@ const td = new Turndown({ codeBlockStyle: 'fenced' });
 })
 export class NodeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let query = (await args.restResult('string')).value;
+		const query = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
 		if (!query) {
-			const handler = new MessagePrompter(args.t('search:node.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
+			message.channel.stopTyping();
 
-			query = res.content;
+			return message.error(args.t('missingArgs', { name: 'query' }));
 		}
 
 		const url = `${Constants.NODE_URL}/dist/latest-v16.x/docs/api/all.json`;
@@ -60,7 +58,11 @@ export class NodeCommand extends YukikazeCommand {
 			findRec(allNodeData, query, 'module') ??
 			findRec(allNodeData, altQuery, 'module');
 
-		if (!result) return message.reply(args.t('search:node.noResults'));
+		if (!result) {
+			message.channel.stopTyping();
+
+			return message.error(args.t('search:node.noResults'));
+		}
 
 		const moduleURL = `${Constants.NODE_URL}/docs/latest-v16.x/api/${result.module}`;
 		const fullURL = `${moduleURL}.html${result.type === 'module' ? '' : `#${anchor(result.textRaw, result.module)}`}`;

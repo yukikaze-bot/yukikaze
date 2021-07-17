@@ -11,5 +11,6 @@ namespace NodeJS {
 		SCREENSHOT_URL: string;
 		GITHUB_TOKEN: string;
 		REDIS_URL: string;
+		SAUCENAO_KEY: string;
 	}
 }

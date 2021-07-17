@@ -1,5 +1,4 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { PokemonDesc, PokemonExtended } from '@keys/Search';
 import type { Query } from '@favware/graphql-pokemon';
@@ -41,15 +40,14 @@ const query = (name: string) => gql`
 })
 export class PokemonCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let pkmn = (await args.restResult('string')).value;
+		const pkmn = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
 		if (!pkmn) {
-			const handler = new MessagePrompter(args.t('search:pokemon.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
+			message.channel.stopTyping();
 
-			pkmn = res.content;
+			return message.error(args.t('missingArgs', { name: 'name' }));
 		}
 
 		try {
@@ -77,7 +75,7 @@ export class PokemonCommand extends YukikazeCommand {
 		} catch {
 			message.channel.stopTyping();
 
-			return message.reply(args.t('search:pokemon.unknown'));
+			return message.error(args.t('search:pokemon.unknown'));
 		}
 	}
 }

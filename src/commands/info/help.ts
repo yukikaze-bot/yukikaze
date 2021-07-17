@@ -1,11 +1,11 @@
-import { Message, MessageEmbed, MessagePayload, TextChannel, Permissions } from 'discord.js';
-import { PaginatedMessage } from '@sapphire/discord.js-utilities';
+import { Message, MessageEmbed, MessageSelectMenu, SelectMenuInteraction, MessageActionRow } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { LanguageHelp } from '@structures/LanguageHelp';
 import type { CommandStore } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
 import { HelpDesc, HelpExtended } from '@keys/Info';
 import { HelpTitles } from '@keys/Bot';
+import { nanoid } from 'nanoid';
 
 @ApplyOptions<YukikazeCommand.Options>({
 	description: HelpDesc,
@@ -19,19 +19,14 @@ export class NarutoCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const commandName = (await args.pickResult('string')).value ?? null;
 
-		if (!commandName) {
-			if (!(message.channel as TextChannel).permissionsFor(message.guild?.me!).has(Permissions.FLAGS.MANAGE_MESSAGES))
-				return message.reply(args.t('info:help.missingPerms'));
-
-			return this.menu(message);
-		}
+		if (!commandName) return this.menu(message);
 
 		this._commands = this.context.client.stores.get('commands');
 
 		const command =
 			this._commands.get(commandName.toLowerCase()) ?? this._commands.find((command) => command.aliases.includes(commandName.toLowerCase()));
 
-		if (!command) return message.reply(args.t('info:help.unknown'));
+		if (!command) return message.error(args.t('info:help.unknown'));
 
 		let prefix = await this.context.client.fetchPrefix(message);
 
@@ -69,24 +64,43 @@ export class NarutoCommand extends YukikazeCommand {
 
 		for (const [, command] of this._commands) categories.add(command.c);
 
-		return new PaginatedMessage({
-			pages: [...categories.values()].map(
-				(category) => (index, pages) =>
-					new MessagePayload(message.channel, {
-						embeds: [
-							new MessageEmbed()
-								.setColor('RANDOM')
-								.setTitle(category)
-								.setDescription(
-									this._commands
-										.filter((c) => c.c === category)
-										.map((cmd) => `\`${cmd.name}\``)
-										.join(' ')
-								)
-								.setFooter(`Page ${index + 1} / ${pages.length}`)
-						]
-					})
-			)
-		}).run(message.author, message.channel as TextChannel);
+		const id = nanoid();
+		const select = new MessageActionRow().addComponents(
+			new MessageSelectMenu()
+				.setCustomId(id)
+				.setPlaceholder('Categories')
+				.addOptions(
+					[...categories.values()].map((cat) => ({
+						label: cat,
+						value: cat
+					}))
+				)
+		);
+		const msg = await message.reply({ content: 'Choose one of the categories below!', components: [select] });
+		const filter = (i: SelectMenuInteraction) => i.customId === id && i.user.id === message.author.id;
+		const collector = message.channel.createMessageComponentCollector({ filter, idle: 180000 });
+
+		collector.on('collect', (i) => {
+			if (!i.isSelectMenu()) return;
+
+			const cat = i.values.join();
+			const embed = new MessageEmbed()
+				.setColor('RANDOM')
+				.setTitle(cat)
+				.setDescription(
+					this._commands
+						.filter((c) => c.c === cat)
+						.map((cmd) => `\`${cmd.name}\``)
+						.join(' ')
+				);
+
+			i.deferUpdate();
+
+			msg.edit({ content: '\u200b', embeds: [embed] });
+		});
+
+		collector.on('end', () => {
+			msg.edit({ content: 'This interaction has ended.', components: [] });
+		});
 	}
 }

@@ -1,6 +1,11 @@
+import { isDMChannel, isGuildBasedChannel } from '@sapphire/discord.js-utilities';
+import { SubCommandGuildOnly, Permissions as Perms } from '@keys/Preconditions';
 import { ApiRequest, ApiResponse, HttpCodes } from '@sapphire/plugin-api';
 import { RateLimitManager } from '@structures/ratelimit/RateLimitManager';
+import { PermissionResolvable, Permissions, Message } from 'discord.js';
 import { createMethodDecorator } from '@sapphire/decorators';
+import type { YukikazeArgs } from '@structures/YukikazeArgs';
+import { UserError } from '@sapphire/framework';
 
 export interface Inhibitor {
 	(...args: any[]): boolean | Promise<boolean>;
@@ -59,4 +64,21 @@ export const ratelimit = (bucket: number, cooldown: number, auth = false) => {
 		},
 		(_: ApiRequest, response: ApiResponse) => response.error(HttpCodes.TooManyRequests)
 	);
+};
+
+const serverOnlyPermissions = new Permissions([Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.ADD_REACTIONS]);
+
+export const requiresPermissions = (...permissionsResolvable: PermissionResolvable[]): MethodDecorator => {
+	const resolved = new Permissions(permissionsResolvable);
+
+	return createFunctionInhibitor((message: Message, _: YukikazeArgs) => {
+		if (isDMChannel(message.channel) && resolved.has(serverOnlyPermissions)) throw new UserError({ identifier: SubCommandGuildOnly });
+		if (isGuildBasedChannel(message.channel)) {
+			const missingPermissions = message.channel.permissionsFor(message.guild!.me!)!.missing(resolved);
+
+			if (missingPermissions.length) throw new UserError({ identifier: Perms, context: { missing: missingPermissions } });
+		}
+
+		return true;
+	});
 };

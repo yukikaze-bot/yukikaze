@@ -1,5 +1,5 @@
-import { MessagePrompter, MessagePrompterStrategies, PaginatedMessage, MessagePage } from '@sapphire/discord.js-utilities';
 import { Message, MessageEmbed, MessagePayload, TextChannel, Permissions } from 'discord.js';
+import { PaginatedMessage, MessagePage } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { AnimeDesc, AnimeExtended } from '@keys/Anime';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -48,23 +48,18 @@ const query = (name: string) => gql`
 })
 export class AnimeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let title = (await args.restResult('string')).value;
+		const title = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
-		if (!title) {
-			const handler = new MessagePrompter(args.t('anime:anime.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
-
-			title = res.content;
-		}
+		if (!title) return message.error(args.t('missingArgs', { name: 'title' }));
 
 		const { searchAnimeByTitle: data } = await request('https://kitsu.io/api/graphql', query(title));
 
 		if (!data.nodes.length) {
 			message.channel.stopTyping();
 
-			return message.reply(args.t('anime:anime.unknown'));
+			return message.error(args.t('anime:anime.unknown'));
 		}
 
 		message.channel.stopTyping();

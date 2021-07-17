@@ -1,5 +1,4 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { NarutoDesc, NarutoExtended } from '@keys/Anime';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -31,23 +30,18 @@ const query = (name: string) => gql`
 })
 export class NarutoCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let char = (await args.restResult('string')).value;
+		const char = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
-		if (!char) {
-			const handler = new MessagePrompter(args.t('anime:naruto.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
-
-			char = res.content;
-		}
+		if (!char) return message.error(args.t('missingArgs', { name: 'character' }));
 
 		const data = await request<Record<string, any>>('https://narutoql.com/graphql', query(char));
 
 		if (!data.characters.results.length) {
 			message.channel.stopTyping();
 
-			return message.reply(args.t('anime:naruto.unknown'));
+			return message.error(args.t('anime:naruto.unknown'));
 		}
 
 		const character = data.characters.results[0];

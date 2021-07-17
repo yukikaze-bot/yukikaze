@@ -40,6 +40,6 @@ export class PrefixCommand extends YukikazeCommand {
 				}
 			});
 
-		return message.reply(args.t('system:prefix.set', { prefix }));
+		return message.success(args.t('system:prefix.set', { prefix }));
 	}
 }

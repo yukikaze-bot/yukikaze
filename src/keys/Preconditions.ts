@@ -5,3 +5,4 @@ export const DMOnly = T<string>('preconditions:dmOnly');
 export const GuildOnly = T<string>('preconditions:guildOnly');
 export const NSFW = T<string>('preconditions:nsfw');
 export const Permissions = FT<{ missing: string[] }, string>('preconditions:permissions');
+export const SubCommandGuildOnly = T<string>('preconditions:SubCommandGuildOnly');

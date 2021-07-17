@@ -1,6 +1,6 @@
-import { MessagePrompter, MessagePrompterStrategies, PaginatedMessage } from '@sapphire/discord.js-utilities';
 import { Message, MessageEmbed, Permissions, MessagePayload, TextChannel } from 'discord.js';
 import { StackoverflowDesc, StackoverflowExtended } from '@keys/Search';
+import { PaginatedMessage } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -24,15 +24,14 @@ interface Result {
 })
 export class StackoverflowCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let q = (await args.restResult('string')).value;
+		const q = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
 		if (!q) {
-			const handler = new MessagePrompter(args.t('search:stackoverflow.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
+			message.channel.stopTyping();
 
-			q = res.content;
+			return message.error(args.t('missingArgs', { name: 'query' }));
 		}
 
 		const query = stringify(
@@ -53,7 +52,7 @@ export class StackoverflowCommand extends YukikazeCommand {
 		if (!items.length) {
 			message.channel.stopTyping();
 
-			return message.reply(args.t('search:stackoverflow.noResults'));
+			return message.error(args.t('search:stackoverflow.noResults'));
 		}
 
 		message.channel.stopTyping();

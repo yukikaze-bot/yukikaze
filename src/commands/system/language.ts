@@ -46,6 +46,6 @@ export class LanguageCommand extends YukikazeCommand {
 				}
 			});
 
-		return message.reply(args.t('system:language.set', { language: lang }));
+		return message.success(args.t('system:language.set', { language: lang }));
 	}
 }

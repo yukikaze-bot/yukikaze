@@ -1,10 +1,9 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { RemindDesc, RemindExtended } from '@keys/Reminder';
-import type { Message, TextChannel } from 'discord.js';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { ApplyOptions } from '@sapphire/decorators';
 import duration from 'dayjs/plugin/duration';
+import type { Message } from 'discord.js';
 import { shorten } from '@utils/shorten';
 import { parse } from 'sherlockjs';
 import dayjs from 'dayjs';
@@ -21,14 +20,9 @@ dayjs.extend(duration);
 })
 export class RemindCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let time = (await args.restResult('string')).value;
+		const time = (await args.restResult('string')).value;
 
-		if (!time) {
-			const handler = new MessagePrompter(args.t('reminder:remind.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
-
-			time = res.content;
-		}
+		if (!time) return message.error(args.t('missingArgs', { name: 'time' }));
 
 		try {
 			const exists = await this.context.client.db.timer.findUnique({ where: { id: `${message.channel.id}-${message.author.id}` } });

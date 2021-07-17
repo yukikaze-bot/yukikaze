@@ -27,3 +27,10 @@ export const kRegExpUnicodeBoxNumber = /^\d\u20E3$/;
 export const kRegExpFormattedCustomEmoji = /<a?:\w{2,32}:\d{17,18}>/;
 export const kRegExpParsedCustomEmoji = /a?:\w{2,32}:\d{17,18}/;
 export const kRegExpTwemoji = new RegExp(TwemojiRegex, '');
+export const imageExtension = /\.(bmp|jpe?g|png|gif|webp)$/i;
+
+export const kColors = [
+	0xffe3af, 0xffe0a5, 0xffdd9c, 0xffdb92, 0xffd889, 0xffd57f, 0xffd275, 0xffcf6b, 0xffcc61, 0xffca57, 0xffc74c, 0xffc440, 0xffc133, 0xffbe23,
+	0xffbb09
+];
+export const kMaxColors = kColors.length - 1;

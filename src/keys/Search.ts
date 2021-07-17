@@ -15,3 +15,5 @@ export const ScreenshotDesc = T<string>('search:screenshot.description');
 export const ScreenshotExtended = T<LanguageHelpDisplayOptions>('search:screenshot.extended');
 export const GithubDesc = T<string>('search:github.description');
 export const GithubExtended = T<LanguageHelpDisplayOptions>('search:github.extended');
+export const SauceDesc = T<string>('search:sauce.description');
+export const SauceExtended = T<LanguageHelpDisplayOptions>('search:sauce.extended');

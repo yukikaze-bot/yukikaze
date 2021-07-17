@@ -1,12 +1,11 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
 import { ScreenshotDesc, ScreenshotExtended } from '@keys/Search';
 import { Message, TextChannel, Permissions } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { ApplyOptions } from '@sapphire/decorators';
 import { screenshot } from '@utils/screenshot';
-import { resolveUrl } from '@utils/resolveUrl';
 import { isRedirect } from '@utils/isRedirect';
+import { generalEmbed } from '@utils/Embed';
 import { parse } from 'url';
 
 @ApplyOptions<YukikazeCommand.Options>({
@@ -26,7 +25,7 @@ export class ScreenshotCommand extends YukikazeCommand {
 	private nsfwList!: string[] | null;
 
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let url = (await args.pickResult('url')).value as string | undefined;
+		const url = (await args.pickResult('url')).value as unknown as string;
 		const width = args.getOption('width') ?? 1920;
 		const height = args.getOption('height') ?? 1080;
 		const full = args.getFlags('full');
@@ -34,17 +33,9 @@ export class ScreenshotCommand extends YukikazeCommand {
 		message.channel.startTyping();
 
 		if (!url) {
-			const handler = new MessagePrompter(args.t('search:screenshot.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
-			const parsed = resolveUrl(res.content);
+			message.channel.stopTyping();
 
-			if (parsed === null) {
-				message.channel.stopTyping();
-
-				return message.reply(args.t('arguments:url'));
-			}
-
-			url = parsed;
+			return message.error(args.t('missingArgs', { name: 'url' }));
 		}
 
 		try {
@@ -58,7 +49,7 @@ export class ScreenshotCommand extends YukikazeCommand {
 			if (this.nsfwList!.some((url) => parsedUrl.host === url) && !isNsfw) {
 				message.channel.stopTyping();
 
-				return message.reply(args.t('search:screenshot.nsfw'));
+				return message.error(args.t('search:screenshot.nsfw'));
 			}
 
 			if (redirect) {
@@ -67,7 +58,7 @@ export class ScreenshotCommand extends YukikazeCommand {
 				if (this.nsfwList!.some((url) => parsed.host === url) && !isNsfw) {
 					message.channel.stopTyping();
 
-					return message.reply(args.t('search:screenshot.nsfw'));
+					return message.error(args.t('search:screenshot.nsfw'));
 				}
 
 				shot = await screenshot(redirect, Number(width), Number(height), full);
@@ -75,12 +66,15 @@ export class ScreenshotCommand extends YukikazeCommand {
 
 			message.channel.stopTyping();
 
-			return message.reply({ files: [{ attachment: shot, name: 'screenshot.png' }] });
+			return message.reply({
+				files: [{ attachment: shot, name: 'screenshot.png' }],
+				embeds: [generalEmbed({ image: { url: 'attachment://screenshot.png' } })]
+			});
 		} catch (e) {
 			message.channel.stopTyping();
 			console.error(e);
 
-			return message.reply(args.t('search:screenshot.invalid'));
+			return message.error(args.t('search:screenshot.invalid')!);
 		}
 	}
 

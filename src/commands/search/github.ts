@@ -1,9 +1,14 @@
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
-import { Message, MessageEmbed, Permissions, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, Permissions, MessagePayload, TextChannel } from 'discord.js';
+import { PaginatedMessage } from '@sapphire/discord.js-utilities';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { GithubDesc, GithubExtended } from '@keys/Search';
+import { requiresPermissions } from '@utils/Decorators';
 import { ApplyOptions } from '@sapphire/decorators';
-import type { User } from '#types/Github';
+import type { User, Search } from '#types/Github';
+
+interface Response<T> {
+	[key: string]: T;
+}
 
 @ApplyOptions<YukikazeCommand.Options>({
 	c: 'Search',
@@ -12,24 +17,23 @@ import type { User } from '#types/Github';
 	aliases: ['gh'],
 	delay: 10000,
 	limit: 2,
-	subCommands: ['user'],
+	subCommands: ['user', 'search'],
 	permissions: Permissions.FLAGS.EMBED_LINKS
 })
 export class GithubCommand extends YukikazeCommand {
 	public async user(message: Message, args: YukikazeCommand.Args) {
-		let user = (await args.pickResult('string')).value;
+		const user = (await args.pickResult('string')).value;
 
 		message.channel.startTyping();
 
 		if (!user) {
-			const handler = new MessagePrompter(args.t('search:github.user.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
+			message.channel.stopTyping();
 
-			user = res.content;
+			return message.error(args.t('missingArgs', { name: 'user' }));
 		}
 
 		try {
-			const { user: data } = await this.context.client.gh<User>(
+			const { user: data } = await this.context.client.gh<Response<User>>(
 				`
 					{
 						user(login: "${user}") {
@@ -71,8 +75,6 @@ export class GithubCommand extends YukikazeCommand {
 					}
 			`
 			);
-			console.log(data);
-
 			const embed = new MessageEmbed()
 				.setTitle(`${data.login} ${data.name ? `(${data.name})` : ''}`)
 				.setThumbnail(data.avatarUrl)
@@ -96,11 +98,91 @@ export class GithubCommand extends YukikazeCommand {
 
 			message.channel.stopTyping();
 			return message.reply({ embeds: [embed] });
-		} catch (e) {
-			console.error(e);
-
+		} catch {
 			message.channel.stopTyping();
-			return message.reply(args.t('search:github.user.noResults'));
+
+			return message.error(args.t('search:github.user.noResults'));
 		}
+	}
+
+	@requiresPermissions(Permissions.FLAGS.MANAGE_MESSAGES)
+	public async search(message: Message, args: YukikazeCommand.Args) {
+		const query = (await args.restResult('string')).value;
+
+		message.channel.startTyping();
+
+		if (!query) {
+			message.channel.stopTyping();
+
+			return message.error(args.t('missingArgs', { name: 'query' }));
+		}
+
+		const { search: data } = await this.context.client.gh<Response<Search>>(`
+				{
+					search(first: 50, query: "${query}", type: REPOSITORY) {
+						nodes {
+							... on Repository {
+								name
+								createdAt
+								description
+								forks {
+							  		totalCount
+								}
+								isFork
+								issues {
+							  		totalCount
+								}
+								licenseInfo {
+							  		name
+								}
+								pullRequests {
+							  		totalCount
+								}
+								url
+								stargazerCount
+								watchers {
+							  		totalCount
+								}
+								owner {
+									avatarUrl
+									login
+									url
+								}
+							}
+						}
+					}
+				}
+			`);
+
+		if (!data.nodes.length) {
+			message.channel.stopTyping();
+
+			return message.error(args.t('search:github.search.noResults'));
+		}
+
+		message.channel.stopTyping();
+
+		return new PaginatedMessage({
+			pages: data.nodes.map((node) => (index, pages) => {
+				const embed = new MessageEmbed()
+					.setTitle(node.name)
+					.setURL(node.url)
+					.setAuthor(node.owner.login, node.owner.avatarUrl, node.owner.url)
+					.setFooter(`Page ${index + 1} / ${pages.length} | Created at`)
+					.setTimestamp(node.createdAt)
+					.setImage(`https://opengraph.github.com/repo/${node.owner.login}/${node.name}`)
+					.addField('Watchers', String(node.watchers.totalCount), true)
+					.addField('Pull Requests', String(node.pullRequests.totalCount), true)
+					.addField('Issues', String(node.issues.totalCount), true)
+					.addField('Stars', String(node.stargazerCount), true)
+					.addField('Fork', node.isFork ? 'Yes' : 'No', true)
+					.setColor('RANDOM');
+
+				if (node.licenseInfo) embed.addField('License', node.licenseInfo.name, true);
+				if (node.description) embed.setDescription(node.description);
+
+				return new MessagePayload(message.channel, { embeds: [embed] });
+			})
+		}).run(message.author, message.channel as TextChannel);
 	}
 }

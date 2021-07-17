@@ -1,11 +1,12 @@
-import { Message, MessageEmbed, Permissions, MessageSelectMenu, SelectMenuInteraction, TextChannel, MessageActionRow } from 'discord.js';
-import { MessagePrompter, MessagePrompterStrategies } from '@sapphire/discord.js-utilities';
+import { Message, MessageEmbed, Permissions, MessageSelectMenu, SelectMenuInteraction, MessageActionRow } from 'discord.js';
 import { YukikazeCommand } from '@structures/YukikazeCommand';
 import { DefineDesc, DefineExtended } from '@keys/Search';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { ApplyOptions } from '@sapphire/decorators';
+import { errorEmbed } from '@utils/Embed';
 import { shorten } from '@utils/shorten';
 import capitalize from 'capitalize';
+import { nanoid } from 'nanoid';
 
 interface Item<T = string> {
 	name: T;
@@ -29,15 +30,14 @@ interface Item<T = string> {
 })
 export class DefineCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
-		let word = (await args.restResult('string')).value;
+		const word = (await args.restResult('string')).value;
 
 		message.channel.startTyping();
 
 		if (!word) {
-			const handler = new MessagePrompter(args.t('search:define.prompt')!, MessagePrompterStrategies.Message);
-			const res = (await handler.run(message.channel as TextChannel, message.author)) as Message;
+			message.channel.stopTyping();
 
-			word = res.content;
+			return message.error(args.t('missingArgs', { name: 'word' }));
 		}
 
 		try {
@@ -48,9 +48,10 @@ export class DefineCommand extends YukikazeCommand {
 				)
 			)[0];
 			const originalMeans = Object.keys(data.meaning);
+			const id = nanoid();
 			const select = new MessageActionRow().addComponents(
 				new MessageSelectMenu()
-					.setCustomId('select-define')
+					.setCustomId(id)
 					.setPlaceholder('Definitions')
 					.addOptions(
 						originalMeans.map((mean) => ({
@@ -64,8 +65,8 @@ export class DefineCommand extends YukikazeCommand {
 			message.channel.stopTyping();
 
 			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [select] });
-			const filter = (i: SelectMenuInteraction) => i.customId === 'select-define' && i.user.id === message.author.id;
-			const collector = message.channel.createMessageComponentCollector({ filter, idle: 120000 });
+			const filter = (i: SelectMenuInteraction) => i.customId === id && i.user.id === message.author.id;
+			const collector = message.channel.createMessageComponentCollector({ filter, idle: 180000 });
 
 			collector.on('collect', (i) => {
 				if (!i.isSelectMenu()) return;
@@ -81,7 +82,7 @@ export class DefineCommand extends YukikazeCommand {
 
 				i.deferUpdate();
 
-				msg.edit({ content: '\u200b', embeds: [embed], components: [select] });
+				msg.edit({ content: '\u200b', embeds: [embed] });
 			});
 			collector.on('end', () => {
 				msg.edit({ content: 'This interaction has ended.', components: [] });
@@ -93,7 +94,7 @@ export class DefineCommand extends YukikazeCommand {
 
 			console.error(e);
 
-			return message.reply(args.t('search:define.noResults'));
+			return message.reply({ embeds: [errorEmbed({ description: args.t('search:define.noResults')! })] });
 		}
 	}
 }
