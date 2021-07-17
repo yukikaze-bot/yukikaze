@@ -8,12 +8,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: alpine:latest
 
     steps:
+      - name: Install Git
+        run: apk add git --update-cache
+
       - name: Checkout the Repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
