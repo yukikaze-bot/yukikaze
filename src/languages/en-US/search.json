@@ -65,7 +65,40 @@
 			"usages": ["Url"],
 			"extendedHelp": "Uses Puppeteer to screenshot your website.",
 			"explainedUsage": [["url", "The url."]],
-			"examples": ["https://google.com --width=1980 --height=1080", "https://yukikaze.tech"]
+			"examples": ["https://google.com --width=1980 --height=1080", "https://yukikaze.tech --full", "https://discord.com"]
+		}
+	},
+	"github": {
+		"description": "Commands that search Github!",
+		"invalid": "You provided an invalid option(s).",
+		"user": {
+			"prompt": "Who is the user?",
+			"noResults": "I could not find that user..."
+		},
+		"search": {
+			"prompt": "What is your query?",
+			"noResults": "I could not find any results for your query."
+		},
+		"extended": {
+			"usages": ["user Name"],
+			"extendedHelp": "Searches GitHub for your query.",
+			"explainedUsage": [
+				["user", "Whether to\n  - Search a user.\n - Search for your query."],
+				["user", "The user"],
+				["query", "Your query."]
+			],
+			"examples": ["user 1chiSensei", "search Discord"]
+		}
+	},
+	"sauce": {
+		"description": "Gets the source of the image.",
+		"noResults": "I could not find any results...",
+		"invalid": "You provided an invalid image url.",
+		"extended": {
+			"usages": ["Url"],
+			"extendedHelp": "Queries the SauceNAO API to get the image source.",
+			"explainedUsage": [["url", "The image url."]],
+			"examples": ["https://yukikaze.tech/profile.png"]
 		}
 	}
 }
