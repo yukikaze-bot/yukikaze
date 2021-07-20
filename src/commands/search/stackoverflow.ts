@@ -26,11 +26,7 @@ export class StackoverflowCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const q = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!q) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'query' }));
 		}
 
@@ -50,12 +46,8 @@ export class StackoverflowCommand extends YukikazeCommand {
 		const { items } = await fetch<Result>(`https://api.stackexchange.com/2.2/search/advanced${query}`, FetchResultTypes.JSON);
 
 		if (!items.length) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('search:stackoverflow.noResults'));
 		}
-
-		message.channel.stopTyping();
 
 		return new PaginatedMessage({
 			pages: items.map(

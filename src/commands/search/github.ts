@@ -24,11 +24,7 @@ export class GithubCommand extends YukikazeCommand {
 	public async user(message: Message, args: YukikazeCommand.Args) {
 		const user = (await args.pickResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!user) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'user' }));
 		}
 
@@ -96,11 +92,8 @@ export class GithubCommand extends YukikazeCommand {
 			if (data.email) embed.addField('Email', data.email, true);
 			if (data.location) embed.addField('Location', data.location, true);
 
-			message.channel.stopTyping();
 			return message.reply({ embeds: [embed] });
 		} catch {
-			message.channel.stopTyping();
-
 			return message.error(args.t('search:github.user.noResults'));
 		}
 	}
@@ -109,11 +102,7 @@ export class GithubCommand extends YukikazeCommand {
 	public async search(message: Message, args: YukikazeCommand.Args) {
 		const query = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!query) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'query' }));
 		}
 
@@ -155,12 +144,8 @@ export class GithubCommand extends YukikazeCommand {
 			`);
 
 		if (!data.nodes.length) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('search:github.search.noResults'));
 		}
-
-		message.channel.stopTyping();
 
 		return new PaginatedMessage({
 			pages: data.nodes.map((node) => (index, pages) => {

@@ -5,7 +5,6 @@ import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { ApplyOptions } from '@sapphire/decorators';
 import { screenshot } from '@utils/screenshot';
 import { isRedirect } from '@utils/isRedirect';
-import { generalEmbed } from '@utils/Embed';
 import { parse } from 'url';
 
 @ApplyOptions<YukikazeCommand.Options>({
@@ -30,11 +29,7 @@ export class ScreenshotCommand extends YukikazeCommand {
 		const height = args.getOption('height') ?? 1080;
 		const full = args.getFlags('full');
 
-		message.channel.startTyping();
-
 		if (!url) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'url' }));
 		}
 
@@ -47,8 +42,6 @@ export class ScreenshotCommand extends YukikazeCommand {
 			let shot: Buffer;
 
 			if (this.nsfwList!.some((url) => parsedUrl.host === url) && !isNsfw) {
-				message.channel.stopTyping();
-
 				return message.error(args.t('search:screenshot.nsfw'));
 			}
 
@@ -56,22 +49,14 @@ export class ScreenshotCommand extends YukikazeCommand {
 				const parsed = parse(redirect);
 
 				if (this.nsfwList!.some((url) => parsed.host === url) && !isNsfw) {
-					message.channel.stopTyping();
-
 					return message.error(args.t('search:screenshot.nsfw'));
 				}
 
 				shot = await screenshot(redirect, Number(width), Number(height), full);
 			} else shot = await screenshot(url, Number(width), Number(height), full);
 
-			message.channel.stopTyping();
-
-			return message.reply({
-				files: [{ attachment: shot, name: 'screenshot.png' }],
-				embeds: [generalEmbed({ image: { url: 'attachment://screenshot.png' } })]
-			});
+			return message.image(shot);
 		} catch (e) {
-			message.channel.stopTyping();
 			console.error(e);
 
 			return message.error(args.t('search:screenshot.invalid')!);

@@ -21,20 +21,14 @@ export class SauceCommand extends YukikazeCommand {
 
 		if (!url) return message.error(args.t('missingArgs', { name: 'url' }));
 
-		message.channel.startTyping();
-
 		try {
 			const valid = await isValid(url);
 
 			if (!valid) {
-				message.channel.stopTyping();
-
 				return message.error(args.t('search:sauce.invalid'));
 			}
 
 			const data = await this.context.client.saucenao(url);
-
-			message.channel.stopTyping();
 
 			return new PaginatedMessage({
 				pages: data.map(
@@ -51,8 +45,6 @@ export class SauceCommand extends YukikazeCommand {
 				)
 			}).run(message.author, message.channel as TextChannel);
 		} catch {
-			message.channel.stopTyping();
-
 			return message.error(args.t('search:sauce.noResults'));
 		}
 	}

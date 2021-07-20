@@ -18,8 +18,6 @@ import gm from 'gm';
 export class CharcoalCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		try {
-			message.channel.startTyping();
-
 			const user = (await args.pickResult('userName')).value;
 			const avatar =
 				user?.displayAvatarURL({ format: 'png', size: 4096 }) ??
@@ -28,11 +26,9 @@ export class CharcoalCommand extends YukikazeCommand {
 			const buffer = await fetch(avatar, FetchResultTypes.Buffer);
 			const state = gm(buffer).emboss().setFormat('png');
 
-			message.channel.stopTyping();
-			return message.reply({ files: [{ attachment: await toBuffer(state), name: 'emboss.png' }] });
+			return message.image(await toBuffer(state));
 		} catch {
-			message.channel.stopTyping();
-			return message.reply(args.t('image:invalid'));
+			return message.error(args.t('image:invalid'));
 		}
 	}
 }

@@ -32,11 +32,7 @@ export class DefineCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const word = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!word) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'word' }));
 		}
 
@@ -61,8 +57,6 @@ export class DefineCommand extends YukikazeCommand {
 						}))
 					)
 			);
-
-			message.channel.stopTyping();
 
 			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [select] });
 			const filter = (i: SelectMenuInteraction) => i.customId === id && i.user.id === message.author.id;
@@ -90,8 +84,6 @@ export class DefineCommand extends YukikazeCommand {
 
 			return;
 		} catch (e) {
-			message.channel.stopTyping();
-
 			console.error(e);
 
 			return message.reply({ embeds: [errorEmbed({ description: args.t('search:define.noResults')! })] });

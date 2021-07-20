@@ -19,8 +19,6 @@ import gm from 'gm';
 export class OilPaintingCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		try {
-			message.channel.startTyping();
-
 			const user = (await args.pickResult('userName')).value;
 			const avatar =
 				user?.displayAvatarURL({ format: 'png', size: 4096 }) ??
@@ -29,12 +27,9 @@ export class OilPaintingCommand extends YukikazeCommand {
 			const buffer = await fetch(avatar, FetchResultTypes.Buffer);
 			const state = gm(buffer).paint(5).setFormat('png');
 
-			message.channel.stopTyping();
-			return message.reply({ files: [{ attachment: await toBuffer(state), name: 'oil-painting.png' }] });
-		} catch (e) {
-			this.context.logger.error(e);
-			message.channel.stopTyping();
-			return message.reply('You provided an invalid image url.');
+			return message.image(await toBuffer(state));
+		} catch {
+			return message.error('You provided an invalid image url.');
 		}
 	}
 }

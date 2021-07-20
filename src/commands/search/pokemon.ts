@@ -42,11 +42,7 @@ export class PokemonCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const pkmn = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!pkmn) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'name' }));
 		}
 
@@ -69,12 +65,8 @@ export class PokemonCommand extends YukikazeCommand {
 				.setFooter('Powered by the GraphQL Pokemon API made by Favware')
 				.setColor('RANDOM');
 
-			message.channel.stopTyping();
-
 			return message.reply({ embeds: [embed] });
 		} catch {
-			message.channel.stopTyping();
-
 			return message.error(args.t('search:pokemon.unknown'));
 		}
 	}

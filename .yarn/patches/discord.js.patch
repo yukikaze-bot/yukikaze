@@ -1,18 +1,5 @@
-diff --git a/src/WebSocket.js b/src/WebSocket.js
-index c12db834fd4a30da0c46b3b623e961dcc8003f7b..6c0f617d875d175e69c9160a4a870933e483921c 100644
---- a/src/WebSocket.js
-+++ b/src/WebSocket.js
-@@ -3,7 +3,7 @@
- let erlpack;
-
- try {
--  erlpack = require('erlpack');
-+  erlpack = require('@yukikaze-bot/erlpack');
-   if (!erlpack.pack) erlpack = null;
- } catch {} // eslint-disable-line no-empty
-
 diff --git a/src/client/Client.js b/src/client/Client.js
-index 3079c3b34f2682389c63a5dbef4446bc6b2781cc..aa520f9a6b630846d4dace3818693b2fe24024ca 100644
+index 3079c3b34f2682389c63a5dbef4446bc6b2781cc..8ae833bd1c0fc6c7e3d09d700da34952863f6dba 100644
 --- a/src/client/Client.js
 +++ b/src/client/Client.js
 @@ -10,7 +10,7 @@ const ChannelManager = require('../managers/ChannelManager');
@@ -24,12 +11,11 @@ index 3079c3b34f2682389c63a5dbef4446bc6b2781cc..aa520f9a6b630846d4dace3818693b2f
  const GuildPreview = require('../structures/GuildPreview');
  const GuildTemplate = require('../structures/GuildTemplate');
  const Invite = require('../structures/Invite');
-@@ -119,6 +119,8 @@ class Client extends BaseClient {
+@@ -119,6 +119,7 @@ class Client extends BaseClient {
       */
      this.channels = new ChannelManager(this);
 
 +    const ClientPresence = Structures.get('ClientPresence');
-+
      /**
       * The presence of the Client
       * @private
@@ -89,17 +75,29 @@ index f750e048b95dd3a1e890625fa79aadceac93731f..8925ba375c54015abb298bd4120c3993
        const oldState =
          guild.voiceStates.cache.get(data.user_id)?._clone() ?? new VoiceState(guild, { user_id: data.user_id });
 diff --git a/src/index.js b/src/index.js
-index 34cc9f298c68600ca4c4d2afa482c04adae88203..5b287a38b725fe6295d843b217d3e1f91c98a5b7 100644
+index 34cc9f298c68600ca4c4d2afa482c04adae88203..48c518559d9a3eff96ad7c571acc89ca66245f5a 100644
 --- a/src/index.js
 +++ b/src/index.js
-@@ -109,6 +109,7 @@ module.exports = {
-   Role: require('./structures/Role'),
-   SelectMenuInteraction: require('./structures/SelectMenuInteraction'),
-   Sticker: require('./structures/Sticker'),
+@@ -28,6 +28,7 @@ module.exports = {
+   Permissions: require('./util/Permissions'),
+   SnowflakeUtil: require('./util/SnowflakeUtil'),
+   SystemChannelFlags: require('./util/SystemChannelFlags'),
 +  Structures: require('./util/Structures'),
-   StoreChannel: require('./structures/StoreChannel'),
-   StageChannel: require('./structures/StageChannel'),
-   Team: require('./structures/Team'),
+   ThreadMemberFlags: require('./util/ThreadMemberFlags'),
+   UserFlags: require('./util/UserFlags'),
+   Util: require('./util/Util'),
+diff --git a/src/index.mjs b/src/index.mjs
+index 2f9b8a8043882add96b86fe99934c7eb83d0103f..77a55a6b503383d16ee8503fac73672721f4b2de 100644
+--- a/src/index.mjs
++++ b/src/index.mjs
+@@ -73,6 +73,7 @@ export const MessageReaction = mod.MessageReaction;
+ export const MessageSelectMenu = mod.MessageSelectMenu;
+ export const NewsChannel = mod.NewsChannel;
+ export const OAuth2Guild = mod.OAuth2Guild;
++export const Structures = mod.Structures;
+ export const Options = mod.Options;
+ export const PermissionOverwriteManager = mod.PermissionOverwriteManager;
+ export const PermissionOverwrites = mod.PermissionOverwrites;
 diff --git a/src/managers/DataManager.js b/src/managers/DataManager.js
 index 6a5c14ca2015ec0d12b292d6b86673ce569cc2b9..ff0f70674719194a2944aff1a4cd7428446a3307 100644
 --- a/src/managers/DataManager.js
@@ -132,25 +130,10 @@ index 6a5c14ca2015ec0d12b292d6b86673ce569cc2b9..ff0f70674719194a2944aff1a4cd7428
 
    /**
 diff --git a/src/structures/Channel.js b/src/structures/Channel.js
-index 9d1825048ffecd339b8abcdc7d78a9ed7a3f504d..cc79f3e115cffecf89a09f8f48c02d3026a403e9 100644
+index 9d1825048ffecd339b8abcdc7d78a9ed7a3f504d..45d3a85be7ccddf02b6585da49d4b621962ac944 100644
 --- a/src/structures/Channel.js
 +++ b/src/structures/Channel.js
-@@ -1,14 +1,6 @@
- 'use strict';
-
- const Base = require('./Base');
--let CategoryChannel;
--let DMChannel;
--let NewsChannel;
--let StageChannel;
--let StoreChannel;
--let TextChannel;
--let ThreadChannel;
--let VoiceChannel;
- const { ChannelTypes, ThreadChannelTypes } = require('../util/Constants');
- const SnowflakeUtil = require('../util/SnowflakeUtil');
-
-@@ -127,18 +119,12 @@ class Channel extends Base {
+@@ -127,18 +127,12 @@ class Channel extends Base {
    }
 
    static create(client, data, guild, allowUnknownGuild) {
@@ -171,7 +154,7 @@ index 9d1825048ffecd339b8abcdc7d78a9ed7a3f504d..cc79f3e115cffecf89a09f8f48c02d30
          channel = new DMChannel(client, data);
        } else if (data.type === ChannelTypes.GROUP_DM) {
          const PartialGroupDMChannel = require('./PartialGroupDMChannel');
-@@ -150,32 +136,39 @@ class Channel extends Base {
+@@ -150,32 +144,39 @@ class Channel extends Base {
        if (guild || allowUnknownGuild) {
          switch (data.type) {
            case ChannelTypes.GUILD_TEXT: {
@@ -212,7 +195,7 @@ index 9d1825048ffecd339b8abcdc7d78a9ed7a3f504d..cc79f3e115cffecf89a09f8f48c02d30
              if (!allowUnknownGuild) channel.parent?.threads.cache.set(channel.id, channel);
              break;
 diff --git a/src/structures/ClientUser.js b/src/structures/ClientUser.js
-index 9d18ae5e8835d9f50308bb748cc092d986200cc7..717e37daae8a36bd5b740acb190e294afcf4270c 100644
+index 9d18ae5e8835d9f50308bb748cc092d986200cc7..b95e7163f2084c94e1e48e97a74d948398ea09cf 100644
 --- a/src/structures/ClientUser.js
 +++ b/src/structures/ClientUser.js
 @@ -1,13 +1,13 @@
@@ -227,7 +210,7 @@ index 9d18ae5e8835d9f50308bb748cc092d986200cc7..717e37daae8a36bd5b740acb190e294a
   * @extends {User}
   */
 -class ClientUser extends User {
-+class ClientUser extends Structures.get('User') {
++ class ClientUser extends Structures.get('User') {
    constructor(client, data) {
      super(client, data);
      this._typing = new Map();
@@ -382,11 +365,11 @@ index 0000000000000000000000000000000000000000..33343e7e12948d21f0e38cdd224b68d3
 +
 +module.exports = Structures;
 diff --git a/typings/index.d.ts b/typings/index.d.ts
-index 4f78a786d27a850007d9434bc0879cab65841b3e..bf72ceed1c697877978a68f98ca6fc8f268b81ec 100644
+index 4f78a786d27a850007d9434bc0879cab65841b3e..f558eebd8ac976eb4bc560f57e8fe605eb816ad0 100644
 --- a/typings/index.d.ts
 +++ b/typings/index.d.ts
-@@ -993,6 +993,43 @@ export class Message extends Base {
-   public unpin(): Promise<Message>;
+@@ -98,6 +98,43 @@ export class ActivityFlags extends BitField<ActivityFlagsString> {
+   public static resolve(bit?: BitFieldResolvable<ActivityFlagsString, number>): number;
  }
 
 +export class Structures extends null {
@@ -426,6 +409,6 @@ index 4f78a786d27a850007d9434bc0879cab65841b3e..bf72ceed1c697877978a68f98ca6fc8f
 +  SelectMenuInteraction: typeof SelectMenuInteraction;
 +}
 +
- export class MessageActionRow extends BaseMessageComponent {
-   public constructor(data?: MessageActionRow | MessageActionRowOptions);
-   public type: 'ACTION_ROW';
+ export abstract class AnonymousGuild extends BaseGuild {
+   public constructor(client: Client, data: unknown, immediatePatch?: boolean);
+   public banner: string | null;

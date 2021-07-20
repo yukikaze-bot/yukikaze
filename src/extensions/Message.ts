@@ -1,6 +1,7 @@
 import { I18nextImplemented, I18nextMessageImplementation, I18nextChannelImplementation } from '@sapphire/plugin-i18next';
-import { errorEmbed, successEmbed } from '@utils/Embed';
+import { errorEmbed, successEmbed, generalEmbed } from '@utils/Embed';
 import { Structures } from 'discord.js';
+import { nanoid } from 'nanoid';
 
 export class Message extends I18nextImplemented(Structures.get('Message') as any) {
 	public fetchLanguage(): Promise<string> {
@@ -14,6 +15,12 @@ export class Message extends I18nextImplemented(Structures.get('Message') as any
 	public success(message: string): Promise<Message> {
 		return this.reply({ embeds: [successEmbed({ description: message })] });
 	}
+
+	public image(image: Buffer): Promise<Message> {
+		const name = `${nanoid()}.png`;
+
+		return this.reply({ embeds: [generalEmbed({ image: { url: `attachment://${name}` } })], files: [{ attachment: image, name }] });
+	}
 }
 
 declare module 'discord.js' {
@@ -21,6 +28,7 @@ declare module 'discord.js' {
 		fetchLanguage(): Promise<string>;
 		error(message: string): Promise<Message>;
 		success(message: string): Promise<Message>;
+		image(image: Buffer): Promise<Message>;
 	}
 }
 

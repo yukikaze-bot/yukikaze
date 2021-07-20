@@ -32,15 +32,11 @@ export class NarutoCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const char = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!char) return message.error(args.t('missingArgs', { name: 'character' }));
 
 		const data = await request<Record<string, any>>('https://narutoql.com/graphql', query(char));
 
 		if (!data.characters.results.length) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('anime:naruto.unknown'));
 		}
 
@@ -56,8 +52,6 @@ export class NarutoCommand extends YukikazeCommand {
 		if (character.rank.length) embed.addField('Rank', character.rank);
 		if (character.village.length) embed.addField('Village', character.village, true);
 		if (character.notableQuotes.length) embed.addField('Quotes', character.notableQuotes);
-
-		message.channel.stopTyping();
 
 		return message.reply({ embeds: [embed] });
 	}

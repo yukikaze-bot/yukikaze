@@ -26,11 +26,7 @@ export class NodeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const query = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!query) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('missingArgs', { name: 'query' }));
 		}
 
@@ -59,8 +55,6 @@ export class NodeCommand extends YukikazeCommand {
 			findRec(allNodeData, altQuery, 'module');
 
 		if (!result) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('search:node.noResults'));
 		}
 
@@ -78,8 +72,6 @@ export class NodeCommand extends YukikazeCommand {
 		const embed = new MessageEmbed()
 			.setDescription(`${underscore(hyperlink(bold(result.textRaw as string), hideLinkEmbed(fullURL)))}\n${parts.join('\n')}`)
 			.setColor('#68A063');
-
-		message.channel.stopTyping();
 
 		return message.reply({ embeds: [embed] });
 	}

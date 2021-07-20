@@ -18,8 +18,6 @@ import { createCanvas } from 'canvas';
 export class CircleCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		try {
-			message.channel.startTyping();
-
 			const data = (await args.pickResult('image')).value ?? (await getImage(message)) ?? (await fetchAvatar(message.author));
 			const dimensions = data.width <= data.height ? data.width : data.height;
 			const canvas = createCanvas(dimensions, dimensions);
@@ -31,11 +29,9 @@ export class CircleCommand extends YukikazeCommand {
 			ctx.clip();
 			ctx.drawImage(data, canvas.width / 2 - data.width / 2, canvas.height / 2 - data.height / 2);
 
-			message.channel.stopTyping();
-			return message.reply({ files: [{ attachment: canvas.toBuffer(), name: 'circle.png' }] });
+			return message.image(canvas.toBuffer());
 		} catch {
-			message.channel.stopTyping();
-			return message.reply(args.t('image:invalid'));
+			return message.error(args.t('image:invalid'));
 		}
 	}
 }

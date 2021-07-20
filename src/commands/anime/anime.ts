@@ -50,19 +50,13 @@ export class AnimeCommand extends YukikazeCommand {
 	public async run(message: Message, args: YukikazeCommand.Args) {
 		const title = (await args.restResult('string')).value;
 
-		message.channel.startTyping();
-
 		if (!title) return message.error(args.t('missingArgs', { name: 'title' }));
 
 		const { searchAnimeByTitle: data } = await request('https://kitsu.io/api/graphql', query(title));
 
 		if (!data.nodes.length) {
-			message.channel.stopTyping();
-
 			return message.error(args.t('anime:anime.unknown'));
 		}
-
-		message.channel.stopTyping();
 
 		return new PaginatedMessage({
 			pages: data.nodes

@@ -2488,7 +2488,7 @@ discord.js@dev:
 
 "discord.js@patch:discord.js@dev#./.yarn/patches/discord.js.patch::locator=yukikaze%40workspace%3A.":
   version: 13.0.0-dev.1dcad05.1626091387
-  resolution: "discord.js@patch:discord.js@npm%3A13.0.0-dev.1dcad05.1626091387#./.yarn/patches/discord.js.patch::version=13.0.0-dev.1dcad05.1626091387&hash=0a3b33&locator=yukikaze%40workspace%3A."
+  resolution: "discord.js@patch:discord.js@npm%3A13.0.0-dev.1dcad05.1626091387#./.yarn/patches/discord.js.patch::version=13.0.0-dev.1dcad05.1626091387&hash=cf0d1e&locator=yukikaze%40workspace%3A."
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -2499,7 +2499,7 @@ discord.js@dev:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 585cf3a5ba0a40d34b1828a9cc972abd8c8e8872149bc1aa167e1b8d7fb92b5ff7c5d4cadd9122d7fdf6c038e974bdb3610990266d85f66031c9b026abffa3d8
+  checksum: 23992b9f5e16da04ae417a9c70a11611d33034a8a1c17a43bacb21196317c8aa9c1f08ebe29123c82092d1fff6de54f14c58e3fb752e3bdc1a5cfb4cd14e1945
   languageName: node
   linkType: hard
 
