@@ -1,0 +1,13 @@
+diff --git a/dist/events/command-handler/CoreMessageParser.js b/dist/events/command-handler/CoreMessageParser.js
+index b995b0e29141d0b369bc0f4ab3095753fbeaec67..a4456ee2985701811a80293257b7bffeb22254b7 100644
+--- a/dist/events/command-handler/CoreMessageParser.js
++++ b/dist/events/command-handler/CoreMessageParser.js
+@@ -39,7 +39,7 @@ class CoreEvent extends Event_1.Event {
+     }
+     async canRunInChannel(message) {
+         var _a;
+-        if (message.channel.type === 'dm')
++        if (message.channel.type === 'DM')
+             return true;
+         const me = (_a = message.guild.me) !== null && _a !== void 0 ? _a : (message.client.id ? await message.guild.members.fetch(message.client.id) : null);
+         if (!me)
