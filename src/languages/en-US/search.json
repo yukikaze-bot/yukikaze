@@ -100,5 +100,15 @@
 			"explainedUsage": [["url", "The image url."]],
 			"examples": ["https://yukikaze.tech/profile.png"]
 		}
+	},
+	"npm": {
+		"description": "Gets information about a NPM package.",
+		"noResults": "I could not find any results...",
+		"extended": {
+			"usages": ["Name"],
+			"extendedHelp": "Uses https://npms.io to get information about the package.",
+			"explainedUsage": [["name", "The package name."]],
+			"examples": ["discord.js", "react", "vue"]
+		}
 	}
 }

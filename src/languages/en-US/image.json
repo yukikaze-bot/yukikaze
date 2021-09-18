@@ -39,5 +39,13 @@
 			"extendedHelp": "Draws an image but embosses it. Fallbacks to the author's avatar when the author provides an invalid user.",
 			"examples": ["Tomio"]
 		}
+	},
+	"sketch": {
+		"description": "Sketches an image.",
+		"extended": {
+			"usages": ["User", "Url"],
+			"extendedHelp": "Draws an image but sketches it. Fallbacks to the author's avatar when the author provides an invalid user.",
+			"examples": ["Yumk"]
+		}
 	}
 }

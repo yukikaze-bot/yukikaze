@@ -17,3 +17,5 @@ export const GithubDesc = T<string>('search:github.description');
 export const GithubExtended = T<LanguageHelpDisplayOptions>('search:github.extended');
 export const SauceDesc = T<string>('search:sauce.description');
 export const SauceExtended = T<LanguageHelpDisplayOptions>('search:sauce.extended');
+export const NPMDesc = T<string>('search:npm.description');
+export const NPMExtended = T<LanguageHelpDisplayOptions>('search:npm.extended');

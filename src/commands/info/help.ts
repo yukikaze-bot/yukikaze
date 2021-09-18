@@ -5,7 +5,7 @@ import type { CommandStore } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
 import { HelpDesc, HelpExtended } from '@keys/Info';
 import { HelpTitles } from '@keys/Bot';
-import { nanoid } from 'nanoid';
+import { v4 } from '@tomiocodes/uuid';
 
 @ApplyOptions<YukikazeCommand.Options>({
 	description: HelpDesc,
@@ -64,7 +64,7 @@ export class NarutoCommand extends YukikazeCommand {
 
 		for (const [, command] of this._commands) categories.add(command.c);
 
-		const id = nanoid();
+		const id = v4();
 		const select = new MessageActionRow().addComponents(
 			new MessageSelectMenu()
 				.setCustomId(id)
@@ -96,7 +96,7 @@ export class NarutoCommand extends YukikazeCommand {
 
 			i.deferUpdate();
 
-			msg.edit({ content: '\u200b', embeds: [embed] });
+			msg.edit({ content: null, embeds: [embed] });
 		});
 
 		collector.on('end', () => {

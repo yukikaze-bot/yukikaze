@@ -5,15 +5,15 @@ import { fetch, FetchResultTypes } from '@sapphire/fetch';
 import { ApplyOptions } from '@sapphire/decorators';
 import { errorEmbed } from '@utils/Embed';
 import { shorten } from '@utils/shorten';
+import { v4 } from '@tomiocodes/uuid';
 import capitalize from 'capitalize';
-import { nanoid } from 'nanoid';
 
 interface Item<T = string> {
 	name: T;
 	meaning: {
 		[key: string]: {
 			definition: string;
-			example: string;
+			example?: string;
 			synonyms?: string[];
 		}[];
 	};
@@ -44,7 +44,7 @@ export class DefineCommand extends YukikazeCommand {
 				)
 			)[0];
 			const originalMeans = Object.keys(data.meaning);
-			const id = nanoid();
+			const id = v4();
 			const select = new MessageActionRow().addComponents(
 				new MessageSelectMenu()
 					.setCustomId(id)
@@ -53,12 +53,13 @@ export class DefineCommand extends YukikazeCommand {
 						originalMeans.map((mean) => ({
 							label: capitalize(mean),
 							description: shorten(data.meaning[mean][0].definition ?? data.meaning[mean][1].definition, 50),
-							value: mean
+							value: mean,
+							emoji: 'ℹ️'
 						}))
 					)
 			);
 
-			const msg = await message.channel.send({ content: args.t('search:define.choose'), components: [select] });
+			const msg = await message.reply({ content: args.t('search:define.choose'), components: [select] });
 			const filter = (i: SelectMenuInteraction) => i.customId === id && i.user.id === message.author.id;
 			const collector = message.channel.createMessageComponentCollector({ filter, idle: 180000 });
 
@@ -69,14 +70,14 @@ export class DefineCommand extends YukikazeCommand {
 				const embed = new MessageEmbed()
 					.setTitle(capitalize(word!))
 					.setDescription(meaning.definition ?? data.meaning[i.values.join()][1].definition)
-					.addField('Example', capitalize(meaning.example))
 					.setColor('RANDOM');
 
 				if (meaning.synonyms) embed.addField('Synonyms', meaning.synonyms.map((m) => capitalize(m)).join(', '));
+				if (meaning.example) embed.addField('Example', capitalize(meaning.example));
 
 				i.deferUpdate();
 
-				msg.edit({ content: '\u200b', embeds: [embed] });
+				msg.edit({ content: null, embeds: [embed] });
 			});
 			collector.on('end', () => {
 				msg.edit({ content: 'This interaction has ended.', components: [] });

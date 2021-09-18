@@ -8,6 +8,7 @@ import type { CustomGet } from '#types/i18n';
 import { graphql } from '@octokit/graphql';
 import type { Image } from 'canvas';
 import { Timers } from './Timers';
+import { NpmsIO } from 'npms.io';
 import Turndown from 'turndown';
 import { join } from 'path';
 import sagiri from 'sagiri';
@@ -20,6 +21,7 @@ declare module '@sapphire/framework' {
 		timers: Timers;
 		llrCollectors: Set<LongLivingReactionCollector>;
 		saucenao: ReturnType<typeof sagiri>;
+		npm: NpmsIO;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -65,6 +67,7 @@ declare module 'discord.js' {
 		timers: Timers;
 		llrCollectors: Set<LongLivingReactionCollector>;
 		saucenao: ReturnType<typeof sagiri>;
+		npm: NpmsIO;
 
 		fetchLanguage: (context: I18nContext) => Promise<string>;
 	}
@@ -77,6 +80,7 @@ export class YukikazeClient extends SapphireClient {
 	public readonly timers = new Timers(process.env.REDIS_URL);
 	public readonly llrCollectors = new Set<LongLivingReactionCollector>();
 	public readonly saucenao = sagiri(process.env.SAUCENAO_KEY, { results: 30 });
+	public readonly npm = new NpmsIO();
 	public readonly owner: `${bigint}` = '566155739652030465';
 
 	public constructor(options?: SapphireClientOptions) {

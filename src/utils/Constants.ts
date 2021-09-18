@@ -23,6 +23,11 @@ export const enum RequestTypes {
 	REMAINING_TIMER = 4
 }
 
+export const enum DownloadSpeed {
+	THREE_G = 400,
+	FOUR_G = 7000
+}
+
 export const kRegExpUnicodeBoxNumber = /^\d\u20E3$/;
 export const kRegExpFormattedCustomEmoji = /<a?:\w{2,32}:\d{17,18}>/;
 export const kRegExpParsedCustomEmoji = /a?:\w{2,32}:\d{17,18}/;
